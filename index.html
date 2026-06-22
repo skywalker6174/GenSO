@@ -112,6 +112,12 @@ figure img{max-width:100%;max-height:62vh;border:1px solid #e6e6e6;border-radius
 figcaption{font-size:13px;color:var(--muted);margin-top:6px}
 .imgrow{display:flex;gap:18px;align-items:center;justify-content:center}
 .imgrow img{max-height:58vh}
+.diagram{width:100%;height:auto;display:block;max-height:46vh}
+figure.dfig{margin:4px 0;text-align:center}
+figure.dfig figcaption{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.35}
+.splitrow{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center;margin:6px 0}
+.splitrow .card{margin-bottom:12px}
+.splitrow .card:last-child{margin-bottom:0}
 
 /* tables */
 table{border-collapse:collapse;width:100%;font-size:15px;margin-top:6px;background:#fff}
@@ -226,12 +232,32 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h2>Decision-Making Under Uncertainty</h2>
   <div class="content">
     <p>Stochastic optimization with recourse: a <span class="red">here-and-now</span> decision \(\bm x\) is chosen <em>before</em> uncertainty \(\tilde{\bm z}\) is revealed; a <span class="red">wait-and-see</span> recourse \(\bm y\) adapts <em>after</em>.</p>
+    <figure class="dfig" style="margin:6px 0 4px">
+      <svg class="diagram" viewBox="0 0 900 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two-stage recourse timeline">
+        <line x1="40" y1="105" x2="852" y2="105" stroke="#d0d0d0" stroke-width="2"/>
+        <polygon points="852,98 876,105 852,112" fill="#d0d0d0"/>
+        <text x="884" y="110" font-size="15" fill="#999">time</text>
+        <text x="250" y="135" font-size="14" fill="#999" text-anchor="middle">before uncertainty</text>
+        <text x="615" y="135" font-size="14" fill="#999" text-anchor="middle">after uncertainty</text>
+        <line x1="150" y1="105" x2="150" y2="82" stroke="#c9b3b3" stroke-width="2"/>
+        <rect x="58" y="20" width="184" height="58" rx="9" fill="#94070A"/>
+        <text x="150" y="45" font-size="16" fill="#fff" text-anchor="middle" font-weight="700">Here-and-now</text>
+        <text x="150" y="66" font-size="15" fill="#fff" text-anchor="middle">decision  x &#8712; X</text>
+        <text x="470" y="46" font-size="16" fill="#94070A" text-anchor="middle" font-weight="700">uncertainty revealed</text>
+        <g stroke="#94070A" stroke-width="2.5"><line x1="470" y1="92" x2="470" y2="80"/><line x1="456" y1="96" x2="447" y2="88"/><line x1="484" y1="96" x2="493" y2="88"/></g>
+        <circle cx="470" cy="105" r="9" fill="#94070A"/>
+        <line x1="760" y1="105" x2="760" y2="82" stroke="#c9b3b3" stroke-width="2"/>
+        <rect x="668" y="20" width="184" height="58" rx="9" fill="#fff" stroke="#94070A" stroke-width="2.5"/>
+        <text x="760" y="45" font-size="16" fill="#94070A" text-anchor="middle" font-weight="700">Wait-and-see</text>
+        <text x="760" y="66" font-size="15" fill="#1b1b1b" text-anchor="middle">recourse  y(z)</text>
+      </svg>
+      <figcaption><strong>Central question:</strong> the decision maker commits to \(\bm x\) before the outcome, then adapts \(\bm y(\bm z)\) after — we want one <em>deployable, expressive, yet tractable</em> rule, not a separate solution per scenario.</figcaption>
+    </figure>
     <div class="eq hl">$$\hat Z=\min_{\bm x\in\mathcal X}\ \mathbb E_{\hat{\mathbb P}}\!\left[\bm c(\tilde{\bm z})^\top\bm x+Q(\bm x,\tilde{\bm z})\right],\qquad Q(\bm x,\bm z)=\min_{\bm y}\big\{\bm d^\top\bm y:\ \bm A(\bm z)\bm x+\bm B\bm y\ge \bm b(\bm z)\big\}$$</div>
     <div class="grid g2">
       <div class="card"><h3>Ideal: arbitrary policies</h3><p>Recourse can be <em>any</em> measurable function \(\bm y(\bm z)\) → maximal adaptivity, but generally <strong>intractable</strong>.</p></div>
       <div class="card"><h3>Reality: scenario SAA</h3><p>SAA gives a separate \(\bm y_s\) per training scenario — optimal in-sample, but <strong>not a deployable rule</strong> for unseen \(\bm z\).</p></div>
     </div>
-    <div class="callout"><span class="lbl">Central question</span><p style="margin-top:4px">How do we obtain a <strong>deployable, expressive, yet tractable</strong> recourse rule for unseen realizations?</p></div>
   </div>
   <div class="footer"><span class="ftitle">Decision-Making Under Uncertainty</span></div>
 </section>
@@ -243,9 +269,37 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <div class="content">
     <p>The dominant device is the <span class="red">Linear Decision Rule (LDR)</span> — restrict recourse to be affine in the uncertainty:</p>
     <div class="eq">$$\mathcal L^{N_z,N_y}=\Big\{\,\bm y:\ \bm y(\bm z)=\bm y_0+\textstyle\sum_{i\in[N_z]}\bm y_i\,z_i\,\Big\}$$</div>
-    <div class="grid g2">
-      <div class="card"><h3>✓ Why it is used</h3><ul><li>Reduces an intractable adaptive problem to a finite LP</li><li>Small coefficient dimension</li><li>Interpretable &amp; deployable</li></ul></div>
-      <div class="card"><h3>✗ The hidden cost</h3><ul><li>A strong inductive bias: recourse <em>must</em> vary linearly with \(\bm z\)</li><li>Cannot express thresholds, ratios, lags, peaks, moving averages…</li></ul></div>
+    <div class="splitrow">
+      <div>
+        <div class="card"><h3>✓ Why it is used</h3><ul><li>Reduces an intractable adaptive problem to a finite LP</li><li>Small coefficient dimension</li><li>Interpretable &amp; deployable</li></ul></div>
+        <div class="card"><h3>✗ The hidden cost</h3><ul><li>Strong inductive bias: recourse <em>must</em> vary linearly with \(\bm z\)</li><li>Cannot express thresholds, ratios, lags, peaks…</li></ul></div>
+      </div>
+      <figure class="dfig">
+        <svg class="diagram" viewBox="0 0 440 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tractability vs expressiveness">
+          <defs>
+            <marker id="ahR" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#94070A"/></marker>
+            <marker id="ahG" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#999"/></marker>
+          </defs>
+          <line x1="70" y1="285" x2="410" y2="285" stroke="#bbb" stroke-width="2"/>
+          <polygon points="410,279 428,285 410,291" fill="#bbb"/>
+          <line x1="70" y1="285" x2="70" y2="38" stroke="#bbb" stroke-width="2"/>
+          <polygon points="64,38 70,22 76,38" fill="#bbb"/>
+          <text x="240" y="310" font-size="15" fill="#777" text-anchor="middle">Tractability  &#8594;</text>
+          <text x="22" y="165" font-size="15" fill="#777" text-anchor="middle" transform="rotate(-90 22 165)">Expressiveness  &#8594;</text>
+          <circle cx="120" cy="78" r="8" fill="#bdbdbd"/>
+          <text x="136" y="74" font-size="13.5" fill="#666">All measurable</text>
+          <text x="136" y="91" font-size="13.5" fill="#666">policies (intractable)</text>
+          <circle cx="360" cy="248" r="8" fill="#bdbdbd"/>
+          <text x="360" y="272" font-size="14" fill="#666" text-anchor="middle">LDR</text>
+          <text x="360" y="92" font-size="34" fill="#94070A" text-anchor="middle">&#9733;</text>
+          <text x="360" y="58" font-size="16" fill="#94070A" text-anchor="middle" font-weight="700">GenLDR</text>
+          <path d="M360,236 L360,108" stroke="#94070A" stroke-width="2" stroke-dasharray="5 4" fill="none" marker-end="url(#ahR)"/>
+          <text x="372" y="180" font-size="13" fill="#94070A">enrich basis</text>
+          <path d="M140,96 C250,150 305,150 350,100" stroke="#999" stroke-width="2" stroke-dasharray="5 4" fill="none" marker-end="url(#ahG)"/>
+          <text x="225" y="172" font-size="13" fill="#888" text-anchor="middle">tractable approx.</text>
+        </svg>
+        <figcaption>GenLDR aims for the top-right: as expressive as richer policies, as tractable as an LDR.</figcaption>
+      </figure>
     </div>
     <div class="box"><span class="lbl">Key point</span><p style="margin-top:4px">Even when LDR coefficients are fitted <strong>perfectly</strong>, the policy can stay far from optimal — because the <strong>representation</strong> itself is too restrictive.</p></div>
   </div>
@@ -259,9 +313,37 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <div class="content">
     <p>The deployed cost decomposes into two fundamentally different errors:</p>
     <div class="eq hl">$$\underbrace{\mathcal J(\hat{\bm x},\hat{\bm y})-Z^\star_{\mathcal R}}_{\text{total gap to oracle}}=\underbrace{\mathcal J(\hat{\bm x},\hat{\bm y})-Z^\star_{\Phi}}_{\text{estimation error}\ \to 0\ \text{as }S\to\infty}\;+\;\underbrace{Z^\star_{\Phi}-Z^\star_{\mathcal R}}_{\text{representation gap}}$$</div>
-    <div class="grid g2">
-      <div class="card"><h3>Estimation error</h3><p>Vanishes with more data \(S\). Classical statistical learning.</p></div>
-      <div class="card"><h3>Representation gap</h3><p><strong>Does not vanish with data.</strong> It is fixed once the basis \(\Phi\) (e.g. raw LDR) is chosen.</p></div>
+    <div class="splitrow">
+      <div>
+        <div class="card"><h3>Estimation error</h3><p>Vanishes with more data \(S\). Classical statistical learning.</p></div>
+        <div class="card"><h3>Representation gap</h3><p><strong>Does not vanish with data.</strong> Fixed once the basis \(\Phi\) (e.g. raw LDR) is chosen.</p></div>
+      </div>
+      <figure class="dfig">
+        <svg class="diagram" viewBox="0 0 450 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cost versus sample size">
+          <rect x="250" y="150" width="170" height="100" fill="#94070A" opacity="0.10"/>
+          <line x1="70" y1="270" x2="420" y2="270" stroke="#bbb" stroke-width="2"/>
+          <polygon points="420,264 438,270 420,276" fill="#bbb"/>
+          <line x1="70" y1="270" x2="70" y2="34" stroke="#bbb" stroke-width="2"/>
+          <text x="245" y="295" font-size="15" fill="#777" text-anchor="middle">training sample size  S  &#8594;</text>
+          <text x="22" y="150" font-size="15" fill="#777" text-anchor="middle" transform="rotate(-90 22 150)">out-of-sample cost</text>
+          <line x1="70" y1="250" x2="420" y2="250" stroke="#444" stroke-width="2" stroke-dasharray="6 4"/>
+          <text x="416" y="265" font-size="13" fill="#444" text-anchor="end">unrestricted oracle</text>
+          <line x1="70" y1="150" x2="420" y2="150" stroke="#999" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <text x="120" y="143" font-size="13" fill="#888">best fixed-basis value</text>
+          <path d="M95,66 C175,82 205,145 415,151" stroke="#9a9a9a" stroke-width="3" fill="none"/>
+          <text x="150" y="58" font-size="13" fill="#888">LDR / fixed basis</text>
+          <path d="M95,104 C185,132 250,235 415,247" stroke="#94070A" stroke-width="3" fill="none"/>
+          <text x="258" y="118" font-size="13" fill="#94070A" font-weight="700">GenSO</text>
+          <g stroke="#94070A" stroke-width="1.8">
+            <line x1="300" y1="150" x2="300" y2="250"/>
+            <line x1="294" y1="150" x2="306" y2="150"/>
+            <line x1="294" y1="250" x2="306" y2="250"/>
+          </g>
+          <text x="312" y="203" font-size="13" fill="#94070A" font-weight="700">representation</text>
+          <text x="312" y="219" font-size="13" fill="#94070A" font-weight="700">gap (irreducible)</text>
+        </svg>
+        <figcaption>More data lowers each curve, but a fixed basis plateaus <em>above</em> the oracle. GenSO lowers the plateau itself.</figcaption>
+      </figure>
     </div>
     <div class="callout"><span class="lbl">Implication</span><p style="margin-top:4px">Good recourse often depends on <strong>nonlinear summaries</strong> — demand seasonality, workload imbalance, recent volatility, bottlenecks. To close the gap we must enrich the <em>representation</em>, not just collect more data.</p></div>
   </div>
@@ -273,9 +355,30 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h1 class="kicker">Problem · 4 / 5</h1>
   <h2>LLMs: An Opportunity — and a Trap</h2>
   <div class="content">
-    <div class="grid g2">
-      <div class="card"><h3>The opportunity</h3><p>LLMs generate mathematical expressions, executable code, and problem-specific abstractions from <em>textual + mathematical + domain</em> context — exactly the kind of nonlinear features that are hard to hand-design.</p></div>
-      <div class="card" style="border-left-color:#999"><h3>The trap: LLM as end-to-end solver</h3><ul><li>Hallucinations</li><li>No feasibility / optimality guarantees</li><li>Limited interpretability</li></ul></div>
+    <div class="splitrow">
+      <div>
+        <div class="card"><h3>The opportunity</h3><p>LLMs generate expressions, executable code, and problem-specific abstractions from <em>textual + mathematical + domain</em> context — exactly the nonlinear features that are hard to hand-design.</p></div>
+        <div class="card" style="border-left-color:#999"><h3>The trap: LLM as end-to-end solver</h3><ul><li>Hallucinations</li><li>No feasibility / optimality guarantees</li><li>Limited interpretability</li></ul></div>
+      </div>
+      <figure class="dfig">
+        <svg class="diagram" viewBox="0 0 360 350" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GenSO division of labor">
+          <defs><marker id="pa" markerWidth="12" markerHeight="12" refX="5" refY="7" orient="auto"><path d="M1,1 L5,7 L9,1" fill="none" stroke="#94070A" stroke-width="2"/></marker></defs>
+          <rect x="40" y="14" width="280" height="50" rx="9" fill="#f4f4f4" stroke="#cfcfcf" stroke-width="1.5"/>
+          <text x="180" y="44" font-size="14.5" fill="#333" text-anchor="middle">Problem structure + domain knowledge</text>
+          <line x1="180" y1="64" x2="180" y2="103" stroke="#94070A" stroke-width="2" marker-end="url(#pa)"/>
+          <rect x="40" y="106" width="280" height="52" rx="9" fill="#f3e6c0" stroke="#b8902f" stroke-width="2"/>
+          <text x="180" y="129" font-size="14.5" fill="#7a5d12" text-anchor="middle" font-weight="700">LLM proposes basis functions</text>
+          <text x="180" y="148" font-size="13" fill="#7a5d12" text-anchor="middle">executable code mapping z &#8594; &#8477;</text>
+          <line x1="180" y1="158" x2="180" y2="197" stroke="#94070A" stroke-width="2" marker-end="url(#pa)"/>
+          <rect x="40" y="200" width="280" height="58" rx="9" fill="#e3edf7" stroke="#3a6ea5" stroke-width="2"/>
+          <text x="180" y="224" font-size="14.5" fill="#28557f" text-anchor="middle" font-weight="700">Optimization model</text>
+          <text x="180" y="243" font-size="12.5" fill="#28557f" text-anchor="middle">fit coefficients &#183; feasibility &#183; OOS evaluation</text>
+          <line x1="180" y1="258" x2="180" y2="297" stroke="#94070A" stroke-width="2" marker-end="url(#pa)"/>
+          <rect x="40" y="300" width="280" height="46" rx="9" fill="#94070A"/>
+          <text x="180" y="329" font-size="14.5" fill="#fff" text-anchor="middle" font-weight="700">Deployable decision rule  &#10003;</text>
+        </svg>
+        <figcaption>The LLM only proposes the <em>representation</em>; it never chooses \(\bm x\) or the coefficients \(\bm y_h\).</figcaption>
+      </figure>
     </div>
     <div class="box"><span class="lbl">Design principle</span><p style="margin-top:4px">Use the LLM for what it is uniquely good at — <strong>proposing functional structure</strong> — and keep optimization for what it is uniquely good at: <strong>fitting, feasibility, and out-of-sample evaluation.</strong></p></div>
     <p style="margin-top:6px">This separation of roles is the heart of the paper. The LLM <em>never</em> chooses \(\bm x\) or the coefficients \(\bm y_h\).</p>
@@ -289,6 +392,29 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h2>Our Answer &amp; Contributions</h2>
   <div class="content">
     <div class="box"><span class="lbl">GenSO in one line</span><p style="margin-top:4px"><strong>The LLM searches over representations; the optimization model fits coefficients.</strong> Recourse stays linear in fitted coefficients, but linear in <em>LLM-generated basis functions</em>.</p></div>
+    <figure class="dfig" style="margin:6px 0 10px">
+      <svg class="diagram" viewBox="0 0 900 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GenSO closed loop" style="max-height:22vh">
+        <defs><marker id="lf" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#94070A"/></marker></defs>
+        <rect x="20" y="55" width="178" height="62" rx="9" fill="#f3e6c0" stroke="#b8902f" stroke-width="2"/>
+        <text x="109" y="80" font-size="14" fill="#7a5d12" text-anchor="middle" font-weight="700">LLM generates</text>
+        <text x="109" y="99" font-size="13" fill="#7a5d12" text-anchor="middle">basis set &#934;</text>
+        <rect x="247" y="55" width="178" height="62" rx="9" fill="#e3edf7" stroke="#3a6ea5" stroke-width="2"/>
+        <text x="336" y="80" font-size="14" fill="#28557f" text-anchor="middle" font-weight="700">Optimization fits</text>
+        <text x="336" y="99" font-size="13" fill="#28557f" text-anchor="middle">coefficients (LP)</text>
+        <rect x="474" y="55" width="178" height="62" rx="9" fill="#f6f6f6" stroke="#c7c7c7" stroke-width="2"/>
+        <text x="563" y="80" font-size="14" fill="#444" text-anchor="middle" font-weight="700">Validate</text>
+        <text x="563" y="99" font-size="13" fill="#444" text-anchor="middle">out-of-sample</text>
+        <rect x="701" y="55" width="178" height="62" rx="9" fill="#fff" stroke="#94070A" stroke-width="2"/>
+        <text x="790" y="80" font-size="14" fill="#94070A" text-anchor="middle" font-weight="700">Select &amp; evolve</text>
+        <text x="790" y="99" font-size="13" fill="#94070A" text-anchor="middle">MILP + Pareto</text>
+        <line x1="198" y1="86" x2="243" y2="86" stroke="#94070A" stroke-width="2" marker-end="url(#lf)"/>
+        <line x1="425" y1="86" x2="470" y2="86" stroke="#94070A" stroke-width="2" marker-end="url(#lf)"/>
+        <line x1="652" y1="86" x2="697" y2="86" stroke="#94070A" stroke-width="2" marker-end="url(#lf)"/>
+        <path d="M790,53 C790,18 109,18 109,51" stroke="#94070A" stroke-width="2" stroke-dasharray="6 4" fill="none" marker-end="url(#lf)"/>
+        <text x="449" y="14" font-size="13" fill="#94070A" text-anchor="middle">repeat for K iterations</text>
+      </svg>
+      <figcaption>GenSO is a closed loop — generate &#8594; fit &#8594; validate &#8594; evolve — and the best basis is deployed.</figcaption>
+    </figure>
     <div class="grid g2">
       <div class="card"><h3>① GenLDR</h3><p>A new adaptive rule class built on generated representations — generalizes classical LDR, preserves tractability.</p></div>
       <div class="card"><h3>② GenSO framework</h3><p>LLM-guided evolutionary search + optimization-based validation; extended to multi-stage problems.</p></div>
