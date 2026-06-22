@@ -112,12 +112,15 @@ figure img{max-width:100%;max-height:62vh;border:1px solid #e6e6e6;border-radius
 figcaption{font-size:13px;color:var(--muted);margin-top:6px}
 .imgrow{display:flex;gap:18px;align-items:center;justify-content:center}
 .imgrow img{max-height:58vh}
-.diagram{width:100%;height:auto;display:block;max-height:46vh}
-figure.dfig{margin:4px 0;text-align:center}
-figure.dfig figcaption{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.35}
-.splitrow{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center;margin:6px 0}
-.splitrow .card{margin-bottom:12px}
+.diagram{width:100%;height:auto;display:block;max-height:32vh}
+figure.dfig{margin:2px 0;text-align:center}
+figure.dfig figcaption{font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.3}
+.splitrow{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:center;margin:2px 0}
+.splitrow .card{margin-bottom:10px;padding:11px 14px}
 .splitrow .card:last-child{margin-bottom:0}
+.splitrow .card h3{font-size:17px}
+.splitrow .card p,.splitrow .card li{font-size:14.5px;line-height:1.38}
+.splitrow .card li{margin-bottom:5px}
 
 /* tables */
 table{border-collapse:collapse;width:100%;font-size:15px;margin-top:6px;background:#fff}
@@ -275,10 +278,9 @@ ol li::marker{color:var(--pku-red);font-weight:700}
         <div class="card"><h3>✗ The hidden cost</h3><ul><li>Strong inductive bias: recourse <em>must</em> vary linearly with \(\bm z\)</li><li>Cannot express thresholds, ratios, lags, peaks…</li></ul></div>
       </div>
       <figure class="dfig">
-        <svg class="diagram" viewBox="0 0 440 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tractability vs expressiveness">
+        <svg class="diagram" viewBox="0 0 440 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tractability vs expressiveness frontier">
           <defs>
             <marker id="ahR" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#94070A"/></marker>
-            <marker id="ahG" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#999"/></marker>
           </defs>
           <line x1="70" y1="285" x2="410" y2="285" stroke="#bbb" stroke-width="2"/>
           <polygon points="410,279 428,285 410,291" fill="#bbb"/>
@@ -286,19 +288,23 @@ ol li::marker{color:var(--pku-red);font-weight:700}
           <polygon points="64,38 70,22 76,38" fill="#bbb"/>
           <text x="240" y="310" font-size="15" fill="#777" text-anchor="middle">Tractability  &#8594;</text>
           <text x="22" y="165" font-size="15" fill="#777" text-anchor="middle" transform="rotate(-90 22 165)">Expressiveness  &#8594;</text>
-          <circle cx="120" cy="78" r="8" fill="#bdbdbd"/>
-          <text x="136" y="74" font-size="13.5" fill="#666">All measurable</text>
-          <text x="136" y="91" font-size="13.5" fill="#666">policies (intractable)</text>
-          <circle cx="360" cy="248" r="8" fill="#bdbdbd"/>
-          <text x="360" y="272" font-size="14" fill="#666" text-anchor="middle">LDR</text>
-          <text x="360" y="92" font-size="34" fill="#94070A" text-anchor="middle">&#9733;</text>
-          <text x="360" y="58" font-size="16" fill="#94070A" text-anchor="middle" font-weight="700">GenLDR</text>
-          <path d="M360,236 L360,108" stroke="#94070A" stroke-width="2" stroke-dasharray="5 4" fill="none" marker-end="url(#ahR)"/>
-          <text x="372" y="180" font-size="13" fill="#94070A">enrich basis</text>
-          <path d="M140,96 C250,150 305,150 350,100" stroke="#999" stroke-width="2" stroke-dasharray="5 4" fill="none" marker-end="url(#ahG)"/>
-          <text x="225" y="172" font-size="13" fill="#888" text-anchor="middle">tractable approx.</text>
+          <path d="M118,60 C165,85 180,95 210,110 C250,130 270,148 298,165 C332,192 360,222 378,248" stroke="#cfcfcf" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
+          <text x="230" y="214" font-size="12" fill="#aaa" text-anchor="middle">classical frontier</text>
+          <circle cx="118" cy="60" r="8" fill="#bdbdbd"/>
+          <text x="132" y="56" font-size="13" fill="#666">All measurable</text>
+          <text x="132" y="72" font-size="13" fill="#666">policies (intractable)</text>
+          <circle cx="210" cy="110" r="7" fill="#bdbdbd"/>
+          <text x="222" y="106" font-size="13" fill="#666">Polynomial</text>
+          <circle cx="298" cy="165" r="7" fill="#bdbdbd"/>
+          <text x="310" y="161" font-size="13" fill="#666">Piecewise-linear</text>
+          <circle cx="378" cy="248" r="8" fill="#bdbdbd"/>
+          <text x="378" y="271" font-size="14" fill="#666" text-anchor="middle">LDR</text>
+          <text x="370" y="114" font-size="34" fill="#94070A" text-anchor="middle">&#9733;</text>
+          <text x="370" y="80" font-size="16" fill="#94070A" text-anchor="middle" font-weight="700">GenLDR</text>
+          <path d="M378,238 L372,130" stroke="#94070A" stroke-width="2" stroke-dasharray="5 4" fill="none" marker-end="url(#ahR)"/>
+          <text x="394" y="186" font-size="12.5" fill="#94070A" text-anchor="middle" transform="rotate(-90 394 186)">enrich basis</text>
         </svg>
-        <figcaption>GenLDR aims for the top-right: as expressive as richer policies, as tractable as an LDR.</figcaption>
+        <figcaption>Classical rules trade off along a frontier; GenLDR pushes past it — yet stays below the intractable all-policies ceiling.</figcaption>
       </figure>
     </div>
     <div class="box"><span class="lbl">Key point</span><p style="margin-top:4px">Even when LDR coefficients are fitted <strong>perfectly</strong>, the policy can stay far from optimal — because the <strong>representation</strong> itself is too restrictive.</p></div>
