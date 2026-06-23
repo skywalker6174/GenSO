@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beyond Linear Decision Rules — GenSO</title>
+<title>Beyond Linear Decision Rules — GenASO</title>
 <script>
   window.MathJax = {
     tex: {
@@ -112,15 +112,6 @@ figure img{max-width:100%;max-height:62vh;border:1px solid #e6e6e6;border-radius
 figcaption{font-size:13px;color:var(--muted);margin-top:6px}
 .imgrow{display:flex;gap:18px;align-items:center;justify-content:center}
 .imgrow img{max-height:58vh}
-.diagram{width:100%;height:auto;display:block;max-height:32vh}
-figure.dfig{margin:2px 0;text-align:center}
-figure.dfig figcaption{font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.3}
-.splitrow{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:center;margin:2px 0}
-.splitrow .card{margin-bottom:10px;padding:11px 14px}
-.splitrow .card:last-child{margin-bottom:0}
-.splitrow .card h3{font-size:17px}
-.splitrow .card p,.splitrow .card li{font-size:14.5px;line-height:1.38}
-.splitrow .card li{margin-bottom:5px}
 
 /* tables */
 table{border-collapse:collapse;width:100%;font-size:15px;margin-top:6px;background:#fff}
@@ -155,8 +146,8 @@ tr.ours td{color:var(--pku-red)}
 .divider{background:linear-gradient(120deg,var(--pku-red) 0%, #7a0608 100%)!important;}
 .divider::before{display:none}
 .divider .content{display:flex;flex-direction:column;justify-content:center;height:100%}
-.divider .num{font-size:120px;font-weight:800;color:rgba(255,255,255,.18);line-height:1;margin-bottom:14px}
-.divider h2{color:#fff;border:none;font-size:46px;margin-top:0}
+.divider .num{font-size:120px;font-weight:800;color:rgba(255,255,255,.18);line-height:1}
+.divider h2{color:#fff;border:none;font-size:46px;margin-top:-30px}
 .divider p{color:rgba(255,255,255,.9);font-size:20px;max-width:760px}
 .divider .footer{background:transparent;border:none;color:rgba(255,255,255,.7)}
 .divider .footer .sec{color:#fff}
@@ -196,10 +187,10 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <div class="pre">Stochastic Optimization &nbsp;·&nbsp; Generative AI &nbsp;·&nbsp; Decision Rules</div>
   <h1>Beyond Linear Decision Rules:<br><span class="accent">LLM-Guided Representation Discovery</span> for Data-Driven Optimization</h1>
   <div class="titlebar"></div>
-  <div class="sub">Generative Stochastic Optimization (GenSO): using LLMs to discover nonlinear recourse representations — without sacrificing rigor, tractability, or interpretability.</div>
+  <div class="sub">Generative Adaptive Stochastic Optimization (GenASO): using LLMs to discover nonlinear recourse representations — without sacrificing rigor, tractability, or interpretability.</div>
   <div class="authors"><b>Huan Zhang</b>, &nbsp;<b>Yang Wang</b> &nbsp;<small>(Northwestern Polytechnical University)</small> &nbsp;·&nbsp; <b>Yue Zhao</b> &nbsp;<small>(HSBC Business School, Peking University)</small></div>
   <div class="aff">Conference Presentation &nbsp;·&nbsp; ~40 minutes</div>
-  <div class="footer"><span class="ftitle">Beyond Linear Decision Rules · GenSO</span></div>
+  <div class="footer"><span>Beyond Linear Decision Rules · GenASO</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- ===================== OUTLINE ===================== -->
@@ -209,14 +200,14 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <div class="content">
     <div class="grid g2">
       <div class="card"><h3>1 · Problem &amp; Motivation</h3><p>The expressiveness–tractability tradeoff of decision rules, and the opportunity created by LLMs.</p></div>
-      <div class="card"><h3>2 · Related Literature</h3><p>Where GenSO sits across five streams of OR / ML research.</p></div>
-      <div class="card"><h3>3 · The GenSO Framework</h3><p>From LDR to Generative LDR; the LLM-guided evolutionary discovery loop.</p></div>
+      <div class="card"><h3>2 · Related Literature</h3><p>Where GenASO sits across five streams of OR / ML research.</p></div>
+      <div class="card"><h3>3 · The GenASO Framework</h3><p>From LDR to Generative LDR; the LLM-guided evolutionary discovery loop.</p></div>
       <div class="card"><h3>4 · Theory: Finite-Sample &amp; Search Bounds</h3><p>Separating estimation error from search error; key insights.</p></div>
       <div class="card"><h3>5 · Numerical Studies</h3><p>Multi-period newsvendor &amp; data-center location with real cloud traces.</p></div>
       <div class="card plain"><h3>6 · Takeaways</h3><p>What LLMs should and should not do inside optimization.</p></div>
     </div>
   </div>
-  <div class="footer"><span class="ftitle">Outline</span></div>
+  <div class="footer"><span>Outline</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- ===================== DIVIDER 1 ===================== -->
@@ -226,7 +217,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
     <h2>Problem &amp; Motivation</h2>
     <p>Why even an optimally-fitted linear decision rule can be far from optimal — and why this gap cannot be closed with more data.</p>
   </div>
-  <div class="footer"><span class="ftitle">Problem &amp; Motivation</span></div>
+  <div class="footer"><span>Problem &amp; Motivation</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- P1: decision under uncertainty -->
@@ -235,34 +226,14 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h2>Decision-Making Under Uncertainty</h2>
   <div class="content">
     <p>Stochastic optimization with recourse: a <span class="red">here-and-now</span> decision \(\bm x\) is chosen <em>before</em> uncertainty \(\tilde{\bm z}\) is revealed; a <span class="red">wait-and-see</span> recourse \(\bm y\) adapts <em>after</em>.</p>
-    <figure class="dfig" style="margin:6px 0 4px">
-      <svg class="diagram" viewBox="0 0 960 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two-stage recourse timeline">
-        <line x1="40" y1="105" x2="852" y2="105" stroke="#d0d0d0" stroke-width="2"/>
-        <polygon points="852,98 876,105 852,112" fill="#d0d0d0"/>
-        <text x="884" y="110" font-size="15" fill="#999">time</text>
-        <text x="250" y="135" font-size="14" fill="#999" text-anchor="middle">before uncertainty</text>
-        <text x="615" y="135" font-size="14" fill="#999" text-anchor="middle">after uncertainty</text>
-        <line x1="150" y1="105" x2="150" y2="82" stroke="#c9b3b3" stroke-width="2"/>
-        <rect x="58" y="20" width="184" height="58" rx="9" fill="#94070A"/>
-        <text x="150" y="45" font-size="16" fill="#fff" text-anchor="middle" font-weight="700">Here-and-now</text>
-        <text x="150" y="66" font-size="15" fill="#fff" text-anchor="middle">decision&#160;<tspan font-family="Georgia,'Times New Roman',serif" font-style="italic" font-weight="700">x</tspan> &#8712; <tspan font-family="Georgia,'Times New Roman',serif" font-style="italic" font-weight="700">X</tspan></text>
-        <text x="470" y="46" font-size="16" fill="#94070A" text-anchor="middle" font-weight="700">uncertainty revealed</text>
-        <g stroke="#94070A" stroke-width="2.5"><line x1="470" y1="92" x2="470" y2="80"/><line x1="456" y1="96" x2="447" y2="88"/><line x1="484" y1="96" x2="493" y2="88"/></g>
-        <circle cx="470" cy="105" r="9" fill="#94070A"/>
-        <line x1="760" y1="105" x2="760" y2="82" stroke="#c9b3b3" stroke-width="2"/>
-        <rect x="668" y="20" width="184" height="58" rx="9" fill="#fff" stroke="#94070A" stroke-width="2.5"/>
-        <text x="760" y="45" font-size="16" fill="#94070A" text-anchor="middle" font-weight="700">Wait-and-see</text>
-        <text x="760" y="66" font-size="15" fill="#1b1b1b" text-anchor="middle">recourse&#160;<tspan font-family="Georgia,'Times New Roman',serif" font-style="italic" font-weight="700">y</tspan>(<tspan font-family="Georgia,'Times New Roman',serif" font-style="italic" font-weight="700">z</tspan>)</text>
-      </svg>
-      <figcaption><strong>Central question:</strong> the decision maker commits to \(\bm x\) before the outcome, then adapts \(\bm y(\bm z)\) after — we want one <em>deployable, expressive, yet tractable</em> rule, not a separate solution per scenario.</figcaption>
-    </figure>
     <div class="eq hl">$$\hat Z=\min_{\bm x\in\mathcal X}\ \mathbb E_{\hat{\mathbb P}}\!\left[\bm c(\tilde{\bm z})^\top\bm x+Q(\bm x,\tilde{\bm z})\right],\qquad Q(\bm x,\bm z)=\min_{\bm y}\big\{\bm d^\top\bm y:\ \bm A(\bm z)\bm x+\bm B\bm y\ge \bm b(\bm z)\big\}$$</div>
     <div class="grid g2">
       <div class="card"><h3>Ideal: arbitrary policies</h3><p>Recourse can be <em>any</em> measurable function \(\bm y(\bm z)\) → maximal adaptivity, but generally <strong>intractable</strong>.</p></div>
       <div class="card"><h3>Reality: scenario SAA</h3><p>SAA gives a separate \(\bm y_s\) per training scenario — optimal in-sample, but <strong>not a deployable rule</strong> for unseen \(\bm z\).</p></div>
     </div>
+    <div class="callout"><span class="lbl">Central question</span><p style="margin-top:4px">How do we obtain a <strong>deployable, expressive, yet tractable</strong> recourse rule for unseen realizations?</p></div>
   </div>
-  <div class="footer"><span class="ftitle">Decision-Making Under Uncertainty</span></div>
+  <div class="footer"><span>Decision-Making Under Uncertainty</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- P2: LDR tradeoff -->
@@ -272,44 +243,13 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <div class="content">
     <p>The dominant device is the <span class="red">Linear Decision Rule (LDR)</span> — restrict recourse to be affine in the uncertainty:</p>
     <div class="eq">$$\mathcal L^{N_z,N_y}=\Big\{\,\bm y:\ \bm y(\bm z)=\bm y_0+\textstyle\sum_{i\in[N_z]}\bm y_i\,z_i\,\Big\}$$</div>
-    <div class="splitrow">
-      <div>
-        <div class="card"><h3>✓ Why it is used</h3><ul><li>Reduces an intractable adaptive problem to a finite LP</li><li>Small coefficient dimension</li><li>Interpretable &amp; deployable</li></ul></div>
-        <div class="card"><h3>✗ The hidden cost</h3><ul><li>Strong inductive bias: recourse <em>must</em> vary linearly with \(\bm z\)</li><li>Cannot express thresholds, ratios, lags, peaks…</li></ul></div>
-      </div>
-      <figure class="dfig">
-        <svg class="diagram" viewBox="0 0 440 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tractability vs expressiveness frontier">
-          <defs>
-            <marker id="ahR" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#94070A"/></marker>
-          </defs>
-          <line x1="70" y1="285" x2="410" y2="285" stroke="#bbb" stroke-width="2"/>
-          <polygon points="410,279 428,285 410,291" fill="#bbb"/>
-          <line x1="70" y1="285" x2="70" y2="38" stroke="#bbb" stroke-width="2"/>
-          <polygon points="64,38 70,22 76,38" fill="#bbb"/>
-          <text x="240" y="310" font-size="15" fill="#777" text-anchor="middle">Tractability  &#8594;</text>
-          <text x="22" y="165" font-size="15" fill="#777" text-anchor="middle" transform="rotate(-90 22 165)">Expressiveness  &#8594;</text>
-          <path d="M118,60 C165,85 180,95 210,110 C250,130 270,148 298,165 C332,192 360,222 378,248" stroke="#cfcfcf" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
-          <text x="230" y="214" font-size="12" fill="#aaa" text-anchor="middle">classical frontier</text>
-          <circle cx="118" cy="60" r="8" fill="#bdbdbd"/>
-          <text x="132" y="56" font-size="13" fill="#666">All measurable</text>
-          <text x="132" y="72" font-size="13" fill="#666">policies (intractable)</text>
-          <circle cx="210" cy="110" r="7" fill="#bdbdbd"/>
-          <text x="222" y="106" font-size="13" fill="#666">Polynomial</text>
-          <circle cx="298" cy="165" r="7" fill="#bdbdbd"/>
-          <text x="310" y="161" font-size="13" fill="#666">Piecewise-linear</text>
-          <circle cx="378" cy="248" r="8" fill="#bdbdbd"/>
-          <text x="378" y="271" font-size="14" fill="#666" text-anchor="middle">LDR</text>
-          <text x="370" y="114" font-size="34" fill="#94070A" text-anchor="middle">&#9733;</text>
-          <text x="370" y="80" font-size="16" fill="#94070A" text-anchor="middle" font-weight="700">GenLDR</text>
-          <path d="M378,238 L372,130" stroke="#94070A" stroke-width="2" stroke-dasharray="5 4" fill="none" marker-end="url(#ahR)"/>
-          <text x="394" y="186" font-size="12.5" fill="#94070A" text-anchor="middle" transform="rotate(-90 394 186)">enrich basis</text>
-        </svg>
-        <figcaption>Classical rules trade off along a frontier; GenLDR pushes past it — yet stays below the intractable all-policies ceiling.</figcaption>
-      </figure>
+    <div class="grid g2">
+      <div class="card"><h3>✓ Why it is used</h3><ul><li>Reduces an intractable adaptive problem to a finite LP</li><li>Small coefficient dimension</li><li>Interpretable &amp; deployable</li></ul></div>
+      <div class="card"><h3>✗ The hidden cost</h3><ul><li>A strong inductive bias: recourse <em>must</em> vary linearly with \(\bm z\)</li><li>Cannot express thresholds, ratios, lags, peaks, moving averages…</li></ul></div>
     </div>
     <div class="box"><span class="lbl">Key point</span><p style="margin-top:4px">Even when LDR coefficients are fitted <strong>perfectly</strong>, the policy can stay far from optimal — because the <strong>representation</strong> itself is too restrictive.</p></div>
   </div>
-  <div class="footer"><span class="ftitle">Tractability–Expressiveness Tradeoff</span></div>
+  <div class="footer"><span>Tractability–Expressiveness Tradeoff</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- P3: irreducible gap -->
@@ -319,41 +259,13 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <div class="content">
     <p>The deployed cost decomposes into two fundamentally different errors:</p>
     <div class="eq hl">$$\underbrace{\mathcal J(\hat{\bm x},\hat{\bm y})-Z^\star_{\mathcal R}}_{\text{total gap to oracle}}=\underbrace{\mathcal J(\hat{\bm x},\hat{\bm y})-Z^\star_{\Phi}}_{\text{estimation error}\ \to 0\ \text{as }S\to\infty}\;+\;\underbrace{Z^\star_{\Phi}-Z^\star_{\mathcal R}}_{\text{representation gap}}$$</div>
-    <div class="splitrow">
-      <div>
-        <div class="card"><h3>Estimation error</h3><p>Vanishes with more data \(S\). Classical statistical learning.</p></div>
-        <div class="card"><h3>Representation gap</h3><p><strong>Does not vanish with data.</strong> Fixed once the basis \(\Phi\) (e.g. raw LDR) is chosen.</p></div>
-      </div>
-      <figure class="dfig">
-        <svg class="diagram" viewBox="0 0 450 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cost versus sample size">
-          <rect x="250" y="150" width="170" height="100" fill="#94070A" opacity="0.10"/>
-          <line x1="70" y1="270" x2="420" y2="270" stroke="#bbb" stroke-width="2"/>
-          <polygon points="420,264 438,270 420,276" fill="#bbb"/>
-          <line x1="70" y1="270" x2="70" y2="34" stroke="#bbb" stroke-width="2"/>
-          <text x="245" y="295" font-size="15" fill="#777" text-anchor="middle">training sample size  S  &#8594;</text>
-          <text x="22" y="150" font-size="15" fill="#777" text-anchor="middle" transform="rotate(-90 22 150)">out-of-sample cost</text>
-          <line x1="70" y1="250" x2="420" y2="250" stroke="#444" stroke-width="2" stroke-dasharray="6 4"/>
-          <text x="416" y="265" font-size="13" fill="#444" text-anchor="end">unrestricted oracle</text>
-          <line x1="70" y1="150" x2="420" y2="150" stroke="#999" stroke-width="1.5" stroke-dasharray="4 4"/>
-          <text x="120" y="143" font-size="13" fill="#888">best fixed-basis value</text>
-          <path d="M95,66 C175,82 205,145 415,151" stroke="#9a9a9a" stroke-width="3" fill="none"/>
-          <text x="150" y="58" font-size="13" fill="#888">LDR / fixed basis</text>
-          <path d="M95,104 C185,132 250,235 415,247" stroke="#94070A" stroke-width="3" fill="none"/>
-          <text x="258" y="118" font-size="13" fill="#94070A" font-weight="700">GenSO</text>
-          <g stroke="#94070A" stroke-width="1.8">
-            <line x1="300" y1="150" x2="300" y2="250"/>
-            <line x1="294" y1="150" x2="306" y2="150"/>
-            <line x1="294" y1="250" x2="306" y2="250"/>
-          </g>
-          <text x="312" y="203" font-size="13" fill="#94070A" font-weight="700">representation</text>
-          <text x="312" y="219" font-size="13" fill="#94070A" font-weight="700">gap (irreducible)</text>
-        </svg>
-        <figcaption>More data lowers each curve, but a fixed basis plateaus <em>above</em> the oracle. GenSO lowers the plateau itself.</figcaption>
-      </figure>
+    <div class="grid g2">
+      <div class="card"><h3>Estimation error</h3><p>Vanishes with more data \(S\). Classical statistical learning.</p></div>
+      <div class="card"><h3>Representation gap</h3><p><strong>Does not vanish with data.</strong> It is fixed once the basis \(\Phi\) (e.g. raw LDR) is chosen.</p></div>
     </div>
     <div class="callout"><span class="lbl">Implication</span><p style="margin-top:4px">Good recourse often depends on <strong>nonlinear summaries</strong> — demand seasonality, workload imbalance, recent volatility, bottlenecks. To close the gap we must enrich the <em>representation</em>, not just collect more data.</p></div>
   </div>
-  <div class="footer"><span class="ftitle">Irreducible Approximation Gap</span></div>
+  <div class="footer"><span>Irreducible Approximation Gap</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- P4: LLM opportunity -->
@@ -361,35 +273,14 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h1 class="kicker">Problem · 4 / 5</h1>
   <h2>LLMs: An Opportunity — and a Trap</h2>
   <div class="content">
-    <div class="splitrow">
-      <div>
-        <div class="card"><h3>The opportunity</h3><p>LLMs generate expressions, executable code, and problem-specific abstractions from <em>textual + mathematical + domain</em> context — exactly the nonlinear features that are hard to hand-design.</p></div>
-        <div class="card" style="border-left-color:#999"><h3>The trap: LLM as end-to-end solver</h3><ul><li>Hallucinations</li><li>No feasibility / optimality guarantees</li><li>Limited interpretability</li></ul></div>
-      </div>
-      <figure class="dfig">
-        <svg class="diagram" viewBox="0 0 360 350" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GenSO division of labor">
-          <defs><marker id="pa" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M1,1 L10,6 L1,11 Z" fill="#94070A"/></marker></defs>
-          <rect x="40" y="14" width="280" height="50" rx="9" fill="#f4f4f4" stroke="#cfcfcf" stroke-width="1.5"/>
-          <text x="180" y="44" font-size="14.5" fill="#333" text-anchor="middle">Problem structure + domain knowledge</text>
-          <line x1="180" y1="64" x2="180" y2="103" stroke="#94070A" stroke-width="2" marker-end="url(#pa)"/>
-          <rect x="40" y="106" width="280" height="52" rx="9" fill="#f3e6c0" stroke="#b8902f" stroke-width="2"/>
-          <text x="180" y="129" font-size="14.5" fill="#7a5d12" text-anchor="middle" font-weight="700">LLM proposes basis functions</text>
-          <text x="180" y="148" font-size="13" fill="#7a5d12" text-anchor="middle">executable code mapping <tspan font-family="Georgia,'Times New Roman',serif" font-style="italic" font-weight="700">z</tspan> &#8594; &#8477;</text>
-          <line x1="180" y1="158" x2="180" y2="197" stroke="#94070A" stroke-width="2" marker-end="url(#pa)"/>
-          <rect x="40" y="200" width="280" height="58" rx="9" fill="#e3edf7" stroke="#3a6ea5" stroke-width="2"/>
-          <text x="180" y="224" font-size="14.5" fill="#28557f" text-anchor="middle" font-weight="700">Optimization model</text>
-          <text x="180" y="243" font-size="12.5" fill="#28557f" text-anchor="middle">fit coefficients &#183; feasibility &#183; OOS evaluation</text>
-          <line x1="180" y1="258" x2="180" y2="297" stroke="#94070A" stroke-width="2" marker-end="url(#pa)"/>
-          <rect x="40" y="300" width="280" height="46" rx="9" fill="#94070A"/>
-          <text x="180" y="329" font-size="14.5" fill="#fff" text-anchor="middle" font-weight="700">Deployable decision rule  &#10003;</text>
-        </svg>
-        <figcaption>The LLM only proposes the <em>representation</em>; it never chooses \(\bm x\) or the coefficients \(\bm y_h\).</figcaption>
-      </figure>
+    <div class="grid g2">
+      <div class="card"><h3>The opportunity</h3><p>LLMs generate mathematical expressions, executable code, and problem-specific abstractions from <em>textual + mathematical + domain</em> context — exactly the kind of nonlinear features that are hard to hand-design.</p></div>
+      <div class="card" style="border-left-color:#999"><h3>The trap: LLM as end-to-end solver</h3><ul><li>Hallucinations</li><li>No feasibility / optimality guarantees</li><li>Limited interpretability</li></ul></div>
     </div>
     <div class="box"><span class="lbl">Design principle</span><p style="margin-top:4px">Use the LLM for what it is uniquely good at — <strong>proposing functional structure</strong> — and keep optimization for what it is uniquely good at: <strong>fitting, feasibility, and out-of-sample evaluation.</strong></p></div>
     <p style="margin-top:6px">This separation of roles is the heart of the paper. The LLM <em>never</em> chooses \(\bm x\) or the coefficients \(\bm y_h\).</p>
   </div>
-  <div class="footer"><span class="ftitle">LLMs: Opportunity and Trap</span></div>
+  <div class="footer"><span>LLMs: Opportunity and Trap</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- P5: contributions -->
@@ -397,38 +288,15 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h1 class="kicker">Problem · 5 / 5</h1>
   <h2>Our Answer &amp; Contributions</h2>
   <div class="content">
-    <div class="box"><span class="lbl">GenSO in one line</span><p style="margin-top:4px"><strong>The LLM searches over representations; the optimization model fits coefficients.</strong> Recourse stays linear in fitted coefficients, but linear in <em>LLM-generated basis functions</em>.</p></div>
-    <figure class="dfig" style="margin:6px 0 10px">
-      <svg class="diagram" viewBox="0 0 900 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GenSO closed loop" style="max-height:22vh">
-        <defs><marker id="lf" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#94070A"/></marker></defs>
-        <rect x="20" y="55" width="178" height="62" rx="9" fill="#f3e6c0" stroke="#b8902f" stroke-width="2"/>
-        <text x="109" y="80" font-size="14" fill="#7a5d12" text-anchor="middle" font-weight="700">LLM generates</text>
-        <text x="109" y="99" font-size="13" fill="#7a5d12" text-anchor="middle">basis set &#934;</text>
-        <rect x="247" y="55" width="178" height="62" rx="9" fill="#e3edf7" stroke="#3a6ea5" stroke-width="2"/>
-        <text x="336" y="80" font-size="14" fill="#28557f" text-anchor="middle" font-weight="700">Optimization fits</text>
-        <text x="336" y="99" font-size="13" fill="#28557f" text-anchor="middle">coefficients (LP)</text>
-        <rect x="474" y="55" width="178" height="62" rx="9" fill="#f6f6f6" stroke="#c7c7c7" stroke-width="2"/>
-        <text x="563" y="80" font-size="14" fill="#444" text-anchor="middle" font-weight="700">Validate</text>
-        <text x="563" y="99" font-size="13" fill="#444" text-anchor="middle">out-of-sample</text>
-        <rect x="701" y="55" width="178" height="62" rx="9" fill="#fff" stroke="#94070A" stroke-width="2"/>
-        <text x="790" y="80" font-size="14" fill="#94070A" text-anchor="middle" font-weight="700">Select &amp; evolve</text>
-        <text x="790" y="99" font-size="13" fill="#94070A" text-anchor="middle">MILP + Pareto</text>
-        <line x1="198" y1="86" x2="243" y2="86" stroke="#94070A" stroke-width="2" marker-end="url(#lf)"/>
-        <line x1="425" y1="86" x2="470" y2="86" stroke="#94070A" stroke-width="2" marker-end="url(#lf)"/>
-        <line x1="652" y1="86" x2="697" y2="86" stroke="#94070A" stroke-width="2" marker-end="url(#lf)"/>
-        <path d="M790,53 C790,18 109,18 109,51" stroke="#94070A" stroke-width="2" stroke-dasharray="6 4" fill="none" marker-end="url(#lf)"/>
-        <text x="449" y="14" font-size="13" fill="#94070A" text-anchor="middle">repeat for K iterations</text>
-      </svg>
-      <figcaption>GenSO is a closed loop — generate &#8594; fit &#8594; validate &#8594; evolve — and the best basis is deployed.</figcaption>
-    </figure>
+    <div class="box"><span class="lbl">GenASO in one line</span><p style="margin-top:4px"><strong>The LLM searches over representations; the optimization model fits coefficients.</strong> Recourse stays linear in fitted coefficients, but linear in <em>LLM-generated basis functions</em>.</p></div>
     <div class="grid g2">
       <div class="card"><h3>① GenLDR</h3><p>A new adaptive rule class built on generated representations — generalizes classical LDR, preserves tractability.</p></div>
-      <div class="card"><h3>② GenSO framework</h3><p>LLM-guided evolutionary search + optimization-based validation; extended to multi-stage problems.</p></div>
+      <div class="card"><h3>② GenASO framework</h3><p>LLM-guided evolutionary search + optimization-based validation; extended to multi-stage problems.</p></div>
       <div class="card"><h3>③ Theory</h3><p>Finite-sample bound for a fixed basis + a search bound under an LLM scaling-law-motivated hit-probability model.</p></div>
       <div class="card"><h3>④ Evidence</h3><p>Multi-period newsvendor &amp; data-center location (real cloud traces): consistent out-of-sample wins + interpretable structures.</p></div>
     </div>
   </div>
-  <div class="footer"><span class="ftitle">Contributions</span></div>
+  <div class="footer"><span>Contributions</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- ===================== DIVIDER 2 ===================== -->
@@ -436,9 +304,9 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <div class="content">
     <div class="num">02</div>
     <h2>Related Literature</h2>
-    <p>Five streams — and how GenSO differs from each.</p>
+    <p>Five streams — and how GenASO differs from each.</p>
   </div>
-  <div class="footer"><span class="ftitle">Related Literature</span></div>
+  <div class="footer"><span>Related Literature</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- L1 -->
@@ -451,9 +319,9 @@ ol li::marker{color:var(--pku-red);font-weight:700}
       <div class="card"><h3>Robust / Adjustable RO</h3><p>Guard against all realizations in an uncertainty set; adjustable RO for adaptivity.</p><small>Ben-Tal et al.; Bertsimas &amp; Sim</small></div>
       <div class="card"><h3>Distributionally Robust</h3><p>Worst case over an ambiguity set (moment, conic, Wasserstein); robust satisficing.</p><small>Delage &amp; Ye; Mohajerin Esfahani &amp; Kuhn; Long et al.</small></div>
     </div>
-    <div class="box"><span class="lbl">Our relation</span><p style="margin-top:4px">GenSO is <strong>compatible</strong> with all of these. For a fixed generated basis, basis values are <em>lifted uncertain quantities</em>; coefficients can be fit by SAA, robust, or DRO machinery — enriching recourse while keeping tractability and out-of-sample evaluation.</p></div>
+    <div class="box"><span class="lbl">Our relation</span><p style="margin-top:4px">GenASO is <strong>compatible</strong> with all of these. For a fixed generated basis, basis values are <em>lifted uncertain quantities</em>; coefficients can be fit by SAA, robust, or DRO machinery — enriching recourse while keeping tractability and out-of-sample evaluation.</p></div>
   </div>
-  <div class="footer"><span class="ftitle">Data-Driven SO &amp; RO</span></div>
+  <div class="footer"><span>Data-Driven SO &amp; RO</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- L2 -->
@@ -465,9 +333,9 @@ ol li::marker{color:var(--pku-red);font-weight:700}
       <div class="card"><h3>Decision rules in optimization</h3><ul><li>LDR (Ben-Tal et al. 2004); when affine rules are optimal (Bertsimas et al.; Georghiou et al.)</li><li>Deflected / segregated LDR (Chen et al.); polynomial rules (Bampou &amp; Kuhn); piecewise-linear &amp; primal-dual (Kuhn et al.)</li><li>Lifted uncertainty in adaptive DRO (Bertsimas et al. 2019); multi-deflected CARA (Chen et al. 2025)</li></ul></div>
       <div class="card"><h3>ODA &amp; prescriptive analytics</h3><ul><li>Operational statistics judged by <em>decision value</em>, not predictive accuracy (Feng et al.)</li><li>Covariate-to-decision prescriptions (Bertsimas &amp; Kallus; Ban &amp; Rudin)</li></ul></div>
     </div>
-    <div class="box"><span class="lbl">The common limitation</span><p style="margin-top:4px">In all of these, the transformation / lifting / basis is <strong>specified manually by the modeler</strong>. <span class="red">GenSO automates this representation-design step</span> — formalized via \(\epsilon\)-good operational-statistic basis sets.</p></div>
+    <div class="box"><span class="lbl">The common limitation</span><p style="margin-top:4px">In all of these, the transformation / lifting / basis is <strong>specified manually by the modeler</strong>. <span class="red">GenASO automates this representation-design step</span> — formalized via \(\epsilon\)-good operational-statistic basis sets.</p></div>
   </div>
-  <div class="footer"><span class="ftitle">Decision Rules &amp; ODA</span></div>
+  <div class="footer"><span>Decision Rules &amp; ODA</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- L3 -->
@@ -481,13 +349,13 @@ ol li::marker{color:var(--pku-red);font-weight:700}
     </div>
     <div class="box"><span class="lbl">Our positioning</span><p style="margin-top:4px">We <strong>transfer the FunSearch idea to adaptive decision rules</strong> and redesign the search around mathematical optimization: the LLM searches for <em>expressive representations</em>, while coefficients come from an optimization model — not an end-to-end optimizer, not a replacement for modeling.</p></div>
   </div>
-  <div class="footer"><span class="ftitle">LLM Function Search &amp; LLMs in OR</span></div>
+  <div class="footer"><span>LLM Function Search &amp; LLMs in OR</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- L4 positioning table -->
 <section class="slide">
   <h1 class="kicker">Literature · 4 / 4</h1>
-  <h2>Where GenSO Sits</h2>
+  <h2>Where GenASO Sits</h2>
   <div class="content">
     <table>
       <thead><tr><th>Approach</th><th>Who designs the representation?</th><th>Tractable?</th><th>Guarantees?</th><th>Interpretable?</th></tr></thead>
@@ -496,22 +364,22 @@ ol li::marker{color:var(--pku-red);font-weight:700}
         <tr><td>Polynomial / PWL rules</td><td>Modeler (fixed family)</td><td>Yes, but dim. blows up</td><td>Yes</td><td>Medium</td></tr>
         <tr><td>ODA / prescriptive</td><td>Modeler (hand-crafted stats)</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
         <tr><td>LLM end-to-end solver</td><td>LLM (whole decision)</td><td>—</td><td><span style="color:#b00">No</span></td><td>Low</td></tr>
-        <tr class="ours"><td>GenSO (this work)</td><td><b>LLM proposes basis; opt. fits</b></td><td><b>Yes (LP/MILP)</b></td><td><b>Yes</b></td><td><b>Yes</b></td></tr>
+        <tr class="ours"><td>GenASO (this work)</td><td><b>LLM proposes basis; opt. fits</b></td><td><b>Yes (LP/MILP)</b></td><td><b>Yes</b></td><td><b>Yes</b></td></tr>
       </tbody>
     </table>
     <div class="callout"><span class="lbl">The gap we fill</span><p style="margin-top:4px">A method that gets the <strong>expressiveness of generative search</strong> while keeping the <strong>rigor, tractability, and interpretability of optimization.</strong></p></div>
   </div>
-  <div class="footer"><span class="ftitle">Positioning</span></div>
+  <div class="footer"><span>Positioning</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- ===================== DIVIDER 3 ===================== -->
 <section class="slide divider">
   <div class="content">
     <div class="num">03</div>
-    <h2>The GenSO Framework</h2>
+    <h2>The GenASO Framework</h2>
     <p>From the LDR to the Generative LDR, and the LLM-guided discovery loop that finds the basis.</p>
   </div>
-  <div class="footer"><span class="ftitle">The GenSO Framework</span></div>
+  <div class="footer"><span>The GenASO Framework</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- F1 recourse formulation -->
@@ -525,7 +393,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
     <div class="eq">$$\hat Z=\min_{\bm x,\,\bm y_1,\dots,\bm y_S}\ \frac1S\sum_{s}\big[\bm c(\hat{\bm z}_s)^\top\bm x+\bm d^\top\bm y_s\big]\ \ \text{s.t.}\ \ \bm A(\hat{\bm z}_s)\bm x+\bm B\bm y_s\ge \bm b(\hat{\bm z}_s)\ \forall s$$</div>
     <div class="box"><span class="lbl">The deployment problem</span><p style="margin-top:4px">Per-scenario \(\bm y_s\) is optimal in-sample but is <strong>not a function of \(\bm z\)</strong> → it cannot be applied to a new realization. We need a parametric <em>rule</em>.</p></div>
   </div>
-  <div class="footer"><span class="ftitle">Recourse Formulation</span></div>
+  <div class="footer"><span>Recourse Formulation</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- F2 LDR -> GenLDR -->
@@ -540,7 +408,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
     <p style="margin-top:6px"><span class="red">“Generative”</span> = the source of the basis: produced by generative AI rather than specified by hand. Classical LDR is the special case \(\phi_h(\bm z)=z_h,\ H=N_z\).</p>
     <div class="callout"><span class="lbl">Crucial property</span><p style="margin-top:4px">For any <em>fixed</em> \(\Phi\), the SAA problem stays a <strong>linear program in \(\bm x\) and \(\{\bm y_h\}\)</strong> — basis values are just numerical inputs. Expressiveness ↑, tractability preserved.</p></div>
   </div>
-  <div class="footer"><span class="ftitle">From LDR to GenLDR</span></div>
+  <div class="footer"><span>From LDR to GenLDR</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- F3 hierarchy proposition -->
@@ -557,7 +425,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
     </ul>
     <div class="callout"><span class="lbl">The real challenge</span><p style="margin-top:4px">Does the enriched rule <strong>generalize out-of-sample</strong>? Fitting \(H+1\) coefficient vectors on \(S\) scenarios introduces estimation error. This needs the statistical analysis in Section 4.</p></div>
   </div>
-  <div class="footer"><span class="ftitle">In-Sample Hierarchy</span></div>
+  <div class="footer"><span>In-Sample Hierarchy</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- F4 closed loop figure -->
@@ -576,7 +444,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
     </div>
     <figure><img src="plots/llm-algo.png" alt="LLM-guided discovery loop"><figcaption>Gold = LLM (generative operator). Blue = optimization (selection &amp; evaluation).</figcaption></figure>
   </div>
-  <div class="footer"><span class="ftitle">Discovery Loop</span></div>
+  <div class="footer"><span>Discovery Loop</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- F5 coefficient fitting LP -->
@@ -584,7 +452,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h1 class="kicker">Framework · 5 / 10</h1>
   <h2>Optimization-Based Validation</h2>
   <div class="content">
-    <p>Given a generated basis \(\Phi^{(k)}\), GenSO evaluates it in two steps:</p>
+    <p>Given a generated basis \(\Phi^{(k)}\), GenASO evaluates it in two steps:</p>
     <p><strong>(i) Fit coefficients</strong> by solving an LP (basis values are constants):</p>
     <div class="eq hl small-eq">$$\hat Z_{\Phi^{(k)}}=\min_{\bm x,\{\bm y_h\}}\ \frac1S\sum_s\Big[\bm c(\hat{\bm z}_s)^\top\bm x+\bm d^\top\big(\bm y_0+\textstyle\sum_h\bm y_h\,\phi_h^{(k)}(\hat{\bm z}_s)\big)\Big]\ \ \text{s.t. constraints}\ \forall s$$</div>
     <p><strong>(ii) Score</strong> the fitted rule on a held-out <em>validation</em> set → vector-valued fitness returned as feedback.</p>
@@ -593,7 +461,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
       <div class="card"><h3>Optimization = evaluator</h3><p>Feasibility, coefficient fitting, out-of-sample scoring, Pareto population management — all stay inside the rigorous model.</p></div>
     </div>
   </div>
-  <div class="footer"><span class="ftitle">Optimization-Based Validation</span></div>
+  <div class="footer"><span>Optimization-Based Validation</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- F6 five-stage algorithm -->
@@ -610,7 +478,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
       <div class="card plain"><h3>Loop \(\times K\)</h3><p>Return the basis set with the best scalar fitness. Full pseudocode in the appendix.</p></div>
     </div>
   </div>
-  <div class="footer"><span class="ftitle">Five-Stage Algorithm</span></div>
+  <div class="footer"><span>Five-Stage Algorithm</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- F7 dynamic selection MILP -->
@@ -618,7 +486,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h1 class="kicker">Framework · 7 / 10</h1>
   <h2>Why a MILP for Parent Selection?</h2>
   <div class="content">
-    <p>Unlike scalar-fitness selection, GenSO keeps a <span class="red">vector fitness</span> \(\bm f_\Phi\in\mathbb R^{S_{\rm val}}\) — scenario-level performance is preserved. Parents are chosen by <strong>goal-programming MILP</strong> with three objectives:</p>
+    <p>Unlike scalar-fitness selection, GenASO keeps a <span class="red">vector fitness</span> \(\bm f_\Phi\in\mathbb R^{S_{\rm val}}\) — scenario-level performance is preserved. Parents are chosen by <strong>goal-programming MILP</strong> with three objectives:</p>
     <div class="grid g3">
       <div class="card"><h3>Coverage</h3><p>Minimize the gap between best fitness of <em>selected</em> parents and best of the <em>whole</em> population, across all validation scenarios.</p></div>
       <div class="card"><h3>Size control</h3><p>Penalize deviation from target size \(G_2\) — bounds the crossover prompt length.</p></div>
@@ -626,7 +494,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
     </div>
     <div class="callout"><span class="lbl">Effect</span><p style="margin-top:4px">Selects parents that are <strong>good on different scenarios</strong> — pairing <em>complementary</em> strengths, so crossover can combine specialized basis functions rather than near-duplicates.</p></div>
   </div>
-  <div class="footer"><span class="ftitle">Dynamic Selection MILP</span></div>
+  <div class="footer"><span>Dynamic Selection MILP</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- F8 merits vs polynomial/PWL -->
@@ -640,12 +508,12 @@ ol li::marker{color:var(--pku-red);font-weight:700}
         <tr><td>Raw LDR</td><td>Small coeff. dim., tractable</td><td>Only linear in raw \(\bm z\) → fixed approximation gap</td></tr>
         <tr><td>Polynomial</td><td>Approximates smooth recourse</td><td># monomials explodes with dimension &amp; degree</td></tr>
         <tr><td>Piecewise-linear</td><td>Great for thresholds</td><td>Regions/breakpoints must be chosen by analyst</td></tr>
-        <tr class="ours"><td>GenSO basis</td><td><b>Problem-specific nonlinear summaries, mixed forms</b></td><td><b>No need to commit to one global family</b></td></tr>
+        <tr class="ours"><td>GenASO basis</td><td><b>Problem-specific nonlinear summaries, mixed forms</b></td><td><b>No need to commit to one global family</b></td></tr>
       </tbody>
     </table>
-    <div class="box"><span class="lbl">The central merit</span><p style="margin-top:4px">GenSO is a <strong>description-guided navigator</strong> between classical choices. It keeps the problem <em>linear in fitted coefficients</em>, while LLM-generated programs expand the recourse rule’s <strong>representational vocabulary</strong>.</p></div>
+    <div class="box"><span class="lbl">The central merit</span><p style="margin-top:4px">GenASO is a <strong>description-guided navigator</strong> between classical choices. It keeps the problem <em>linear in fitted coefficients</em>, while LLM-generated programs expand the recourse rule’s <strong>representational vocabulary</strong>.</p></div>
   </div>
-  <div class="footer"><span class="ftitle">Merits of LLM Representations</span></div>
+  <div class="footer"><span>Merits of LLM Representations</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- F9 multistage -->
@@ -660,7 +528,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
       <div class="card"><h3>Still an LP</h3><p>For fixed \(\bm\Phi\), all basis values are numerical inputs → the multi-stage SAA is a linear program in \(\bm x\) and \(\{\bm y_{t,h}\}\).</p></div>
     </div>
   </div>
-  <div class="footer"><span class="ftitle">Multi-Stage Extension</span></div>
+  <div class="footer"><span>Multi-Stage Extension</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- F10 overview recap -->
@@ -679,9 +547,9 @@ ol li::marker{color:var(--pku-red);font-weight:700}
       </ol>
       <div class="callout"><span class="lbl">Net result</span><p style="margin-top:4px">A decision rule that is <strong>data-driven, interpretable, and deployable</strong> — and provably analyzable, as we show next.</p></div>
     </div>
-    <figure><img src="plots/figure1-llm.png" alt="GenSO overview"><figcaption>GenSO: generative search outside, optimization inside.</figcaption></figure>
+    <figure><img src="plots/figure1-llm.png" alt="GenASO overview"><figcaption>GenASO: generative search outside, optimization inside.</figcaption></figure>
   </div>
-  <div class="footer"><span class="ftitle">Framework at a Glance</span></div>
+  <div class="footer"><span>Framework at a Glance</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- ===================== DIVIDER 4 ===================== -->
@@ -691,7 +559,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
     <h2>Theory: Finite-Sample &amp; Search Bounds</h2>
     <p>Separating what is purely statistical from what depends on the LLM search.</p>
   </div>
-  <div class="footer"><span class="ftitle">Theory</span></div>
+  <div class="footer"><span>Theory</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- B1 challenge -->
@@ -705,7 +573,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
       <div class="card"><h3>✓ Our strategy</h3><p><strong>Condition</strong> on the generated basis. Once \(\Phi\) is fixed, the rule is linear in a finite \(\bm w\) and the loss is linear → control fitting by a sub-Gaussian argument. The LLM appears <em>only</em> in the search term.</p></div>
     </div>
   </div>
-  <div class="footer"><span class="ftitle">Analytical Challenge</span></div>
+  <div class="footer"><span>Analytical Challenge</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- B2 decomposition -->
@@ -720,7 +588,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
     </div>
     <div class="box"><span class="lbl">Benchmarks</span><p style="margin-top:4px">\(Z^\star_{\mathcal R}\): unrestricted measurable oracle. \(Z^\star_\Phi\): best GenLDR with basis \(\Phi\) under the <em>true</em> distribution. \(\ Z^\star_{\mathcal R}\le Z^\star_\Phi\le Z^\star_{\mathcal L}\).</p></div>
   </div>
-  <div class="footer"><span class="ftitle">Core Decomposition</span></div>
+  <div class="footer"><span>Core Decomposition</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- B3 fixed basis setup -->
@@ -733,7 +601,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
     <div class="eq">$$\bm\xi(\bm z)=\big(\bm c(\bm z),\,\bm d,\,\phi_1(\bm z)\bm d,\dots,\phi_H(\bm z)\bm d\big),\qquad \ell(\bm w,\bm z)=\bm\xi(\bm z)^\top\bm w$$</div>
     <div class="box"><span class="lbl">Why this matters</span><p style="margin-top:4px">The scenario cost is <strong>linear in \(\bm w\)</strong>. So uniform convergence reduces to controlling \(\|\hat{\bm\xi}_S-\bar{\bm\xi}\|_2\) — concentration of a sample mean — with <strong>no global complexity measure of the LLM program class</strong>.</p></div>
   </div>
-  <div class="footer"><span class="ftitle">Fixed-Basis Setup</span></div>
+  <div class="footer"><span>Fixed-Basis Setup</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- B4 assumptions -->
@@ -749,7 +617,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
     <div class="eq small-eq">$$\sigma_\Phi=\tfrac12\Big[\textstyle\sum_i (L_i^\xi)^2\Big]^{1/2}\ \text{(sensitivity)},\qquad M_{\xi,\Phi}=M_{\xi,0}+\textstyle\sum_i L_i^\xi\ \text{(feature size)}$$</div>
     <p><small>By McDiarmid's inequality, bounded differences ⇒ every 1-D projection of \(\bm\xi(\tilde{\bm z})-\mathbb E\bm\xi\) is sub-Gaussian with parameter \(\le\sigma_\Phi\). Same constants later bound the miss term — not a separate assumption.</small></p>
   </div>
-  <div class="footer"><span class="ftitle">Assumptions</span></div>
+  <div class="footer"><span>Assumptions</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- B5 proposition uniform conv -->
@@ -768,7 +636,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
     </div>
     <p style="margin-top:8px"><small>Uniformity is essential: the SAA optimizer is selected <em>after</em> seeing the data.</small></p>
   </div>
-  <div class="footer"><span class="ftitle">Uniform Convergence</span></div>
+  <div class="footer"><span>Uniform Convergence</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- B6 theorem 1 -->
@@ -787,7 +655,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
     </div>
     <p style="margin-top:8px"><small>Crucially: <strong>no complexity measure of the LLM program class</strong> appears — only conditional, fixed-basis quantities.</small></p>
   </div>
-  <div class="footer"><span class="ftitle">Theorem 1</span></div>
+  <div class="footer"><span>Theorem 1</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- B7 ODA-good + scaling law -->
@@ -801,7 +669,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
     <div class="eq small-eq">$$D_{\rm KL}\big(\mathbb Q^\star\,\|\,\mathbb Q_{\bm\theta}\big)\le A|\bm\theta|^{-\alpha}\ \ \Longrightarrow\ \ P_{\bm\theta}\{\Phi\in\mathcal A_\epsilon\}\ge\Big(c_\epsilon-\sqrt{\tfrac{A}{2|\bm\theta|^\alpha}}\Big)_+$$</div>
     <p><small>(Pinsker's inequality.) Larger models place more mass on \(\epsilon\)-good operational statistics.</small></p>
   </div>
-  <div class="footer"><span class="ftitle">ODA-Good Basis &amp; LLM Prior</span></div>
+  <div class="footer"><span>ODA-Good Basis &amp; LLM Prior</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- B8 hit probability assumption -->
@@ -818,7 +686,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
       <li>The Pinsker-linearized form of the scaling-law KL bound.</li>
     </ul>
   </div>
-  <div class="footer"><span class="ftitle">Hit-Probability Assumption</span></div>
+  <div class="footer"><span>Hit-Probability Assumption</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- B9 Theorem 2 combined -->
@@ -836,21 +704,21 @@ ol li::marker{color:var(--pku-red);font-weight:700}
     </div>
     <p style="margin-top:6px"><small>Proof: chain-rule miss bound \(\Pr(M_K)\le e^{-K\rho}\) + Markov; intersect with the union-bounded fixed-basis event.</small></p>
   </div>
-  <div class="footer"><span class="ftitle">Theorem 2</span></div>
+  <div class="footer"><span>Theorem 2</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- B10 key insights -->
 <section class="slide">
   <h1 class="kicker">Bounds · 10 / 10</h1>
-  <h2>Key Insight: GenSO vs. a Fixed Basis</h2>
+  <h2>Key Insight: GenASO vs. a Fixed Basis</h2>
   <div class="content">
     <div class="grid g2">
       <div class="card plain"><h3>Fixed basis \(\Phi_0\) (e.g. LDR)</h3><div class="eq small-eq">$$\Delta_{\Phi_0}+C_1B\sigma\sqrt{\tfrac{N_H^0+\log(1/\eta)}{S}}$$</div><p>The structural gap \(\Delta_{\Phi_0}\) is <strong>fixed</strong> — it can <em>only</em> improve through more data \(S\).</p></div>
-      <div class="card"><h3>GenSO</h3><div class="eq small-eq hl">$$\epsilon+C_1B\sigma\sqrt{\tfrac{N_H+\log K+\log(1/\eta)}{S}}+\tfrac{C_2}{\eta'}e^{-K\rho_\theta}$$</div><p>Replaces the fixed gap by \(\epsilon\) + an <strong>exponentially shrinking</strong> search penalty.</p></div>
+      <div class="card"><h3>GenASO</h3><div class="eq small-eq hl">$$\epsilon+C_1B\sigma\sqrt{\tfrac{N_H+\log K+\log(1/\eta)}{S}}+\tfrac{C_2}{\eta'}e^{-K\rho_\theta}$$</div><p>Replaces the fixed gap by \(\epsilon\) + an <strong>exponentially shrinking</strong> search penalty.</p></div>
     </div>
-    <div class="box"><span class="lbl">The tradeoff &amp; the levers</span><p style="margin-top:4px">GenSO can improve along <strong>three</strong> axes a fixed basis cannot: <span class="red">more search budget \(K\)</span>, <span class="red">a larger model \(|\bm\theta|\)</span>, and <span class="red">a better prompt</span> (higher \(\epsilon\)-good mass). Multi-stage: search effort scales as \(K\sum_t H_t\); statistics as \(\sqrt{T(H+1)/S}\).</p></div>
+    <div class="box"><span class="lbl">The tradeoff &amp; the levers</span><p style="margin-top:4px">GenASO can improve along <strong>three</strong> axes a fixed basis cannot: <span class="red">more search budget \(K\)</span>, <span class="red">a larger model \(|\bm\theta|\)</span>, and <span class="red">a better prompt</span> (higher \(\epsilon\)-good mass). Multi-stage: search effort scales as \(K\sum_t H_t\); statistics as \(\sqrt{T(H+1)/S}\).</p></div>
   </div>
-  <div class="footer"><span class="ftitle">Key Insights</span></div>
+  <div class="footer"><span>Key Insights</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- ===================== DIVIDER 5 ===================== -->
@@ -860,7 +728,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
     <h2>Numerical Studies</h2>
     <p>Multi-period newsvendor (synthetic) &amp; data-center location with real cloud workload traces.</p>
   </div>
-  <div class="footer"><span class="ftitle">Numerical Studies</span></div>
+  <div class="footer"><span>Numerical Studies</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- N1 setup -->
@@ -869,12 +737,12 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h2>Setup &amp; Benchmarks</h2>
   <div class="content">
     <div class="grid g2">
-      <div class="card"><h3>What we compare</h3><ul><li><strong>SAA</strong> (no adaptation)</li><li><strong>SAA / LDR</strong> (full prespecified rule)</li><li><strong>DRO</strong> — mean–variance &amp; Wasserstein ambiguity (RSOME)</li><li><strong>ODA Dictionary</strong> — manual operational statistics (revision)</li><li><strong>GenSO</strong> (ours)</li></ul></div>
+      <div class="card"><h3>What we compare</h3><ul><li><strong>SAA</strong> (no adaptation)</li><li><strong>SAA / LDR</strong> (full prespecified rule)</li><li><strong>DRO</strong> — mean–variance &amp; Wasserstein ambiguity (RSOME)</li><li><strong>ODA Dictionary</strong> — manual operational statistics (revision)</li><li><strong>GenASO</strong> (ours)</li></ul></div>
       <div class="card"><h3>Protocol</h3><ul><li>Train / validation / large held-out test split</li><li>Metric: deployed decision-rule cost \(\hat{\mathcal J}^{\rm Eval}\) + 95% CVaR</li><li>Generator: <strong>DeepSeek V4</strong>, \(K=20\) iterations</li><li>Basis budget capped (\(H_t\le 10\) / \(\le 5\))</li><li>Infeasible recourse projected onto feasible region</li></ul></div>
     </div>
     <div class="callout"><span class="lbl">Evaluation philosophy</span><p style="margin-top:4px">All rules are scored as they would be <strong>deployed</strong> — applying the trained non-anticipative rule on each test path using only observed history.</p></div>
   </div>
-  <div class="footer"><span class="ftitle">Setup &amp; Benchmarks</span></div>
+  <div class="footer"><span>Setup &amp; Benchmarks</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- N2 newsvendor results -->
@@ -883,7 +751,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h2>Case 1 — Multi-Period Newsvendor</h2>
   <div class="two">
     <div>
-      <p><small>Seasonal demand, \(T=24\), \(c_+\!=\!5,c_-\!=\!1\). Mean cost (lower is better); GenSO is best at every uncertainty level \(\theta\).</small></p>
+      <p><small>Seasonal demand, \(T=24\), \(c_+\!=\!5,c_-\!=\!1\). Mean cost (lower is better); GenASO is best at every uncertainty level \(\theta\).</small></p>
       <table>
         <thead><tr><th>Method</th><th>θ=.025</th><th>θ=.05</th><th>θ=.10</th><th>θ=.20</th></tr></thead>
         <tbody>
@@ -891,14 +759,14 @@ ol li::marker{color:var(--pku-red);font-weight:700}
           <tr><td>SAA (Full LDR)</td><td>661</td><td>1334</td><td>2721</td><td>5303</td></tr>
           <tr><td>DRO (Mean–Var)</td><td>881</td><td>1758</td><td>3514</td><td>7034</td></tr>
           <tr><td>DRO (Wasserstein)</td><td>599</td><td>1198</td><td>2396</td><td>4794</td></tr>
-          <tr class="ours"><td>GenSO (Ours)</td><td class="best">534</td><td class="best">1069</td><td class="best">2174</td><td class="best">4389</td></tr>
+          <tr class="ours"><td>GenASO (Ours)</td><td class="best">534</td><td class="best">1069</td><td class="best">2174</td><td class="best">4389</td></tr>
         </tbody>
       </table>
       <div class="box"><span class="lbl">Improvement</span><p style="margin-top:4px">vs LDR: <strong>~17–20%↓</strong> &nbsp;·&nbsp; vs Wasserstein DRO: <strong>~8–11%↓</strong> &nbsp;·&nbsp; lowest mean <em>and</em> CVaR throughout.</p></div>
     </div>
-    <figure><img src="plots/newsvendor_theta_0025_boxplot.png" alt="newsvendor boxplot"><figcaption>Out-of-sample cost over 1,000 test scenarios (θ=0.025). GenSO: lower median, narrower spread.</figcaption></figure>
+    <figure><img src="plots/newsvendor_theta_0025_boxplot.png" alt="newsvendor boxplot"><figcaption>Out-of-sample cost over 1,000 test scenarios (θ=0.025). GenASO: lower median, narrower spread.</figcaption></figure>
   </div>
-  <div class="footer"><span class="ftitle">Case 1 — Newsvendor</span></div>
+  <div class="footer"><span>Case 1 — Newsvendor</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- N3 newsvendor insights / discovered functions -->
@@ -909,12 +777,12 @@ ol li::marker{color:var(--pku-red);font-weight:700}
     <p>The generated basis functions are <span class="red">interpretable operational statistics</span>, not arbitrary nonlinearities:</p>
     <div class="grid g3">
       <div class="card"><h3>① Seasonal deviation</h3><div class="eq small-eq" style="background:#fff">$$\tfrac{d_{t-1}-d^*_t}{1000}$$</div><p>Reacts to demand <em>shocks</em> vs the nominal seasonal pattern, rather than following the season mechanically.</p></div>
-      <div class="card"><h3>② Peak-demand risk</h3><div class="eq small-eq" style="background:#fff">$$\min\!\big\{1,\big(\tfrac{\max_{\tau\lt t}d_\tau-1200}{1000}\big)_+\big\}$$</div><p>Clipped “unusual surge” signal → a more conservative inventory position after spikes.</p></div>
+      <div class="card"><h3>② Peak-demand risk</h3><div class="eq small-eq" style="background:#fff">$$\min\!\big\{1,(\tfrac{\max_{\tau<t}d_\tau-1200}{1000})_+\big\}$$</div><p>Clipped “unusual surge” signal → a more conservative inventory position after spikes.</p></div>
       <div class="card"><h3>③ Seasonal interaction</h3><div class="eq small-eq" style="background:#fff">$$\sin\!\big(\tfrac{2\pi(t-1)}{12}\big)\tfrac{d_{t-1}}{1200}$$</div><p>Encodes demand magnitude × seasonal phase — peak, trough, or transition.</p></div>
     </div>
     <div class="callout"><span class="lbl">Takeaway</span><p style="margin-top:4px">These mix thresholds, ratios, lags, and trigonometric phase terms — structures that are <strong>hard to pre-commit to</strong> with a single polynomial or PWL family.</p></div>
   </div>
-  <div class="footer"><span class="ftitle">Case 1 — Discovered Structure</span></div>
+  <div class="footer"><span>Case 1 — Discovered Structure</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- N4 datacenter setup -->
@@ -934,7 +802,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
     </div>
     <figure><img src="plots/us_data_center_demand_map.png" alt="US data center demand map"><figcaption>Candidate data-center sites &amp; metro demand locations.</figcaption></figure>
   </div>
-  <div class="footer"><span class="ftitle">Case 2 — Data Center</span></div>
+  <div class="footer"><span>Case 2 — Data Center</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- N5 datacenter results -->
@@ -943,7 +811,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h2>Case 2 — Results &amp; Out-of-Distribution Robustness</h2>
   <div class="two">
     <div>
-      <p><small>Multi-period \(T=8\). Mean cost; lower is better. GenSO wins on both the in-distribution (Alibaba) and OOD (Microsoft) test sets.</small></p>
+      <p><small>Multi-period \(T=8\). Mean cost; lower is better. GenASO wins on both the in-distribution (Alibaba) and OOD (Microsoft) test sets.</small></p>
       <table>
         <thead><tr><th>Method</th><th>Alibaba</th><th>Microsoft (OOD)</th></tr></thead>
         <tbody>
@@ -951,14 +819,14 @@ ol li::marker{color:var(--pku-red);font-weight:700}
           <tr><td>SAA (LDR)</td><td>2658</td><td>4608</td></tr>
           <tr><td>DRO (Mean–Var)</td><td>3208</td><td>2867</td></tr>
           <tr><td>DRO (Wasserstein)</td><td>2304</td><td>2399</td></tr>
-          <tr class="ours"><td>GenSO (Ours)</td><td class="best">2123</td><td class="best">2173</td></tr>
+          <tr class="ours"><td>GenASO (Ours)</td><td class="best">2123</td><td class="best">2173</td></tr>
         </tbody>
       </table>
-      <div class="box"><span class="lbl">Generalization</span><p style="margin-top:4px">vs LDR on OOD: <strong>~53%↓</strong>. GenSO also has the <strong>smallest std &amp; CVaR</strong> — the learned bases transfer to a different trace distribution.</p></div>
+      <div class="box"><span class="lbl">Generalization</span><p style="margin-top:4px">vs LDR on OOD: <strong>~53%↓</strong>. GenASO also has the <strong>smallest std &amp; CVaR</strong> — the learned bases transfer to a different trace distribution.</p></div>
     </div>
     <figure><img src="plots/multiperiod_two_test_sets_boxplot.png" alt="two test sets boxplot"><figcaption>(a) Alibaba in-distribution &nbsp; (b) Microsoft out-of-distribution.</figcaption></figure>
   </div>
-  <div class="footer"><span class="ftitle">Case 2 — Results</span></div>
+  <div class="footer"><span>Case 2 — Results</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- Insights consolidation -->
@@ -967,14 +835,14 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h2>What the Experiments Tell Us</h2>
   <div class="content">
     <div class="grid g2">
-      <div class="card"><h3>Consistent wins</h3><p>GenSO beats SAA, LDR, and both DRO variants on <strong>mean cost and CVaR</strong>, across uncertainty levels, horizons, and two domains.</p></div>
+      <div class="card"><h3>Consistent wins</h3><p>GenASO beats SAA, LDR, and both DRO variants on <strong>mean cost and CVaR</strong>, across uncertainty levels, horizons, and two domains.</p></div>
       <div class="card"><h3>Advantage grows with uncertainty</h3><p>The richer representation matters more precisely when adaptivity is most valuable.</p></div>
       <div class="card"><h3>Lower variance, better tails</h3><p>Narrower out-of-sample spread → more reliable, not just lower on average.</p></div>
       <div class="card"><h3>Transfers out-of-distribution</h3><p>Bases learned on Alibaba traces generalize to Azure — evidence they capture genuine operational structure.</p></div>
     </div>
     <div class="callout"><span class="lbl">Interpretability bonus</span><p style="margin-top:4px">Discovered features (EWMA with heteroskedasticity scaling, proximity-weighted network load, multi-scale cyclical patterns, backlog urgency) read like <strong>expert-designed operational statistics</strong> — but were found automatically.</p></div>
   </div>
-  <div class="footer"><span class="ftitle">Numerical Insights</span></div>
+  <div class="footer"><span>Numerical Insights</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- ===================== TAKEAWAYS ===================== -->
@@ -990,7 +858,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
     </div>
     <div class="box"><span class="lbl">Broader implication</span><p style="margin-top:4px">The same recipe extends to pricing, revenue management, staffing, scheduling, transportation, and online optimization — anywhere good decisions depend on <strong>nonlinear summaries of history</strong>.</p></div>
   </div>
-  <div class="footer"><span class="ftitle">Key Takeaways</span></div>
+  <div class="footer"><span>Key Takeaways</span><span class="sec">PKU</span></div>
 </section>
 
 <!-- THANK YOU -->
@@ -1000,7 +868,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <p style="font-size:22px;max-width:720px;margin-top:8px">Beyond Linear Decision Rules:<br>LLM-Guided Representation Discovery for Data-Driven Optimization</p>
   <p style="margin-top:24px;font-size:18px"><b style="color:var(--pku-red)">Questions &amp; Discussion welcome</b></p>
   <p class="aff" style="margin-top:18px">Huan Zhang · Yang Wang · Yue Zhao &nbsp;|&nbsp; NWPU &amp; HSBC Business School, Peking University</p>
-  <div class="footer"><span class="ftitle">Thank You</span></div>
+  <div class="footer"><span>Thank You</span><span class="sec">PKU</span></div>
 </section>
 
 </div><!-- /deck -->
