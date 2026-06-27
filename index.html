@@ -399,9 +399,9 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h1 class="kicker">Problem · 5 / 5</h1>
   <h2>Our Answer &amp; Contributions</h2>
   <div class="content">
-    <div class="box"><span class="lbl">GenSO in one line</span><p style="margin-top:4px"><strong>The LLM searches over representations; the optimization model fits coefficients.</strong> Recourse stays linear in fitted coefficients, but linear in <em>LLM-generated basis functions</em>.</p></div>
-    <figure class="dfig" style="margin:6px 0 10px">
-      <svg class="diagram" viewBox="0 0 900 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GenSO closed loop" style="max-height:22vh">
+    <div class="box" style="padding:10px 14px;margin:8px 0"><span class="lbl">GenSO in one line</span><p style="margin-top:3px;font-size:16px;line-height:1.3"><strong>The LLM searches over representations; optimization fits coefficients.</strong> Recourse stays linear in fitted coefficients, but over <em>LLM-generated basis functions</em>.</p></div>
+    <figure class="dfig" style="margin:2px 0 6px">
+      <svg class="diagram" viewBox="0 0 900 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GenSO closed loop" style="max-height:18vh">
         <defs><marker id="lf" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#94070A"/></marker></defs>
         <rect x="20" y="55" width="178" height="62" rx="9" fill="#f3e6c0" stroke="#b8902f" stroke-width="2"/>
         <text x="109" y="80" font-size="14" fill="#7a5d12" text-anchor="middle" font-weight="700">LLM generates</text>
@@ -421,13 +421,13 @@ ol li::marker{color:var(--pku-red);font-weight:700}
         <path d="M790,53 C790,18 109,18 109,51" stroke="#94070A" stroke-width="2" stroke-dasharray="6 4" fill="none" marker-end="url(#lf)"/>
         <text x="449" y="14" font-size="13" fill="#94070A" text-anchor="middle">repeat for K iterations</text>
       </svg>
-      <figcaption>GenSO is a closed loop — generate &#8594; fit &#8594; validate &#8594; evolve — and the best basis is deployed.</figcaption>
+      <figcaption style="font-size:12px;margin-top:3px">GenSO is a closed loop — generate &#8594; fit &#8594; validate &#8594; evolve — and the best basis is deployed.</figcaption>
     </figure>
-    <div class="grid g2">
-      <div class="card"><h3>① GenLDR</h3><p>A new adaptive rule class built on generated representations — generalizes classical LDR, preserves tractability.</p></div>
-      <div class="card"><h3>② GenSO framework</h3><p>LLM-guided evolutionary search + optimization-based validation; extended to multi-stage problems.</p></div>
-      <div class="card"><h3>③ Theory</h3><p>Finite-sample bound for a fixed basis + a search bound under an LLM scaling-law-motivated hit-probability model.</p></div>
-      <div class="card"><h3>④ Evidence</h3><p>Multi-period inventory control &amp; data-center location (real cloud traces): consistent out-of-sample wins + interpretable structures.</p></div>
+    <div class="grid g2" style="gap:10px">
+      <div class="card" style="padding:10px 12px"><h3 style="font-size:16px">① GenLDR</h3><p style="font-size:14px;line-height:1.28">Generated representations generalize LDR while preserving tractability.</p></div>
+      <div class="card" style="padding:10px 12px"><h3 style="font-size:16px">② GenSO framework</h3><p style="font-size:14px;line-height:1.28">LLM-guided evolutionary search plus optimization-based validation.</p></div>
+      <div class="card" style="padding:10px 12px"><h3 style="font-size:16px">③ Theory</h3><p style="font-size:14px;line-height:1.28">Finite-sample fixed-basis bound plus LLM-search performance bound.</p></div>
+      <div class="card" style="padding:10px 12px"><h3 style="font-size:16px">④ Evidence</h3><p style="font-size:14px;line-height:1.28">Inventory control and data-center studies show OOS gains and interpretable structures.</p></div>
     </div>
   </div>
   <div class="footer"><span class="ftitle">Contributions</span></div>
