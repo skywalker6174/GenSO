@@ -566,17 +566,14 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 <section class="slide">
   <h1 class="kicker">Framework · 4 / 10</h1>
   <h2>LLM-Guided Representation Discovery</h2>
-  <div class="two">
-    <div>
-      <p>A <span class="red">closed evolutionary loop</span>, repeated \(K\) iterations. The LLM and the optimization model act in tandem:</p>
-      <ul>
-        <li><span class="tag">LLM</span> writes, recombines, mutates, repairs executable basis functions</li>
-        <li><span class="tag lt">OPT</span> fits coefficients, scores out-of-sample, pairs parents (MILP), manages population (Pareto)</li>
-      </ul>
-      <div class="eq small-eq">$$\Phi^{(k)}=G_{\bm\theta}(\bm\pi^{(k)})=\{\phi_1^{(k)},\dots,\phi_H^{(k)}\}$$</div>
-      <p><small>Prompt \(\bm\pi^{(k)}\) encodes the problem, the I/O format, and feedback from previous evaluations.</small></p>
+  <div class="content">
+    <p>A <span class="red">closed evolutionary loop</span>, repeated \(K\) iterations. The LLM and the optimization model act in tandem, but with sharply separated roles:</p>
+    <div class="grid g2">
+      <div class="card"><h3><span class="tag">LLM</span> Representation generator</h3><p>Writes, recombines, mutates, and repairs executable basis functions.</p></div>
+      <div class="card"><h3><span class="tag lt">OPT</span> Validation engine</h3><p>Fits coefficients, checks feasibility, scores out-of-sample, selects parents, and manages the Pareto population.</p></div>
     </div>
-    <figure><img src="plots/llm-algo.png" alt="LLM-guided discovery loop"><figcaption>Gold = LLM (generative operator). Blue = optimization (selection &amp; evaluation).</figcaption></figure>
+    <div class="eq small-eq">$$\Phi^{(k)}=G_{\bm\theta}(\bm\pi^{(k)})=\{\phi_1^{(k)},\dots,\phi_H^{(k)}\}$$</div>
+    <div class="callout"><span class="lbl">Prompt as search state</span><p style="margin-top:4px">The prompt \(\bm\pi^{(k)}\) encodes the problem description, the required I/O format, and feedback from previously evaluated bases. The detailed algorithmic picture appears on the five-stage algorithm slide.</p></div>
   </div>
   <div class="footer"><span class="ftitle">Discovery Loop</span></div>
 </section>
@@ -602,14 +599,17 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 <section class="slide">
   <h1 class="kicker">Framework · 6 / 10</h1>
   <h2>The Five-Stage Evolutionary Algorithm</h2>
-  <div class="content">
-    <div class="grid g3">
-      <div class="card"><h3>① Basis population</h3><p>Each individual = a set of executable functions \(\phi_h:\bm z\!\to\!\mathbb R\) (linear, piecewise-linear, nonlinear) — no predefined dictionary.</p></div>
-      <div class="card"><h3>② Selection</h3><p>Evaluate on validation → <em>vector</em> fitness; an optimization model picks <strong>complementary</strong> parents for crossover and elites for mutation.</p></div>
-      <div class="card"><h3>③ LLM operators</h3><p>The LLM recombines parents &amp; mutates strong individuals by <strong>editing code directly</strong>.</p></div>
-      <div class="card"><h3>④ LLM repair</h3><p>Invalid offspring are repaired or discarded — only executable, diverse functions enter evaluation.</p></div>
-      <div class="card"><h3>⑤ Population management</h3><p>Score offspring; retain <strong>non-dominated</strong> sets; remove dominated ones by Pareto dominance.</p></div>
-      <div class="card plain"><h3>Loop \(\times K\)</h3><p>Return the basis set with the best scalar fitness. Full pseudocode in the appendix.</p></div>
+  <div class="two">
+    <figure><img src="plots/llm-algo.png" alt="LLM-guided five-stage discovery loop"><figcaption>Gold = LLM generation/repair. Blue = optimization-based selection, fitting, and evaluation.</figcaption></figure>
+    <div>
+      <ol>
+        <li><strong>Basis population:</strong> each individual is a set of executable functions \(\phi_h:\bm z\to\mathbb R\).</li>
+        <li><strong>Selection:</strong> validation fitness identifies complementary parents.</li>
+        <li><strong>LLM operators:</strong> recombine parents and mutate strong individuals by editing code.</li>
+        <li><strong>Repair:</strong> invalid functions are fixed or discarded.</li>
+        <li><strong>Management:</strong> retain non-dominated offspring and loop for \(K\) iterations.</li>
+      </ol>
+      <div class="callout"><span class="lbl">Why the picture matters</span><p style="margin-top:4px">The LLM explores representation space, while optimization decides which representations survive.</p></div>
     </div>
   </div>
   <div class="footer"><span class="ftitle">Five-Stage Algorithm</span></div>
@@ -666,28 +666,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- F10 overview recap -->
-<section class="slide">
-  <h1 class="kicker">Framework · 10 / 10</h1>
-  <h2>The Framework at a Glance</h2>
-  <div class="two">
-    <div>
-      <ol>
-        <li><strong>Prompt</strong> the LLM with problem structure + domain knowledge + feedback</li>
-        <li>LLM <strong>generates</strong> executable basis functions \(\Phi^{(k)}\)</li>
-        <li>Optimization <strong>fits</strong> coefficients via LP / MILP</li>
-        <li><strong>Validate</strong> out-of-sample → vector fitness</li>
-        <li>MILP <strong>selects</strong> complementary parents; LLM <strong>evolves</strong>; Pareto <strong>manages</strong></li>
-        <li>Return best basis; <strong>deploy</strong> the GenLDR</li>
-      </ol>
-      <div class="callout"><span class="lbl">Net result</span><p style="margin-top:4px">A decision rule that is <strong>data-driven, interpretable, and deployable</strong> — and provably analyzable, as we show next.</p></div>
-    </div>
-    <div>
-      <div class="card" style="margin-bottom:12px"><h3>Division of labor</h3><p><span class="tag">LLM</span> proposes functional representations; <span class="tag lt">OPT</span> fits coefficients, enforces feasibility, and evaluates out-of-sample.</p></div>
-      <div class="card"><h3>Why this avoids repetition</h3><p>The detailed loop appears earlier. Here the takeaway is conceptual: GenSO separates <em>representation discovery</em> from <em>optimization-based validation</em>.</p></div>
-    </div>
-  </div>
-  <div class="footer"><span class="ftitle">Framework at a Glance</span></div>
-</section>
+
 
 <!-- ===================== DIVIDER 4 ===================== -->
 <section class="slide divider">
