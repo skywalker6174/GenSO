@@ -681,7 +681,10 @@ ol li::marker{color:var(--pku-red);font-weight:700}
       </ol>
       <div class="callout"><span class="lbl">Net result</span><p style="margin-top:4px">A decision rule that is <strong>data-driven, interpretable, and deployable</strong> — and provably analyzable, as we show next.</p></div>
     </div>
-    <figure><img src="plots/figure1-llm.png" alt="GenSO overview"><figcaption>GenSO: generative search outside, optimization inside.</figcaption></figure>
+    <div>
+      <div class="card" style="margin-bottom:12px"><h3>Division of labor</h3><p><span class="tag">LLM</span> proposes functional representations; <span class="tag lt">OPT</span> fits coefficients, enforces feasibility, and evaluates out-of-sample.</p></div>
+      <div class="card"><h3>Why this avoids repetition</h3><p>The detailed loop appears earlier. Here the takeaway is conceptual: GenSO separates <em>representation discovery</em> from <em>optimization-based validation</em>.</p></div>
+    </div>
   </div>
   <div class="footer"><span class="ftitle">Framework at a Glance</span></div>
 </section>
