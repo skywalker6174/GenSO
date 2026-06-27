@@ -729,9 +729,9 @@ ol li::marker{color:var(--pku-red);font-weight:700}
       <div class="card"><h3>(i) Bounded optimizers</h3><p>Independent components of \(\tilde{\bm z}\); stacked optimal coefficients satisfy \(\|\bm w\|_2\le B\). <br><small>Prevents the empirical optimizer from amplifying sampling noise with huge coefficients.</small></p></div>
       <div class="card"><h3>(ii) Bounded differences</h3><p>\(\bm\xi(\cdot)\) changes by at most \(L_i\) when coordinate \(i\) changes. <br><small>More targeted than a global Lipschitz assumption.</small></p></div>
     </div>
-    <p>These define two key constants:</p>
-    <div class="eq small-eq">$$\sigma=\tfrac12\Big[\textstyle\sum_i (L_i)^2\Big]^{1/2}\ \text{(sensitivity)},\qquad M=M_0+\textstyle\sum_i L_i\ \text{(feature size)}$$</div>
-    <p><small>By McDiarmid's inequality, bounded differences ⇒ every 1-D projection of \(\bm\xi(\tilde{\bm z})-\mathbb E\bm\xi\) is sub-Gaussian with parameter \(\le\sigma\). Same constants later bound the miss term — not a separate assumption.</small></p>
+    <p>These define the sensitivity constant used in the finite-sample bound:</p>
+    <div class="eq small-eq">$$\sigma=\tfrac12\Big[\textstyle\sum_i (L_i)^2\Big]^{1/2}$$</div>
+    <p><small>By McDiarmid's inequality, bounded differences ⇒ every 1-D projection of \(\bm\xi(\tilde{\bm z})-\mathbb E\bm\xi\) is sub-Gaussian with parameter \(\le\sigma\).</small></p>
   </div>
   <div class="footer"><span class="ftitle">Assumptions</span></div>
 </section>
