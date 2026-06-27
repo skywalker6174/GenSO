@@ -317,7 +317,9 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h1 class="kicker">Problem · 3 / 5</h1>
   <h2>An Irreducible Approximation Gap</h2>
   <div class="content">
-    <p>The deployed cost decomposes into two fundamentally different errors:</p>
+    <p>First define the performance notation. For any deployed decision rule \(\bm y\), let \(\mathcal J(\bm x,\bm y)\) be its true out-of-sample expected cost.</p>
+    <div class="eq small-eq">$$Z^\star_{\mathcal R}:=\inf_{\bm x,\,\bm y\in\mathcal R}\mathcal J(\bm x,\bm y),\qquad Z^\star_{\Phi}:=\inf_{\bm x,\,\bm y\in\mathcal L_{\Phi}}\mathcal J(\bm x,\bm y)$$</div>
+    <p>Here \(\mathcal R\) is the unrestricted oracle policy class, and \(\mathcal L_\Phi\) is the decision-rule class induced by a fixed basis \(\Phi\). Then the deployed cost decomposes as:</p>
     <div class="eq hl">$$\underbrace{\mathcal J(\hat{\bm x},\hat{\bm y})-Z^\star_{\mathcal R}}_{\text{total gap to oracle}}=\underbrace{\mathcal J(\hat{\bm x},\hat{\bm y})-Z^\star_{\Phi}}_{\text{estimation error}\ \to 0\ \text{as }S\to\infty}\;+\;\underbrace{Z^\star_{\Phi}-Z^\star_{\mathcal R}}_{\text{representation gap}}$$</div>
     <div class="splitrow">
       <div>
