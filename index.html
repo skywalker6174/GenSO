@@ -891,13 +891,13 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h1 class="kicker">Numerical · 3 / 5</h1>
   <h2>Case 1 — What Did the LLM Discover?</h2>
   <div class="content">
-    <p>The generated basis functions are <span class="red">interpretable operational statistics</span>, not arbitrary nonlinearities:</p>
+    <p>The generated basis functions are <span class="red">interpretable operational statistics</span>, not arbitrary nonlinearities. Representative examples from the main text:</p>
     <div class="grid g3">
-      <div class="card"><h3>① Seasonal deviation</h3><div class="eq small-eq" style="background:#fff">$$\tfrac{d_{t-1}-d^*_t}{1000}$$</div><p>Reacts to demand <em>shocks</em> vs the nominal seasonal pattern, rather than following the season mechanically.</p></div>
-      <div class="card"><h3>② Peak-demand risk</h3><div class="eq small-eq" style="background:#fff">$$\min\!\big\{1,\big(\tfrac{\max_{\tau\lt t}d_\tau-1200}{1000}\big)_+\big\}$$</div><p>Clipped “unusual surge” signal → a more conservative inventory position after spikes.</p></div>
-      <div class="card"><h3>③ Seasonal interaction</h3><div class="eq small-eq" style="background:#fff">$$\sin\!\big(\tfrac{2\pi(t-1)}{12}\big)\tfrac{d_{t-1}}{1200}$$</div><p>Encodes demand magnitude × seasonal phase — peak, trough, or transition.</p></div>
+      <div class="card"><h3>① Seasonal deviation</h3><div class="eq small-eq" style="background:#fff">$$\phi^{(1)}=\frac{d_{t-1}-d_t^*}{1000},\quad d_t^*=1000\Big(1+0.5\sin\frac{\pi(t-1)}{12}\Big)$$</div><p>Compares the most recent demand with the nominal seasonal level. Positive values signal stronger-than-expected demand; negative values signal weaker demand.</p></div>
+      <div class="card"><h3>② Historical peak-demand risk</h3><div class="eq small-eq" style="background:#fff">$$\phi^{(2)}=\min\!\left\{1,\max\!\left(0,\frac{\max_{\tau<t}d_\tau-1200}{1000}\right)\right\}$$</div><p>Detects whether past demand has exceeded a high-demand threshold. The clipping bounds the signal, avoiding overreaction to extreme outliers.</p></div>
+      <div class="card"><h3>③ Seasonal demand interaction</h3><div class="eq small-eq" style="background:#fff">$$\phi^{(3)}=\sin\!\frac{2\pi(t-1)}{12}\frac{d_{t-1}}{1200},\quad \tilde\phi^{(3)}=\cos\!\frac{2\pi(t-1)}{12}\frac{d_{t-1}}{1200}$$</div><p>Uses a sine/cosine pair to encode both demand magnitude and seasonal phase, distinguishing peaks, troughs, and transitions.</p></div>
     </div>
-    <div class="callout"><span class="lbl">Takeaway</span><p style="margin-top:4px">These mix thresholds, ratios, lags, and trigonometric phase terms — structures that are <strong>hard to pre-commit to</strong> with a single polynomial or PWL family.</p></div>
+    <div class="callout"><span class="lbl">Takeaway</span><p style="margin-top:4px">The forms match the main text: they combine lagged demand, thresholds, clipping, scaling, and cyclical phase terms — useful structures that are hard to pre-commit to with one polynomial or PWL family.</p></div>
   </div>
   <div class="footer"><span class="ftitle">Case 1 — Discovered Structure</span></div>
 </section>
