@@ -713,7 +713,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h2>Fixed-Basis Setup: Exploiting Linearity</h2>
   <div class="content">
     <p>Stack the decision and define a <span class="red">feature-cost vector</span> so the loss becomes a single inner product:</p>
-    <div class="eq">$$\bm w=(\bm x,\bm y_0,\dots,\bm y_H)\in\mathbb R^{N_H},\quad N_H=N_x+(H+1)N_y$$</div>
+    <div class="eq">$$\bm w=(\bm x,\bm y_0,\dots,\bm y_H)\in\mathbb R^{N},\quad N=N_x+(H+1)N_y$$</div>
     <div class="eq">$$\bm\xi(\bm z)=\big(\bm c(\bm z),\,\bm d,\,\phi_1(\bm z)\bm d,\dots,\phi_H(\bm z)\bm d\big),\qquad \ell(\bm w,\bm z)=\bm\xi(\bm z)^\top\bm w$$</div>
     <div class="box"><span class="lbl">Why this matters</span><p style="margin-top:4px">The scenario cost is <strong>linear in \(\bm w\)</strong>. So uniform convergence reduces to controlling \(\|\hat{\bm\xi}_S-\bar{\bm\xi}\|_2\) — concentration of a sample mean — with <strong>no global complexity measure of the LLM program class</strong>.</p></div>
   </div>
@@ -742,12 +742,12 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h2>Proposition: Uniform Convergence</h2>
   <div class="content">
     <div class="box"><span class="lbl">Proposition 1</span><p style="margin-top:6px">Under the assumptions, for any fixed \(\Phi\), with probability \(\ge 1-\eta\):</p>
-      <div class="eq" style="background:#fff">$$\sup_{\|\bm w\|_2\le B}\big|\mathcal J(\bm w)-\hat{\mathcal J}_S(\bm w)\big|\ \le\ \epsilon_S(\Phi,\eta)=C\,B\,\sigma_\Phi\sqrt{\tfrac{N_H+\log(1/\eta)}{S}}$$</div>
+      <div class="eq" style="background:#fff">$$\sup_{\|\bm w\|_2\le B}\big|\mathcal J(\bm w)-\hat{\mathcal J}_S(\bm w)\big|\ \le\ \epsilon_S(\Phi,\eta)=C\,B\,\sigma_\Phi\sqrt{\tfrac{N+\log(1/\eta)}{S}}$$</div>
     </div>
     <h3>Proof in three moves</h3>
     <div class="grid g3">
       <div class="card"><h3>1 · One direction</h3><p>McDiarmid ⇒ each projection is sub-Gaussian; sample mean has parameter \(\sigma/\sqrt S\).</p></div>
-      <div class="card"><h3>2 · \(\varepsilon\)-net</h3><p>Cover the sphere by a \(1/2\)-net of size \(\le 5^{N_H}\); norm \(\le 2\max_{\text{net}}|\bm u^\top\bm v|\).</p></div>
+      <div class="card"><h3>2 · \(\varepsilon\)-net</h3><p>Cover the sphere by a \(1/2\)-net of size \(\le 5^{N}\); norm \(\le 2\max_{\text{net}}|\bm u^\top\bm v|\).</p></div>
       <div class="card"><h3>3 · Union bound</h3><p>Over the net → convert back to a Euclidean-norm bound.</p></div>
     </div>
     <p style="margin-top:8px"><small>Uniformity is essential: the SAA optimizer is selected <em>after</em> seeing the data.</small></p>
@@ -761,13 +761,13 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h2>Theorem 1: Finite-Sample Bound</h2>
   <div class="content">
     <div class="box"><span class="lbl">Theorem 1</span><p style="margin-top:6px">For a fixed basis \(\Phi\), with probability \(\ge 1-\eta\) over \(S\) i.i.d. scenarios:</p>
-      <div class="eq" style="background:#fff">$$\mathcal J(\hat{\bm x}^\star,\hat{\bm y}^\star)\ \le\ Z^\star_\Phi+2\,\epsilon_S(\Phi,\eta)=Z^\star_\Phi+\mathcal O\!\Big(B\sigma\sqrt{\tfrac{H+\log(1/\eta)}{S}}\Big)$$</div>
+      <div class="eq" style="background:#fff">$$\mathcal J(\hat{\bm x}^\star,\hat{\bm y}^\star)\ \le\ Z^\star_\Phi+2\,\epsilon_S(\Phi,\eta)=Z^\star_\Phi+\mathcal O\!\Big(B\sigma\sqrt{\tfrac{N+\log(1/\eta)}{S}}\Big)$$</div>
     </div>
     <p>Proof: split into (I) generalization error + (II) optimizer bias; each \(\le\epsilon_S\) on the same uniform-convergence event.</p>
     <div class="grid g3">
       <div class="card"><h3>\(\sigma_\Phi\)</h3><p>Coordinatewise sensitivity of the cost/features.</p></div>
       <div class="card"><h3>\(B\)</h3><p>Size of the coefficient search region.</p></div>
-      <div class="card"><h3>\(N_H/S\)</h3><p>Fitted parameters per training scenario.</p></div>
+      <div class="card"><h3>\(N/S\)</h3><p>Fitted parameters per training scenario.</p></div>
     </div>
     <p style="margin-top:8px"><small>Crucially: <strong>no complexity measure of the LLM program class</strong> appears — only conditional, fixed-basis quantities.</small></p>
   </div>
@@ -811,7 +811,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h2>Theorem 2: Combined Estimation + Search Bound</h2>
   <div class="content">
     <div class="box"><span class="lbl">Theorem 2</span><p style="margin-top:6px">With probability \(\ge 1-\eta-\eta'\) over both basis generation and coefficient fitting:</p>
-      <div class="eq" style="background:#fff">$$\mathcal J(\hat{\bm x}_{\rm LLM},\hat{\bm y}_{\rm LLM})-Z^\star_{\mathcal R}\ \le\ \underbrace{\epsilon}_{\text{statistic approximation}}+\underbrace{C_1B\sigma\sqrt{\tfrac{N_H+\log K+\log(1/\eta)}{S}}}_{\text{estimation + selection}}+\underbrace{\tfrac{C_2}{\eta'}e^{-K(c_1-c_2|\bm\theta|^{-\alpha/2})_+}}_{\text{LLM search penalty}}$$</div>
+      <div class="eq" style="background:#fff">$$\mathcal J(\hat{\bm x}_{\rm LLM},\hat{\bm y}_{\rm LLM})-Z^\star_{\mathcal R}\ \le\ \underbrace{\epsilon}_{\text{statistic approximation}}+\underbrace{C_1B\sigma\sqrt{\tfrac{N+\log K+\log(1/\eta)}{S}}}_{\text{estimation + selection}}+\underbrace{\tfrac{C_2}{\eta'}e^{-K(c_1-c_2|\bm\theta|^{-\alpha/2})_+}}_{\text{LLM search penalty}}$$</div>
     </div>
     <div class="grid g3">
       <div class="card"><h3>Term 1: \(\epsilon\)</h3><p>Small when generated bases can nearly match the oracle.</p></div>
@@ -829,8 +829,8 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h2>Key Insight: GenSO vs. a Fixed Basis</h2>
   <div class="content">
     <div class="grid g2">
-      <div class="card plain"><h3>Fixed basis \(\Phi_0\) (e.g. LDR)</h3><div class="eq small-eq">$$\Delta_{\Phi_0}+C_1B\sigma\sqrt{\tfrac{N_H^0+\log(1/\eta)}{S}}$$</div><p>The structural gap \(\Delta_{\Phi_0}\) is <strong>fixed</strong> — it can <em>only</em> improve through more data \(S\).</p></div>
-      <div class="card"><h3>GenSO</h3><div class="eq small-eq hl">$$\epsilon+C_1B\sigma\sqrt{\tfrac{N_H+\log K+\log(1/\eta)}{S}}+\tfrac{C_2}{\eta'}e^{-K\rho_\theta}$$</div><p>Replaces the fixed gap by \(\epsilon\) + an <strong>exponentially shrinking</strong> search penalty.</p></div>
+      <div class="card plain"><h3>Fixed basis \(\Phi_0\) (e.g. LDR)</h3><div class="eq small-eq">$$\Delta_{\Phi_0}+C_1B\sigma\sqrt{\tfrac{N_0+\log(1/\eta)}{S}}$$</div><p>The structural gap \(\Delta_{\Phi_0}\) is <strong>fixed</strong> — it can <em>only</em> improve through more data \(S\).</p></div>
+      <div class="card"><h3>GenSO</h3><div class="eq small-eq hl">$$\epsilon+C_1B\sigma\sqrt{\tfrac{N+\log K+\log(1/\eta)}{S}}+\tfrac{C_2}{\eta'}e^{-K\rho_\theta}$$</div><p>Replaces the fixed gap by \(\epsilon\) + an <strong>exponentially shrinking</strong> search penalty.</p></div>
     </div>
     <div class="box"><span class="lbl">The tradeoff &amp; the levers</span><p style="margin-top:4px">GenSO can improve along <strong>three</strong> axes a fixed basis cannot: <span class="red">more search budget \(K\)</span>, <span class="red">a larger model \(|\bm\theta|\)</span>, and <span class="red">a better prompt</span> (higher \(\epsilon\)-good mass). Multi-stage: search effort scales as \(K\sum_t H_t\); statistics as \(\sqrt{T(H+1)/S}\).</p></div>
   </div>
