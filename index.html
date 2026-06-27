@@ -957,8 +957,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
       <div class="card"><h3>Lower variance, better tails</h3><p>Narrower out-of-sample spread → more reliable, not just lower on average.</p></div>
       <div class="card"><h3>Transfers out-of-distribution</h3><p>Bases learned on Alibaba traces generalize to Azure — evidence they capture genuine operational structure.</p></div>
     </div>
-    <div class="callout"><span class="lbl">Interpretability bonus</span><p style="margin-top:4px">Discovered features (EWMA with heteroskedasticity scaling, proximity-weighted network load, multi-scale cyclical patterns, backlog urgency) read like <strong>expert-designed operational statistics</strong> — but were found automatically.</p></div>
-    <div class="box" style="background:#eef5ff;border-color:#9fc4ff"><span class="lbl" style="color:#1657b7">Closed-form policy note</span><p style="margin-top:4px;color:#1657b7"><strong>Some stylized inventory models do admit closed-form policies</strong>: for example, two-stage single-item settings reduce to base-stock or critical-fractile-type rules, and certain robust formulations yield threshold policies under rectangular uncertainty. But in general multi-period stochastic inventory control with history-dependent uncertainty and data-driven recourse, a closed-form optimal policy is hard to obtain. This is exactly where GenSO is useful: it searches for expressive closed-form statistics while optimization keeps the fitted policy tractable.</p></div>
+    <div class="callout"><span class="lbl">Interpretability bonus</span><p style="margin-top:4px">Discovered features (exponentially weighted moving averages, heteroskedasticity scaling, proximity-weighted network load, multi-scale cyclical patterns, backlog urgency) read like <strong>expert-designed operational statistics</strong> — but were found automatically.</p></div>
   </div>
   <div class="footer"><span class="ftitle">Numerical Insights</span></div>
 </section>
@@ -985,7 +984,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h2 style="border:none;font-size:44px;color:var(--pku-red)">Thank You</h2>
   <p style="font-size:22px;max-width:720px;margin-top:8px">Beyond Linear Decision Rules:<br>LLM-Guided Representation Discovery for Data-Driven Optimization</p>
   <p style="margin-top:24px;font-size:18px"><b style="color:var(--pku-red)">Questions &amp; Discussion welcome</b></p>
-  <p class="aff" style="margin-top:18px">Huan Zhang · Yang Wang · Hanzhang Qin · Yue Zhao &nbsp;|&nbsp; NWPU, NUS &amp; HSBC Business School, Peking University</p>
+  <p class="aff" style="margin-top:18px">Huan Zhang · Yang Wang · Hanzhang Qin · Yue Zhao &nbsp;|&nbsp; NWPU · NUS · PKU</p>
   <div class="footer"><span class="ftitle">Thank You</span></div>
 </section>
 
