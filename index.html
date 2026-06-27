@@ -212,7 +212,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
       <div class="card"><h3>2 · Related Literature</h3><p>Where GenSO sits across five streams of OR / ML research.</p></div>
       <div class="card"><h3>3 · The GenSO Framework</h3><p>From LDR to Generative LDR; the LLM-guided evolutionary discovery loop.</p></div>
       <div class="card"><h3>4 · Theory: Finite-Sample &amp; Search Bounds</h3><p>Separating estimation error from search error; key insights.</p></div>
-      <div class="card"><h3>5 · Numerical Studies</h3><p>Multi-period newsvendor &amp; data-center location with real cloud traces.</p></div>
+      <div class="card"><h3>5 · Numerical Studies</h3><p>Multi-period inventory control &amp; data-center location with real cloud traces.</p></div>
       <div class="card plain"><h3>6 · Takeaways</h3><p>What LLMs should and should not do inside optimization.</p></div>
     </div>
   </div>
@@ -425,7 +425,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
       <div class="card"><h3>① GenLDR</h3><p>A new adaptive rule class built on generated representations — generalizes classical LDR, preserves tractability.</p></div>
       <div class="card"><h3>② GenSO framework</h3><p>LLM-guided evolutionary search + optimization-based validation; extended to multi-stage problems.</p></div>
       <div class="card"><h3>③ Theory</h3><p>Finite-sample bound for a fixed basis + a search bound under an LLM scaling-law-motivated hit-probability model.</p></div>
-      <div class="card"><h3>④ Evidence</h3><p>Multi-period newsvendor &amp; data-center location (real cloud traces): consistent out-of-sample wins + interpretable structures.</p></div>
+      <div class="card"><h3>④ Evidence</h3><p>Multi-period inventory control &amp; data-center location (real cloud traces): consistent out-of-sample wins + interpretable structures.</p></div>
     </div>
   </div>
   <div class="footer"><span class="ftitle">Contributions</span></div>
@@ -858,7 +858,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <div class="content">
     <div class="num">05</div>
     <h2>Numerical Studies</h2>
-    <p>Multi-period newsvendor (synthetic) &amp; data-center location with real cloud workload traces.</p>
+    <p>Multi-period inventory control (synthetic demand) &amp; data-center location with real cloud workload traces.</p>
   </div>
   <div class="footer"><span class="ftitle">Numerical Studies</span></div>
 </section>
@@ -878,10 +878,10 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <div class="footer"><span class="ftitle">Setup &amp; Benchmarks</span></div>
 </section>
 
-<!-- N2 newsvendor results -->
+<!-- N2 inventory-control results -->
 <section class="slide">
   <h1 class="kicker">Numerical · 2 / 5</h1>
-  <h2>Case 1 — Multi-Period Newsvendor</h2>
+  <h2>Case 1 — Multi-Period Inventory Control</h2>
   <div class="two">
     <div>
       <p><small>Seasonal demand, \(T=24\), \(c_+\!=\!5,c_-\!=\!1\). Mean cost (lower is better); GenSO is best at every uncertainty level \(\theta\).</small></p>
@@ -897,12 +897,12 @@ ol li::marker{color:var(--pku-red);font-weight:700}
       </table>
       <div class="box"><span class="lbl">Improvement</span><p style="margin-top:4px">vs LDR: <strong>~17–20%↓</strong> &nbsp;·&nbsp; vs Wasserstein DRO: <strong>~8–11%↓</strong> &nbsp;·&nbsp; lowest mean <em>and</em> CVaR throughout.</p></div>
     </div>
-    <figure><img src="plots/newsvendor_theta_0025_boxplot.png" alt="newsvendor boxplot"><figcaption>Out-of-sample cost over 1,000 test scenarios (θ=0.025). GenSO: lower median, narrower spread.</figcaption></figure>
+    <figure><img src="plots/newsvendor_theta_0025_boxplot.png" alt="inventory-control boxplot"><figcaption>Out-of-sample cost over 1,000 test scenarios (θ=0.025). GenSO: lower median, narrower spread.</figcaption></figure>
   </div>
-  <div class="footer"><span class="ftitle">Case 1 — Newsvendor</span></div>
+  <div class="footer"><span class="ftitle">Case 1 — Inventory Control</span></div>
 </section>
 
-<!-- N3 newsvendor insights / discovered functions -->
+<!-- N3 inventory-control insights / discovered functions -->
 <section class="slide">
   <h1 class="kicker">Numerical · 3 / 5</h1>
   <h2>Case 1 — What Did the LLM Discover?</h2>
@@ -974,6 +974,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
       <div class="card"><h3>Transfers out-of-distribution</h3><p>Bases learned on Alibaba traces generalize to Azure — evidence they capture genuine operational structure.</p></div>
     </div>
     <div class="callout"><span class="lbl">Interpretability bonus</span><p style="margin-top:4px">Discovered features (EWMA with heteroskedasticity scaling, proximity-weighted network load, multi-scale cyclical patterns, backlog urgency) read like <strong>expert-designed operational statistics</strong> — but were found automatically.</p></div>
+    <div class="box" style="background:#eef5ff;border-color:#9fc4ff"><span class="lbl" style="color:#1657b7">Closed-form policy note</span><p style="margin-top:4px;color:#1657b7"><strong>Some stylized inventory models do admit closed-form policies</strong>: for example, two-stage single-item settings reduce to base-stock or critical-fractile-type rules, and certain robust formulations yield threshold policies under rectangular uncertainty. But in general multi-period stochastic inventory control with history-dependent uncertainty and data-driven recourse, a closed-form optimal policy is hard to obtain. This is exactly where GenSO is useful: it searches for expressive closed-form statistics while optimization keeps the fitted policy tractable.</p></div>
   </div>
   <div class="footer"><span class="ftitle">Numerical Insights</span></div>
 </section>
