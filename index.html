@@ -727,11 +727,11 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <div class="content">
     <div class="grid g2">
       <div class="card"><h3>(i) Bounded optimizers</h3><p>Independent components of \(\tilde{\bm z}\); stacked optimal coefficients satisfy \(\|\bm w\|_2\le B\). <br><small>Prevents the empirical optimizer from amplifying sampling noise with huge coefficients.</small></p></div>
-      <div class="card"><h3>(ii) Bounded differences</h3><p>\(\bm\xi(\cdot)\) changes by at most \(L_i^\xi\) when coordinate \(i\) changes. <br><small>More targeted than a global Lipschitz assumption.</small></p></div>
+      <div class="card"><h3>(ii) Bounded differences</h3><p>\(\bm\xi(\cdot)\) changes by at most \(L_i\) when coordinate \(i\) changes. <br><small>More targeted than a global Lipschitz assumption.</small></p></div>
     </div>
     <p>These define two key constants:</p>
-    <div class="eq small-eq">$$\sigma_\Phi=\tfrac12\Big[\textstyle\sum_i (L_i^\xi)^2\Big]^{1/2}\ \text{(sensitivity)},\qquad M_{\xi,\Phi}=M_{\xi,0}+\textstyle\sum_i L_i^\xi\ \text{(feature size)}$$</div>
-    <p><small>By McDiarmid's inequality, bounded differences ⇒ every 1-D projection of \(\bm\xi(\tilde{\bm z})-\mathbb E\bm\xi\) is sub-Gaussian with parameter \(\le\sigma_\Phi\). Same constants later bound the miss term — not a separate assumption.</small></p>
+    <div class="eq small-eq">$$\sigma=\tfrac12\Big[\textstyle\sum_i (L_i)^2\Big]^{1/2}\ \text{(sensitivity)},\qquad M=M_0+\textstyle\sum_i L_i\ \text{(feature size)}$$</div>
+    <p><small>By McDiarmid's inequality, bounded differences ⇒ every 1-D projection of \(\bm\xi(\tilde{\bm z})-\mathbb E\bm\xi\) is sub-Gaussian with parameter \(\le\sigma\). Same constants later bound the miss term — not a separate assumption.</small></p>
   </div>
   <div class="footer"><span class="ftitle">Assumptions</span></div>
 </section>
@@ -742,7 +742,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h2>Proposition: Uniform Convergence</h2>
   <div class="content">
     <div class="box"><span class="lbl">Proposition 1</span><p style="margin-top:6px">Under the assumptions, for any fixed \(\Phi\), with probability \(\ge 1-\eta\):</p>
-      <div class="eq" style="background:#fff">$$\sup_{\|\bm w\|_2\le B}\big|\mathcal J(\bm w)-\hat{\mathcal J}_S(\bm w)\big|\ \le\ \epsilon_S(\Phi,\eta)=C\,B\,\sigma_\Phi\sqrt{\tfrac{N+\log(1/\eta)}{S}}$$</div>
+      <div class="eq" style="background:#fff">$$\sup_{\|\bm w\|_2\le B}\big|\mathcal J(\bm w)-\hat{\mathcal J}_S(\bm w)\big|\ \le\ \epsilon_S(\Phi,\eta)=C\,B\,\sigma\sqrt{\tfrac{N+\log(1/\eta)}{S}}$$</div>
     </div>
     <h3>Proof in three moves</h3>
     <div class="grid g3">
@@ -765,7 +765,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
     </div>
     <p>Proof: split into (I) generalization error + (II) optimizer bias; each \(\le\epsilon_S\) on the same uniform-convergence event.</p>
     <div class="grid g3">
-      <div class="card"><h3>\(\sigma_\Phi\)</h3><p>Coordinatewise sensitivity of the cost/features.</p></div>
+      <div class="card"><h3>\(\sigma\)</h3><p>Coordinatewise sensitivity of the cost/features.</p></div>
       <div class="card"><h3>\(B\)</h3><p>Size of the coefficient search region.</p></div>
       <div class="card"><h3>\(N/S\)</h3><p>Fitted parameters per training scenario.</p></div>
     </div>
