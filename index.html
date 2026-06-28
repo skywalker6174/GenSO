@@ -72,7 +72,7 @@ strong{color:var(--ink)}
 .red{color:var(--pku-red);font-weight:700}
 small{color:var(--muted);font-size:14px}
 
-.content{flex:1;overflow:auto;padding-right:6px}
+.content{flex:1;min-height:0;overflow:auto;padding-right:10px;padding-bottom:28px}
 .content::-webkit-scrollbar{width:8px}
 .content::-webkit-scrollbar-thumb{background:#ccc;border-radius:4px}
 
@@ -88,11 +88,12 @@ small{color:var(--muted);font-size:14px}
 
 /* cards / grids */
 .grid{display:grid;gap:18px}
+.grid>*,.splitrow>*,.two>*,.flex>*{min-width:0}
 .g2{grid-template-columns:1fr 1fr}
 .g3{grid-template-columns:1fr 1fr 1fr}
 .card{
   background:var(--card);border:1px solid #ececec;border-left:4px solid var(--pku-red);
-  border-radius:8px;padding:16px 18px;
+  border-radius:8px;padding:16px 18px;overflow-wrap:break-word;
 }
 .card h3{margin-top:0;color:var(--pku-red);font-size:18px}
 .card p,.card li{font-size:16px;line-height:1.42}
@@ -100,7 +101,7 @@ small{color:var(--muted);font-size:14px}
 
 .box{
   background:var(--pku-red-soft);border:1px solid var(--pku-red-line);
-  border-radius:8px;padding:14px 18px;margin:12px 0;
+  border-radius:8px;padding:14px 18px;margin:12px 0;overflow-wrap:break-word;
 }
 .box .lbl{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--pku-red);font-weight:700}
 
@@ -136,8 +137,8 @@ tr.ours td{color:var(--pku-red)}
   padding:3px 10px;border-radius:20px;margin:2px 4px 2px 0;letter-spacing:.5px}
 .tag.lt{background:#fff;color:var(--pku-red);border:1px solid var(--pku-red)}
 
-.two{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:start;height:100%}
-.center{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;height:100%}
+.two{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:start;min-height:0}
+.center{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:0}
 
 /* title slide */
 #s-title{justify-content:center;align-items:flex-start;padding:0 80px;background:
@@ -189,6 +190,9 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 
 /* PPT-style default scale: larger text and figures for projection */
 .slide{padding:40px 58px 58px 58px}
+.slide{overflow:hidden}
+.slide.active{min-height:0}
+.slide .content>*:last-child{margin-bottom:18px}
 h1.kicker{font-size:18px!important}
 .slide h2{font-size:40px!important;margin-bottom:18px}
 .slide h3{font-size:24px!important}
@@ -213,7 +217,6 @@ figure.dfig figcaption{font-size:14px!important}
 #pageno{font-size:15px}
 .nav button{width:42px;height:42px;font-size:20px}
 .hint{font-size:14px}
-svg text{font-size:17px!important}
 #s-title .pre{font-size:19px!important}
 #s-title h1{font-size:62px!important}
 #s-title .sub{font-size:26px!important}
@@ -225,6 +228,17 @@ svg text{font-size:17px!important}
 [style*="font-size:12"],[style*="font-size:13"],[style*="font-size:14"]{font-size:16px!important}
 [style*="font-size:15"]{font-size:17px!important}
 [style*="font-size:16"]{font-size:18px!important}
+
+@media (max-width: 1050px), (max-height: 720px){
+  .slide{padding:34px 44px 56px 44px}
+  .slide h2{font-size:34px!important;margin-bottom:14px}
+  .slide p,.slide li{font-size:19px!important}
+  .card p,.card li{font-size:16.5px!important}
+  .g3{grid-template-columns:1fr}
+  .g2,.splitrow,.two{grid-template-columns:1fr}
+  figure img{max-height:58vh}
+  .diagram{max-height:34vh}
+}
 </style>
 </head>
 <body>
