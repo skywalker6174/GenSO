@@ -820,9 +820,11 @@ svg text{font-size:17px!important}
   <div class="content">
     <p>A useful basis function = an <span class="red">operational statistic</span> (threshold, ratio, lag, aggregate, bottleneck…). Define the \(\epsilon\)-good basis sets:</p>
     <div class="eq hl">$$\mathcal A_\epsilon=\{\,\Phi:\ Z^\star_\Phi-Z^\star_{\mathcal R}\le\epsilon\,\}$$</div>
-    <p>A frozen LLM + prompt induces a distribution over executable bases, \(P_{\bm\theta}(\cdot\mid\bm\pi)\) — a <strong>problem-conditioned prior</strong> over representations. Empirical <strong>scaling laws</strong> motivate:</p>
-    <div class="eq small-eq">$$D_{\rm KL}\big(\mathbb Q^\star\,\|\,\mathbb Q_{\bm\theta}\big)\le A|\bm\theta|^{-\alpha}\ \ \Longrightarrow\ \ P_{\bm\theta}\{\Phi\in\mathcal A_\epsilon\}\ge\Big(c_\epsilon-\sqrt{\tfrac{A}{2|\bm\theta|^\alpha}}\Big)_+$$</div>
-    <p><small>(Pinsker's inequality.) Larger models place more mass on \(\epsilon\)-good operational statistics.</small></p>
+    <p>A frozen LLM + prompt induces a distribution over executable bases, \(\mathbb Q_{\bm\theta}(\cdot\mid\bm\pi)\) — a <strong>problem-conditioned prior</strong> over representations.</p>
+    <div class="eq small-eq">$$\underbrace{\big|\mathbb Q^\star(\mathcal A_\epsilon\mid\bm\pi)-\mathbb Q_{\bm\theta}(\mathcal A_\epsilon\mid\bm\pi)\big|}_{\text{Pinsker}}\le\sqrt{\tfrac12D_{\rm KL}(\mathbb Q^\star(\cdot\mid\bm\pi)\,\|\,\mathbb Q_{\bm\theta}(\cdot\mid\bm\pi))}$$</div>
+    <p>With scaling \(D_{\rm KL}\le A|\bm\theta|^{-\alpha}\) and ideal mass \(\mathbb Q^\star(\mathcal A_\epsilon\mid\bm\pi)\ge p(\bm\pi,\epsilon)\):</p>
+    <div class="eq small-eq hl">$$\mathbb Q_{\bm\theta}\{\Phi\in\mathcal A_\epsilon\mid\bm\pi\}\ge\Big(p(\bm\pi,\epsilon)-\sqrt{\tfrac{A}{2|\bm\theta|^\alpha}}\Big)_+$$</div>
+    <p><small>Larger models and better prompts increase mass on \(\epsilon\)-good operational statistics.</small></p>
   </div>
   <div class="footer"><span class="ftitle">Operational-Statistic Basis &amp; LLM Prior</span></div>
 </section>
@@ -832,12 +834,12 @@ svg text{font-size:17px!important}
   <h1 class="kicker">Bounds · 8 / 10</h1>
   <h2>Assumption: LLM Prior Mass / Hit Probability</h2>
   <div class="content">
-    <div class="box"><span class="lbl">Assumption (hit probability)</span><p style="margin-top:6px">There exist \(c_1,c_2,\alpha>0\) (independent of \(K,S,\eta,\eta',|\bm\theta|\)) such that each search round hits an \(\epsilon\)-good basis with probability</p>
-      <div class="eq" style="background:#fff">$$\mathrm{Pr}\big(\Phi^{(k)}\in\mathcal A_\epsilon\mid\mathcal H_{k-1}\big)\ \ge\ \rho_\theta(\epsilon,\bm\pi)=\big(c_1-c_2|\bm\theta|^{-\alpha/2}\big)_+$$</div>
+    <div class="box"><span class="lbl">Assumption (hit probability)</span><p style="margin-top:6px">There exist \(p(\bm\pi,\epsilon)>0\), \(c_2>0\), and \(\alpha>0\) (independent of \(K,S,\eta,\eta',|\bm\theta|\)) such that each search round hits an \(\epsilon\)-good basis with probability</p>
+      <div class="eq" style="background:#fff">$$\mathrm{Pr}\big(\Phi^{(k)}\in\mathcal A_\epsilon\mid\mathcal H_{k-1}\big)\ \ge\ \rho_\theta(\epsilon,\bm\pi)=\big(p(\bm\pi,\epsilon)-c_2|\bm\theta|^{-\alpha/2}\big)_+$$</div>
     </div>
     <ul>
       <li><strong>Conditional on history \(\mathcal H_{k-1}\)</strong> → the evolutionary search may be adaptive; independence across rounds is <em>not</em> required.</li>
-      <li>\(c_1\): intrinsic prompt-conditioned mass of \(\epsilon\)-good statistics. Larger model ⇒ larger lower bound.</li>
+      <li>\(p(\bm\pi,\epsilon)\): intrinsic prompt- and target-dependent mass of \(\epsilon\)-good statistics.</li>
       <li>The Pinsker-linearized form of the scaling-law KL bound.</li>
     </ul>
   </div>
@@ -850,7 +852,7 @@ svg text{font-size:17px!important}
   <h2>Theorem 2: Combined Estimation + Search Bound</h2>
   <div class="content">
     <div class="box"><span class="lbl">Theorem 2</span><p style="margin-top:6px">With probability \(\ge 1-\eta-\eta'\) over both basis generation and coefficient fitting:</p>
-      <div class="eq" style="background:#fff">$$\mathcal J(\hat{\bm x}_{\rm LLM},\hat{\bm y}_{\rm LLM})-Z^\star_{\mathcal R}\ \le\ \underbrace{\epsilon}_{\text{statistic approximation}}+\underbrace{C_1B\sigma\sqrt{\tfrac{N+\log K+\log(1/\eta)}{S}}}_{\text{estimation + selection}}+\underbrace{\tfrac{C_2}{\eta'}e^{-K(c_1-c_2|\bm\theta|^{-\alpha/2})_+}}_{\text{LLM search penalty}}$$</div>
+      <div class="eq" style="background:#fff">$$\mathcal J(\hat{\bm x}_{\rm LLM},\hat{\bm y}_{\rm LLM})-Z^\star_{\mathcal R}\ \le\ \underbrace{\epsilon}_{\text{statistic approximation}}+\underbrace{C_1B\sigma\sqrt{\tfrac{N+\log K+\log(1/\eta)}{S}}}_{\text{estimation + selection}}+\underbrace{\tfrac{C_2}{\eta'}e^{-K(p(\bm\pi,\epsilon)-c_2|\bm\theta|^{-\alpha/2})_+}}_{\text{LLM search penalty}}$$</div>
     </div>
     <div class="grid g3">
       <div class="card"><h3>Term 1: \(\epsilon\)</h3><p>Small when generated bases can nearly match the oracle.</p></div>
