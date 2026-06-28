@@ -150,10 +150,10 @@ tr.ours td{color:var(--pku-red)}
 #s-title h1{font-size:76px;line-height:1.08;color:var(--ink);font-weight:850;margin:0 auto;max-width:1450px;letter-spacing:-1.6px}
 #s-title h1 .accent{color:var(--pku-red)}
 .titlebar{height:8px;width:260px;background:var(--pku-red);margin:34px auto 38px;border-radius:6px}
-.authors{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;width:100%;max-width:1500px;margin:0 auto}
-.author-card{background:#fff;border:1px solid #ead2d2;border-top:6px solid var(--pku-red);border-radius:14px;padding:22px 16px 18px;box-shadow:0 8px 22px rgba(148,7,10,.07)}
-.author-card b{display:block;color:var(--pku-red);font-size:30px;line-height:1.15;margin-bottom:10px}
-.author-card span{display:block;color:var(--ink-soft);font-size:21px;line-height:1.25}
+.authors{display:flex;flex-wrap:wrap;justify-content:center;gap:18px 34px;font-size:30px;line-height:1.35;color:var(--ink);max-width:1500px;margin:0 auto}
+.author-item{white-space:nowrap}
+.authors b{color:var(--pku-red);font-weight:800}
+.authors small{font-size:22px!important;color:var(--ink-soft)}
 .aff{font-size:24px;color:var(--muted);margin-top:28px;letter-spacing:.3px}
 
 /* divider slides */
@@ -204,6 +204,23 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 .slide.scrollable .card p,.slide.scrollable .card li{font-size:22px!important;line-height:1.24}
 .slide.scrollable .eq{padding:6px 12px;margin:6px 0}
 .slide.scrollable .diagram{max-height:36vh}
+.slide.fit-tight .content{gap:8px}
+.slide.fit-tight h2{font-size:44px!important;margin-bottom:12px}
+.slide.fit-tight p,.slide.fit-tight li{font-size:22px!important;line-height:1.18}
+.slide.fit-tight .card{padding:12px 16px}
+.slide.fit-tight .card h3{font-size:24px!important;margin-bottom:6px}
+.slide.fit-tight .card p,.slide.fit-tight .card li{font-size:18.5px!important;line-height:1.18}
+.slide.fit-tight .eq,.slide.fit-tight .small-eq{font-size:19px!important;padding:5px 10px;margin:4px 0}
+.slide.fit-tight .splitrow{gap:18px;align-items:center}
+.slide.fit-tight .diagram{max-height:34vh}
+.slide.fit-tight figcaption{font-size:15px!important}
+.slide.fit-tight .callout{padding:7px 10px;margin-top:4px}
+.slide.fit-tight .callout .lbl{font-size:15px!important}
+.slide.fit-tight .callout p{font-size:18px!important;line-height:1.18}
+.slide.figure-slide figure{height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;margin:0}
+.slide.figure-slide .content{overflow:hidden;padding-bottom:0;justify-content:center}
+.slide.figure-slide figure img{max-height:68vh;max-width:96%}
+.slide.figure-slide figcaption{font-size:24px!important;margin-top:10px}
 h1.kicker{font-size:24px!important}
 .slide h2{font-size:56px!important;margin-bottom:22px}
 .slide h3{font-size:34px!important}
@@ -232,8 +249,8 @@ figure.dfig figcaption{font-size:19px!important}
 .nav button{width:42px;height:42px;font-size:20px}
 .hint{font-size:14px}
 #s-title h1{font-size:76px!important}
-.author-card b{font-size:30px!important}
-.author-card span{font-size:21px!important}
+.authors{font-size:30px!important}
+.authors small{font-size:22px!important}
 .aff{font-size:24px!important}
 .divider .num{font-size:132px!important}
 .divider h2{font-size:70px!important}
@@ -262,12 +279,11 @@ figure.dfig figcaption{font-size:19px!important}
   <h1>Beyond Linear Decision Rules:<br><span class="accent">LLM-Guided Representation Discovery</span><br>for Data-Driven Optimization</h1>
   <div class="titlebar"></div>
   <div class="authors">
-    <div class="author-card"><b>Huan Zhang</b><span>Northwestern Polytechnical University</span></div>
-    <div class="author-card"><b>Yang Wang</b><span>Northwestern Polytechnical University</span></div>
-    <div class="author-card"><b>Hanzhang Qin</b><span>National University of Singapore</span></div>
-    <div class="author-card"><b>Yue Zhao</b><span>HSBC Business School<br>Peking University</span></div>
+    <span class="author-item"><b>Huan Zhang</b><small> (NWPU)</small></span>
+    <span class="author-item"><b>Yang Wang</b><small> (NWPU)</small></span>
+    <span class="author-item"><b>Hanzhang Qin</b><small> (NUS)</small></span>
+    <span class="author-item"><b>Yue Zhao</b><small> (PKU)</small></span>
   </div>
-  <div class="aff">NWPU · NUS · PKU</div>
   <div class="footer"><span class="ftitle">Beyond Linear Decision Rules · GenSO</span></div>
 </section>
 
@@ -335,7 +351,7 @@ figure.dfig figcaption{font-size:19px!important}
 </section>
 
 <!-- P2: LDR tradeoff -->
-<section class="slide">
+<section class="slide fit-tight">
   <h1 class="kicker">Problem · 2 / 5</h1>
   <h2>The Tractability–Expressiveness Tradeoff</h2>
   <div class="content">
@@ -382,7 +398,7 @@ figure.dfig figcaption{font-size:19px!important}
 </section>
 
 <!-- P3: irreducible gap -->
-<section class="slide">
+<section class="slide fit-tight">
   <h1 class="kicker">Problem · 3 / 5</h1>
   <h2>An Irreducible Approximation Gap</h2>
   <div class="content">
@@ -958,7 +974,7 @@ figure.dfig figcaption{font-size:19px!important}
 </section>
 
 <!-- N3 inventory-control insights / discovered functions -->
-<section class="slide">
+<section class="slide fit-tight">
   <h1 class="kicker">Numerical · 3 / 5</h1>
   <h2>Case 1 — What Did the LLM Discover?</h2>
   <div class="content">
@@ -995,26 +1011,32 @@ figure.dfig figcaption{font-size:19px!important}
 
 <!-- N5 datacenter results -->
 <section class="slide">
-  <h1 class="kicker">Numerical · 5 / 5</h1>
+  <h1 class="kicker">Numerical · 5 / 6</h1>
   <h2>Case 2 — Results &amp; Out-of-Distribution Robustness</h2>
-  <div class="two">
-    <div>
-      <p><small>Multi-period \(T=8\). Mean cost; lower is better. GenSO wins on both the in-distribution (Alibaba) and OOD (Microsoft) test sets.</small></p>
-      <table>
-        <thead><tr><th>Method</th><th>Alibaba</th><th>Microsoft (OOD)</th></tr></thead>
-        <tbody>
-          <tr><td>SAA (No Adapt.)</td><td>3657</td><td>4132</td></tr>
-          <tr><td>SAA (LDR)</td><td>2658</td><td>4608</td></tr>
-          <tr><td>DRO (Mean–Var)</td><td>3208</td><td>2867</td></tr>
-          <tr><td>DRO (Wasserstein)</td><td>2304</td><td>2399</td></tr>
-          <tr class="ours"><td>GenSO (Ours)</td><td class="best">2123</td><td class="best">2173</td></tr>
-        </tbody>
-      </table>
-      <div class="box"><span class="lbl">Generalization</span><p style="margin-top:4px">vs LDR on OOD: <strong>~53%↓</strong>. GenSO also has the <strong>smallest std &amp; CVaR</strong> — the learned bases transfer to a different trace distribution.</p></div>
-    </div>
-    <figure><img src="plots/multiperiod_two_test_sets_boxplot.png" alt="two test sets boxplot"><figcaption>(a) Alibaba in-distribution &nbsp; (b) Microsoft out-of-distribution.</figcaption></figure>
+  <div class="content">
+    <p>Multi-period \(T=8\). Mean cost; lower is better. GenSO wins on both the in-distribution Alibaba test set and the out-of-distribution Microsoft test set.</p>
+    <table>
+      <thead><tr><th>Method</th><th>Alibaba</th><th>Microsoft (OOD)</th></tr></thead>
+      <tbody>
+        <tr><td>SAA (No Adapt.)</td><td>3657</td><td>4132</td></tr>
+        <tr><td>SAA (LDR)</td><td>2658</td><td>4608</td></tr>
+        <tr><td>DRO (Mean–Var)</td><td>3208</td><td>2867</td></tr>
+        <tr><td>DRO (Wasserstein)</td><td>2304</td><td>2399</td></tr>
+        <tr class="ours"><td>GenSO (Ours)</td><td class="best">2123</td><td class="best">2173</td></tr>
+      </tbody>
+    </table>
+    <div class="box"><span class="lbl">Generalization</span><p style="margin-top:4px">vs LDR on OOD: <strong>~53%↓</strong>. GenSO also has the <strong>smallest std &amp; CVaR</strong> — the learned bases transfer to a different trace distribution.</p></div>
   </div>
   <div class="footer"><span class="ftitle">Case 2 — Results</span></div>
+</section>
+
+<section class="slide figure-slide">
+  <h1 class="kicker">Numerical · 6 / 6</h1>
+  <h2>Case 2 — Distributional Performance</h2>
+  <div class="content">
+    <figure><img src="plots/multiperiod_two_test_sets_boxplot.png" alt="two test sets boxplot"><figcaption>(a) Alibaba in-distribution &nbsp; (b) Microsoft out-of-distribution.</figcaption></figure>
+  </div>
+  <div class="footer"><span class="ftitle">Case 2 — Boxplot</span></div>
 </section>
 
 <!-- Insights consolidation -->
