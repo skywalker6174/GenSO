@@ -143,16 +143,18 @@ tr.ours td{color:var(--pku-red)}
 .center{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:0}
 
 /* title slide */
-#s-title{justify-content:center;align-items:flex-start;padding:0 80px;background:
-  radial-gradient(1200px 500px at 80% -10%, #fbeeee 0%, #fff 55%);}
-#s-title .pre{font-size:16px;letter-spacing:5px;color:var(--pku-red);font-weight:700;text-transform:uppercase}
-#s-title h1{font-size:54px;line-height:1.1;color:var(--ink);font-weight:800;margin:18px 0 10px;max-width:1000px}
+#s-title{justify-content:center;align-items:center;text-align:center;padding:0 96px;background:
+  radial-gradient(900px 420px at 78% 12%, #f8eaea 0%, rgba(248,234,234,.55) 35%, transparent 70%),
+  linear-gradient(135deg,#fff 0%,#fff 62%,#fbf3f3 100%);}
+#s-title::after{content:"";position:absolute;right:72px;top:86px;width:150px;height:150px;border:18px solid rgba(148,7,10,.09);border-radius:50%}
+#s-title h1{font-size:76px;line-height:1.08;color:var(--ink);font-weight:850;margin:0 auto;max-width:1450px;letter-spacing:-1.6px}
 #s-title h1 .accent{color:var(--pku-red)}
-#s-title .sub{font-size:22px;color:var(--ink-soft);max-width:880px;margin-bottom:34px}
-.authors{font-size:18px;color:var(--ink)}
-.authors b{color:var(--pku-red)}
-.aff{font-size:15px;color:var(--muted);margin-top:4px}
-.titlebar{height:6px;width:160px;background:var(--pku-red);margin:26px 0;border-radius:3px}
+.titlebar{height:8px;width:260px;background:var(--pku-red);margin:34px auto 38px;border-radius:6px}
+.authors{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;width:100%;max-width:1500px;margin:0 auto}
+.author-card{background:#fff;border:1px solid #ead2d2;border-top:6px solid var(--pku-red);border-radius:14px;padding:22px 16px 18px;box-shadow:0 8px 22px rgba(148,7,10,.07)}
+.author-card b{display:block;color:var(--pku-red);font-size:30px;line-height:1.15;margin-bottom:10px}
+.author-card span{display:block;color:var(--ink-soft);font-size:21px;line-height:1.25}
+.aff{font-size:24px;color:var(--muted);margin-top:28px;letter-spacing:.3px}
 
 /* divider slides */
 .divider{background:linear-gradient(120deg,var(--pku-red) 0%, #7a0608 100%)!important;}
@@ -229,10 +231,9 @@ figure.dfig figcaption{font-size:19px!important}
 #pageno{font-size:15px}
 .nav button{width:42px;height:42px;font-size:20px}
 .hint{font-size:14px}
-#s-title .pre{font-size:25px!important}
 #s-title h1{font-size:76px!important}
-#s-title .sub{font-size:34px!important}
-.authors{font-size:28px!important}
+.author-card b{font-size:30px!important}
+.author-card span{font-size:21px!important}
 .aff{font-size:24px!important}
 .divider .num{font-size:132px!important}
 .divider h2{font-size:70px!important}
@@ -258,12 +259,15 @@ figure.dfig figcaption{font-size:19px!important}
 
 <!-- ===================== TITLE ===================== -->
 <section class="slide" id="s-title">
-  <div class="pre">Stochastic Optimization &nbsp;·&nbsp; Generative AI &nbsp;·&nbsp; Decision Rules</div>
-  <h1>Beyond Linear Decision Rules:<br><span class="accent">LLM-Guided Representation Discovery</span> for Data-Driven Optimization</h1>
+  <h1>Beyond Linear Decision Rules:<br><span class="accent">LLM-Guided Representation Discovery</span><br>for Data-Driven Optimization</h1>
   <div class="titlebar"></div>
-  <div class="sub">Generative Stochastic Optimization (GenSO): using LLMs to discover nonlinear recourse representations — without sacrificing rigor, tractability, or interpretability.</div>
-  <div class="authors"><b>Huan Zhang</b>, &nbsp;<b>Yang Wang</b> &nbsp;<small>(Northwestern Polytechnical University)</small> &nbsp;·&nbsp; <b>Hanzhang Qin</b> &nbsp;<small>(National University of Singapore)</small> &nbsp;·&nbsp; <b>Yue Zhao</b> &nbsp;<small>(HSBC Business School, Peking University)</small></div>
-  <div class="aff">Conference Presentation &nbsp;·&nbsp; ~40 minutes</div>
+  <div class="authors">
+    <div class="author-card"><b>Huan Zhang</b><span>Northwestern Polytechnical University</span></div>
+    <div class="author-card"><b>Yang Wang</b><span>Northwestern Polytechnical University</span></div>
+    <div class="author-card"><b>Hanzhang Qin</b><span>National University of Singapore</span></div>
+    <div class="author-card"><b>Yue Zhao</b><span>HSBC Business School<br>Peking University</span></div>
+  </div>
+  <div class="aff">NWPU · NUS · PKU</div>
   <div class="footer"><span class="ftitle">Beyond Linear Decision Rules · GenSO</span></div>
 </section>
 
