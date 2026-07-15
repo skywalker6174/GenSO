@@ -72,11 +72,9 @@ strong{color:var(--ink)}
 .red{color:var(--pku-red);font-weight:700}
 small{color:var(--muted);font-size:14px}
 
-.content{flex:1;min-height:0;overflow:auto;padding-right:10px;padding-bottom:14px;display:flex;flex-direction:column;gap:12px}
-.content>*{flex-shrink:0}
+.content{flex:1;overflow:auto;padding-right:6px}
 .content::-webkit-scrollbar{width:8px}
 .content::-webkit-scrollbar-thumb{background:#ccc;border-radius:4px}
-.content>.grid,.content>.splitrow,.content>.two,.content>figure,.content>.box,.content>.callout{width:100%}
 
 /* footer */
 .footer{
@@ -90,12 +88,11 @@ small{color:var(--muted);font-size:14px}
 
 /* cards / grids */
 .grid{display:grid;gap:18px}
-.grid>*,.splitrow>*,.two>*,.flex>*{min-width:0}
 .g2{grid-template-columns:1fr 1fr}
 .g3{grid-template-columns:1fr 1fr 1fr}
 .card{
   background:var(--card);border:1px solid #ececec;border-left:4px solid var(--pku-red);
-  border-radius:8px;padding:16px 18px;overflow-wrap:break-word;
+  border-radius:8px;padding:16px 18px;
 }
 .card h3{margin-top:0;color:var(--pku-red);font-size:18px}
 .card p,.card li{font-size:16px;line-height:1.42}
@@ -103,11 +100,11 @@ small{color:var(--muted);font-size:14px}
 
 .box{
   background:var(--pku-red-soft);border:1px solid var(--pku-red-line);
-  border-radius:8px;padding:14px 18px;margin:12px 0;overflow-wrap:break-word;
+  border-radius:8px;padding:14px 18px;margin:12px 0;
 }
 .box .lbl{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--pku-red);font-weight:700}
 
-.eq{background:#fff;border:1px solid #ececec;border-radius:8px;padding:10px 14px;margin:10px 0;overflow:auto}
+.eq{background:#fff;border:1px solid #ececec;border-radius:8px;padding:6px 14px;margin:10px 0;overflow-x:auto}
 .eq.hl{border-left:4px solid var(--pku-red);background:#fffafa}
 
 figure{margin:8px 0;text-align:center}
@@ -139,22 +136,20 @@ tr.ours td{color:var(--pku-red)}
   padding:3px 10px;border-radius:20px;margin:2px 4px 2px 0;letter-spacing:.5px}
 .tag.lt{background:#fff;color:var(--pku-red);border:1px solid var(--pku-red)}
 
-.two{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:start;min-height:0}
-.center{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:0}
+.two{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:start;height:100%}
+.center{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;height:100%}
 
 /* title slide */
-#s-title{justify-content:center;align-items:center;text-align:center;padding:0 96px;background:
-  radial-gradient(900px 420px at 78% 12%, #f8eaea 0%, rgba(248,234,234,.55) 35%, transparent 70%),
-  linear-gradient(135deg,#fff 0%,#fff 62%,#fbf3f3 100%);}
-#s-title::after{content:"";position:absolute;right:72px;top:86px;width:150px;height:150px;border:18px solid rgba(148,7,10,.09);border-radius:50%}
-#s-title h1{font-size:76px;line-height:1.08;color:var(--ink);font-weight:850;margin:0 auto;max-width:1450px;letter-spacing:-1.6px}
+#s-title{justify-content:center;align-items:flex-start;padding:0 80px;background:
+  radial-gradient(1200px 500px at 80% -10%, #fbeeee 0%, #fff 55%);}
+#s-title .pre{font-size:16px;letter-spacing:5px;color:var(--pku-red);font-weight:700;text-transform:uppercase}
+#s-title h1{font-size:54px;line-height:1.1;color:var(--ink);font-weight:800;margin:18px 0 10px;max-width:1000px}
 #s-title h1 .accent{color:var(--pku-red)}
-.titlebar{height:8px;width:260px;background:var(--pku-red);margin:34px auto 38px;border-radius:6px}
-.authors{display:flex;flex-wrap:wrap;justify-content:center;gap:18px 34px;font-size:30px;line-height:1.35;color:var(--ink);max-width:1500px;margin:0 auto}
-.author-item{white-space:nowrap}
-.authors b{color:var(--pku-red);font-weight:800}
-.authors small{font-size:22px!important;color:var(--ink-soft)}
-.aff{font-size:24px;color:var(--muted);margin-top:28px;letter-spacing:.3px}
+#s-title .sub{font-size:22px;color:var(--ink-soft);max-width:880px;margin-bottom:34px}
+.authors{font-size:18px;color:var(--ink)}
+.authors b{color:var(--pku-red)}
+.aff{font-size:15px;color:var(--muted);margin-top:4px}
+.titlebar{height:6px;width:160px;background:var(--pku-red);margin:26px 0;border-radius:3px}
 
 /* divider slides */
 .divider{background:linear-gradient(120deg,var(--pku-red) 0%, #7a0608 100%)!important;}
@@ -191,84 +186,6 @@ tr.ours td{color:var(--pku-red)}
 .flex>div{flex:1}
 ol{margin-left:24px}
 ol li::marker{color:var(--pku-red);font-weight:700}
-
-/* PPT-style default scale: larger text and figures for projection */
-.slide{padding:40px 58px 58px 58px}
-.slide{overflow:hidden}
-.slide.active{min-height:0}
-.slide .content>*:last-child{margin-bottom:6px}
-.slide.sparse .content{justify-content:space-evenly}
-.slide.scrollable .content{justify-content:flex-start}
-.slide.scrollable .content{gap:8px}
-.slide.scrollable p,.slide.scrollable li{font-size:25px!important;line-height:1.26}
-.slide.scrollable .card p,.slide.scrollable .card li{font-size:22px!important;line-height:1.24}
-.slide.scrollable .eq{padding:6px 12px;margin:6px 0}
-.slide.scrollable .diagram{max-height:36vh}
-.slide.fit-tight .content{gap:8px}
-.slide.fit-tight h2{font-size:44px!important;margin-bottom:12px}
-.slide.fit-tight p,.slide.fit-tight li{font-size:22px!important;line-height:1.18}
-.slide.fit-tight .card{padding:12px 16px}
-.slide.fit-tight .card h3{font-size:24px!important;margin-bottom:6px}
-.slide.fit-tight .card p,.slide.fit-tight .card li{font-size:18.5px!important;line-height:1.18}
-.slide.fit-tight .eq,.slide.fit-tight .small-eq{font-size:19px!important;padding:5px 10px;margin:4px 0}
-.slide.fit-tight .splitrow{gap:18px;align-items:center}
-.slide.fit-tight .diagram{max-height:34vh}
-.slide.fit-tight figcaption{font-size:15px!important}
-.slide.fit-tight .callout{padding:7px 10px;margin-top:4px}
-.slide.fit-tight .callout .lbl{font-size:15px!important}
-.slide.fit-tight .callout p{font-size:18px!important;line-height:1.18}
-.slide.figure-slide figure{height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;margin:0}
-.slide.figure-slide .content{overflow:hidden;padding-bottom:0;justify-content:center}
-.slide.figure-slide figure img{max-height:68vh;max-width:96%}
-.slide.figure-slide figcaption{font-size:24px!important;margin-top:10px}
-h1.kicker{font-size:24px!important}
-.slide h2{font-size:56px!important;margin-bottom:22px}
-.slide h3{font-size:34px!important}
-.slide p,.slide li{font-size:32px!important;line-height:1.32}
-.card{padding:22px 26px}
-.card h3{font-size:30px!important}
-.card p,.card li{font-size:26px!important;line-height:1.28}
-small{font-size:22px!important}
-.box .lbl,.callout .lbl{font-size:20px!important}
-.eq,.small-eq{font-size:25px!important}
-table{font-size:24px!important}
-th,td{padding:8px 11px}
-figcaption{font-size:20px!important}
-figure img{max-height:70vh}
-.imgrow img{max-height:66vh}
-.diagram{max-height:40vh}
-.slide.sparse figure img{max-height:76vh}
-.slide.sparse .diagram{max-height:52vh}
-.slide.sparse .grid{gap:22px}
-figure.dfig figcaption{font-size:19px!important}
-.splitrow .card h3{font-size:28px!important}
-.splitrow .card p,.splitrow .card li{font-size:23px!important;line-height:1.24}
-.tag{font-size:20px!important}
-.footer{font-size:15px}
-#pageno{font-size:15px}
-.nav button{width:42px;height:42px;font-size:20px}
-.hint{font-size:14px}
-#s-title h1{font-size:76px!important}
-.authors{font-size:30px!important}
-.authors small{font-size:22px!important}
-.aff{font-size:24px!important}
-.divider .num{font-size:132px!important}
-.divider h2{font-size:70px!important}
-.divider p{font-size:34px!important}
-[style*="font-size:12"],[style*="font-size:13"],[style*="font-size:14"]{font-size:22px!important}
-[style*="font-size:15"]{font-size:24px!important}
-[style*="font-size:16"]{font-size:25px!important}
-
-@media (max-width: 1050px), (max-height: 720px){
-  .slide{padding:34px 44px 56px 44px}
-  .slide h2{font-size:44px!important;margin-bottom:14px}
-  .slide p,.slide li{font-size:25px!important}
-  .card p,.card li{font-size:22px!important}
-  .g3{grid-template-columns:1fr}
-  .g2,.splitrow,.two{grid-template-columns:1fr}
-  figure img{max-height:58vh}
-  .diagram{max-height:34vh}
-}
 </style>
 </head>
 <body>
@@ -276,14 +193,12 @@ figure.dfig figcaption{font-size:19px!important}
 
 <!-- ===================== TITLE ===================== -->
 <section class="slide" id="s-title">
-  <h1>Beyond Linear Decision Rules:<br><span class="accent">LLM-Guided Representation Discovery</span><br>for Data-Driven Optimization</h1>
+  <div class="pre">Stochastic Optimization &nbsp;·&nbsp; Generative AI &nbsp;·&nbsp; Decision Rules</div>
+  <h1>Beyond Linear Decision Rules:<br><span class="accent">LLM-Guided Representation Discovery</span> for Data-Driven Optimization</h1>
   <div class="titlebar"></div>
-  <div class="authors">
-    <span class="author-item"><b>Huan Zhang</b><small> (NWPU)</small></span>
-    <span class="author-item"><b>Yang Wang</b><small> (NWPU)</small></span>
-    <span class="author-item"><b>Hanzhang Qin</b><small> (NUS)</small></span>
-    <span class="author-item"><b>Yue Zhao</b><small> (PKU)</small></span>
-  </div>
+  <div class="sub">Generative Stochastic Optimization (GenSO): using LLMs to discover nonlinear recourse representations — without sacrificing rigor, tractability, or interpretability.</div>
+  <div class="authors"><b>Huan Zhang</b>, &nbsp;<b>Yang Wang</b> &nbsp;<small>(Northwestern Polytechnical University)</small> &nbsp;·&nbsp; <b>Hanzhang Qin</b> &nbsp;<small>(National University of Singapore)</small> &nbsp;·&nbsp; <b>Yue Zhao</b> &nbsp;<small>(HSBC Business School, Peking University)</small></div>
+  <div class="aff">Conference Presentation &nbsp;·&nbsp; ~40 minutes</div>
   <div class="footer"><span class="ftitle">Beyond Linear Decision Rules · GenSO</span></div>
 </section>
 
@@ -351,7 +266,7 @@ figure.dfig figcaption{font-size:19px!important}
 </section>
 
 <!-- P2: LDR tradeoff -->
-<section class="slide fit-tight">
+<section class="slide">
   <h1 class="kicker">Problem · 2 / 5</h1>
   <h2>The Tractability–Expressiveness Tradeoff</h2>
   <div class="content">
@@ -398,7 +313,7 @@ figure.dfig figcaption{font-size:19px!important}
 </section>
 
 <!-- P3: irreducible gap -->
-<section class="slide fit-tight">
+<section class="slide">
   <h1 class="kicker">Problem · 3 / 5</h1>
   <h2>An Irreducible Approximation Gap</h2>
   <div class="content">
@@ -782,10 +697,10 @@ figure.dfig figcaption{font-size:19px!important}
   <h1 class="kicker">Bounds · 2 / 10</h1>
   <h2>The Core Decomposition</h2>
   <div class="content">
-    <div class="eq hl">$$\mathcal J(\hat{\bm x},\hat{\bm y})-Z^\star_{\mathcal R}=\underbrace{\mathcal J(\hat{\bm x},\hat{\bm y})-Z^\star_{\Phi}}_{\text{(A) coefficient estimation \& selection}}+\underbrace{Z^\star_{\Phi}-Z^\star_{\mathcal R}}_{\text{(B) operational-statistic approximation}}$$</div>
+    <div class="eq hl">$$\mathcal J(\hat{\bm x},\hat{\bm y})-Z^\star_{\mathcal R}=\underbrace{\mathcal J(\hat{\bm x},\hat{\bm y})-Z^\star_{\Phi}}_{\text{(A) coefficient estimation \& selection}}+\underbrace{Z^\star_{\Phi}-Z^\star_{\mathcal R}}_{\text{(B) representation approximation}}$$</div>
     <div class="grid g2">
-      <div class="card"><h3>(A) Statistical error</h3><p>After the search fixes a representable class — pure SAA generalization. <strong>§4.1</strong>: a fixed-basis finite-sample bound.</p></div>
-      <div class="card"><h3>(B) Structural error</h3><p>How well the generated basis serves as <em>operational statistics</em> for the oracle. <strong>§4.2–4.3</strong>: operational-statistic basis + LLM prior mass.</p></div>
+      <div class="card"><h3>(A) Statistical error</h3><p>After the search fixes a representable class — pure SAA generalization. <strong>§3.1</strong>: a fixed-basis finite-sample bound.</p></div>
+      <div class="card"><h3>(B) Structural error</h3><p>How well the generated basis serves as a decision-relevant representation for the oracle. <strong>§3.2–3.3</strong>: \(\epsilon\)-good basis sets + LLM prior mass.</p></div>
     </div>
     <div class="box"><span class="lbl">Benchmarks</span><p style="margin-top:4px">\(Z^\star_{\mathcal R}\): unrestricted measurable oracle. \(Z^\star_\Phi\): best GenLDR with basis \(\Phi\) under the <em>true</em> distribution. \(\ Z^\star_{\mathcal R}\le Z^\star_\Phi\le Z^\star_{\mathcal L}\).</p></div>
   </div>
@@ -811,12 +726,12 @@ figure.dfig figcaption{font-size:19px!important}
   <h2>Assumptions (Fixed Basis)</h2>
   <div class="content">
     <div class="grid g2">
-      <div class="card"><h3>(i) Bounded optimizers</h3><p>Independent components of \(\tilde{\bm z}\); stacked optimal coefficients satisfy \(\|\bm w\|_2\le B\). <br><small>Prevents the empirical optimizer from amplifying sampling noise with huge coefficients.</small></p></div>
+      <div class="card"><h3>(i) Bounded optimizers</h3><p>Independent components of \(\tilde{\bm z}\); stacked optimal coefficients satisfy \(\|\bm w\|_2\le R_\Phi\). <br><small>Prevents the empirical optimizer from amplifying sampling noise with huge coefficients.</small></p></div>
       <div class="card"><h3>(ii) Bounded differences</h3><p>\(\bm\xi(\cdot)\) changes by at most \(L_i\) when coordinate \(i\) changes. <br><small>More targeted than a global Lipschitz assumption.</small></p></div>
     </div>
     <p>These define the sensitivity constant used in the finite-sample bound:</p>
-    <div class="eq small-eq">$$\sigma=\tfrac12\Big[\textstyle\sum_i (L_i)^2\Big]^{1/2}$$</div>
-    <p><small>By McDiarmid's inequality, bounded differences ⇒ every 1-D projection of \(\bm\xi(\tilde{\bm z})-\mathbb E\bm\xi\) is sub-Gaussian with parameter \(\le\sigma\).</small></p>
+    <div class="eq small-eq">$$\sigma_\Phi=\tfrac12\Big[\textstyle\sum_i L_{\Phi,i}^2\Big]^{1/2}$$</div>
+    <p><small>By McDiarmid's inequality, bounded differences ⇒ every 1-D projection of \(\bm\xi(\tilde{\bm z})-\mathbb E\bm\xi\) is sub-Gaussian with parameter \(\le\sigma_\Phi\).</small></p>
   </div>
   <div class="footer"><span class="ftitle">Assumptions</span></div>
 </section>
@@ -827,7 +742,7 @@ figure.dfig figcaption{font-size:19px!important}
   <h2>Proposition: Uniform Convergence</h2>
   <div class="content">
     <div class="box"><span class="lbl">Proposition 1</span><p style="margin-top:6px">Under the assumptions, for any fixed \(\Phi\), with probability \(\ge 1-\eta\):</p>
-      <div class="eq" style="background:#fff">$$\sup_{\|\bm w\|_2\le B}\big|\mathcal J(\bm w)-\hat{\mathcal J}_S(\bm w)\big|\ \le\ \epsilon_S(\Phi,\eta)=C\,B\,\sigma\sqrt{\tfrac{N+\log(1/\eta)}{S}}$$</div>
+      <div class="eq" style="background:#fff">$$\sup_{\|\bm w\|_2\le R_\Phi}\big|\mathcal J_\Phi(\bm w)-\hat{\mathcal J}_S(\bm w)\big|\ \le\ C R_\Phi\sigma_\Phi\sqrt{\tfrac{N+\log(1/\eta)}{S}}$$</div>
     </div>
     <h3>Proof in three moves</h3>
     <div class="grid g3">
@@ -846,12 +761,12 @@ figure.dfig figcaption{font-size:19px!important}
   <h2>Theorem 1: Finite-Sample Bound</h2>
   <div class="content">
     <div class="box"><span class="lbl">Theorem 1</span><p style="margin-top:6px">For a fixed basis \(\Phi\), with probability \(\ge 1-\eta\) over \(S\) i.i.d. scenarios:</p>
-      <div class="eq" style="background:#fff">$$\mathcal J(\hat{\bm x}^\star,\hat{\bm y}^\star)\ \le\ Z^\star_\Phi+2\,\epsilon_S(\Phi,\eta)=Z^\star_\Phi+\mathcal O\!\Big(B\sigma\sqrt{\tfrac{N+\log(1/\eta)}{S}}\Big)$$</div>
+      <div class="eq" style="background:#fff">$$\mathcal J(\bmh{x}^\star,\bmh{y}^\star)\ \le\ Z^\star_\Phi+2C R_\Phi\sigma_\Phi\sqrt{\tfrac{N+\log(1/\eta)}{S}}$$</div>
     </div>
     <p>Proof: split into (I) generalization error + (II) optimizer bias; each \(\le\epsilon_S\) on the same uniform-convergence event.</p>
     <div class="grid g3">
       <div class="card"><h3>\(\sigma\)</h3><p>Coordinatewise sensitivity of the cost/features.</p></div>
-      <div class="card"><h3>\(B\)</h3><p>Size of the coefficient search region.</p></div>
+      <div class="card"><h3>\(R_\Phi\)</h3><p>Size of the coefficient search region.</p></div>
       <div class="card"><h3>\(N/S\)</h3><p>Fitted parameters per training scenario.</p></div>
     </div>
     <p style="margin-top:8px"><small>Crucially: <strong>no complexity measure of the LLM program class</strong> appears — only conditional, fixed-basis quantities.</small></p>
@@ -859,20 +774,18 @@ figure.dfig figcaption{font-size:19px!important}
   <div class="footer"><span class="ftitle">Theorem 1</span></div>
 </section>
 
-<!-- B7 operational-statistic basis + scaling law -->
+<!-- B7 epsilon-good basis + scaling law -->
 <section class="slide">
   <h1 class="kicker">Bounds · 7 / 10</h1>
-  <h2>Operational-Statistic Bases &amp; the LLM as a Prior</h2>
+  <h2>\(\epsilon\)-Good Bases &amp; the LLM as a Prior</h2>
   <div class="content">
-    <p>A useful basis function = an <span class="red">operational statistic</span> (threshold, ratio, lag, aggregate, bottleneck…). Define the \(\epsilon\)-good basis sets:</p>
+    <p>A useful basis set is decision-relevant: its best GenLDR nearly matches the unrestricted recourse oracle. Define the \(\epsilon\)-good basis sets:</p>
     <div class="eq hl">$$\mathcal A_\epsilon=\{\,\Phi:\ Z^\star_\Phi-Z^\star_{\mathcal R}\le\epsilon\,\}$$</div>
-    <p>A frozen LLM + prompt induces a distribution over executable bases, \(\mathbb Q_{\bm\theta}(\cdot\mid\bm\pi)\) — a <strong>problem-conditioned prior</strong> over representations.</p>
-    <div class="eq small-eq">$$\underbrace{\big|\mathbb Q^\star(\mathcal A_\epsilon\mid\bm\pi)-\mathbb Q_{\bm\theta}(\mathcal A_\epsilon\mid\bm\pi)\big|}_{\text{Pinsker}}\le\sqrt{\tfrac12D_{\rm KL}(\mathbb Q^\star(\cdot\mid\bm\pi)\,\|\,\mathbb Q_{\bm\theta}(\cdot\mid\bm\pi))}$$</div>
-    <p>With scaling \(D_{\rm KL}\le A|\bm\theta|^{-\alpha}\) and ideal mass \(\mathbb Q^\star(\mathcal A_\epsilon\mid\bm\pi)\ge p(\bm\pi,\epsilon)\):</p>
-    <div class="eq small-eq hl">$$\mathbb Q_{\bm\theta}\{\Phi\in\mathcal A_\epsilon\mid\bm\pi\}\ge\Big(p(\bm\pi,\epsilon)-\sqrt{\tfrac{A}{2|\bm\theta|^\alpha}}\Big)_+$$</div>
-    <p><small>Larger models and better prompts increase mass on \(\epsilon\)-good operational statistics.</small></p>
+    <p>A frozen LLM + prompt induces a distribution over executable bases, \(\mathbb Q_{\bm\theta}(\cdot\mid\bm\pi)\) — a <strong>problem-conditioned prior</strong> over representations. Empirical <strong>scaling laws</strong> motivate:</p>
+    <div class="eq small-eq">$$D_{\rm KL}\big(\mathbb Q^\star\,\|\,\mathbb Q_{\bm\theta}\big)\le A|\bm\theta|^{-\alpha}\ \ \Longrightarrow\ \ \mathbb Q_{\bm\theta}\{\Phi\in\mathcal A_\epsilon\mid\bm\pi\}\ge\Big(c_\epsilon-\sqrt{\tfrac{A}{2|\bm\theta|^\alpha}}\Big)_+$$</div>
+    <p><small>(Pinsker's inequality.) Larger models place more mass on \(\epsilon\)-good representations.</small></p>
   </div>
-  <div class="footer"><span class="ftitle">Operational-Statistic Basis &amp; LLM Prior</span></div>
+  <div class="footer"><span class="ftitle">\(\epsilon\)-Good Basis &amp; LLM Prior</span></div>
 </section>
 
 <!-- B8 hit probability assumption -->
@@ -880,12 +793,12 @@ figure.dfig figcaption{font-size:19px!important}
   <h1 class="kicker">Bounds · 8 / 10</h1>
   <h2>Assumption: LLM Prior Mass / Hit Probability</h2>
   <div class="content">
-    <div class="box"><span class="lbl">Assumption (hit probability)</span><p style="margin-top:6px">There exist \(p(\bm\pi,\epsilon)>0\), \(c_2>0\), and \(\alpha>0\) (independent of \(K,S,\eta,\eta',|\bm\theta|\)) such that each search round hits an \(\epsilon\)-good basis with probability</p>
-      <div class="eq" style="background:#fff">$$\mathrm{Pr}\big(\Phi^{(k)}\in\mathcal A_\epsilon\mid\mathcal H_{k-1}\big)\ \ge\ \rho_\theta(\epsilon,\bm\pi)=\big(p(\bm\pi,\epsilon)-c_2|\bm\theta|^{-\alpha/2}\big)_+$$</div>
+    <div class="box"><span class="lbl">Assumption (hit probability)</span><p style="margin-top:6px">There exist \(c_1,c_2,\alpha>0\) (independent of \(K,S,\eta,\eta',|\bm\theta|\)) such that each search round hits an \(\epsilon\)-good basis with probability</p>
+      <div class="eq" style="background:#fff">$$\mathrm{Pr}\big(\Phi^{(k)}\in\mathcal A_\epsilon\mid\mathcal H_{k-1}\big)\ \ge\ \rho_\theta(\epsilon,\bm\pi)=\big(c_1-c_2|\bm\theta|^{-\alpha/2}\big)_+$$</div>
     </div>
     <ul>
       <li><strong>Conditional on history \(\mathcal H_{k-1}\)</strong> → the evolutionary search may be adaptive; independence across rounds is <em>not</em> required.</li>
-      <li>\(p(\bm\pi,\epsilon)\): intrinsic prompt- and target-dependent mass of \(\epsilon\)-good statistics.</li>
+      <li>\(c_1\): intrinsic prompt-conditioned mass of \(\epsilon\)-good representations. Larger model ⇒ larger lower bound.</li>
       <li>The Pinsker-linearized form of the scaling-law KL bound.</li>
     </ul>
   </div>
@@ -898,11 +811,11 @@ figure.dfig figcaption{font-size:19px!important}
   <h2>Theorem 2: Combined Estimation + Search Bound</h2>
   <div class="content">
     <div class="box"><span class="lbl">Theorem 2</span><p style="margin-top:6px">With probability \(\ge 1-\eta-\eta'\) over both basis generation and coefficient fitting:</p>
-      <div class="eq" style="background:#fff">$$\mathcal J(\hat{\bm x}_{\rm LLM},\hat{\bm y}_{\rm LLM})-Z^\star_{\mathcal R}\ \le\ \underbrace{\epsilon}_{\text{statistic approximation}}+\underbrace{C_1B\sigma\sqrt{\tfrac{N+\log K+\log(1/\eta)}{S}}}_{\text{estimation + selection}}+\underbrace{\tfrac{C_2}{\eta'}e^{-K(p(\bm\pi,\epsilon)-c_2|\bm\theta|^{-\alpha/2})_+}}_{\text{LLM search penalty}}$$</div>
+      <div class="eq" style="background:#fff">$$\mathcal J(\bmh{x}^\star_K,\bmh{y}^\star_K)-Z^\star_{\mathcal R}\ \le\ \underbrace{\epsilon}_{\text{approximation}}+\underbrace{C_1R\sigma\sqrt{\tfrac{N+\log K+\log(1/\eta)}{S}}}_{\text{estimation + selection}}+\underbrace{\tfrac{C_2}{\eta'}e^{-K(c_1-c_2|\bm\theta|^{-\alpha/2})_+}}_{\text{LLM search penalty}}$$</div>
     </div>
     <div class="grid g3">
       <div class="card"><h3>Term 1: \(\epsilon\)</h3><p>Small when generated bases can nearly match the oracle.</p></div>
-      <div class="card"><h3>Term 2: statistics</h3><p>Selecting among \(K\) bases adds only \(\log K\).</p></div>
+      <div class="card"><h3>Term 2: estimation</h3><p>Selecting among \(K\) bases adds only \(\log K\).</p></div>
       <div class="card"><h3>Term 3: search</h3><p><strong>Decays exponentially in \(K\)</strong>; improves with model scale \(|\bm\theta|\).</p></div>
     </div>
     <p style="margin-top:6px"><small>Proof: chain-rule miss bound \(\Pr(M_K)\le e^{-K\rho}\) + Markov; intersect with the union-bounded fixed-basis event.</small></p>
@@ -916,10 +829,10 @@ figure.dfig figcaption{font-size:19px!important}
   <h2>Key Insight: GenSO vs. a Fixed Basis</h2>
   <div class="content">
     <div class="grid g2">
-      <div class="card plain"><h3>Fixed basis \(\Phi_0\) (e.g. LDR)</h3><div class="eq small-eq">$$\Delta_{\Phi_0}+C_1B\sigma\sqrt{\tfrac{N_0+\log(1/\eta)}{S}}$$</div><p>The structural gap \(\Delta_{\Phi_0}\) is <strong>fixed</strong> — it can <em>only</em> improve through more data \(S\).</p></div>
-      <div class="card"><h3>GenSO</h3><div class="eq small-eq hl">$$\epsilon+C_1B\sigma\sqrt{\tfrac{N+\log K+\log(1/\eta)}{S}}+\tfrac{C_2}{\eta'}e^{-K\rho_\theta}$$</div><p>Replaces the fixed gap by \(\epsilon\) + an <strong>exponentially shrinking</strong> search penalty.</p></div>
+      <div class="card plain"><h3>Fixed basis \(\Phi_0\) (e.g. LDR)</h3><div class="eq small-eq">$$\Delta_{\Phi_0}+C_1R_{\Phi_0}\sigma_{\Phi_0}\sqrt{\tfrac{N_0+\log(1/\eta)}{S}}$$</div><p>The structural gap \(\Delta_{\Phi_0}\) is <strong>fixed</strong> — it can <em>only</em> improve through more data \(S\).</p></div>
+      <div class="card"><h3>GenSO</h3><div class="eq small-eq hl">$$\epsilon+C_1R\sigma\sqrt{\tfrac{N+\log K+\log(1/\eta)}{S}}+\tfrac{C_2}{\eta'}e^{-K\rho_\theta}$$</div><p>Replaces the fixed gap by \(\epsilon\) + an <strong>exponentially shrinking</strong> search penalty.</p></div>
     </div>
-    <div class="box"><span class="lbl">The tradeoff &amp; the levers</span><p style="margin-top:4px">GenSO can improve along <strong>three</strong> axes a fixed basis cannot: <span class="red">more search budget \(K\)</span>, <span class="red">a larger model \(|\bm\theta|\)</span>, and <span class="red">a better prompt</span> (higher \(\epsilon\)-good mass). Multi-stage: search effort scales as \(K\sum_t H_t\); statistics as \(\sqrt{T(H+1)/S}\).</p></div>
+    <div class="box"><span class="lbl">The tradeoff &amp; the levers</span><p style="margin-top:4px">GenSO can improve along <strong>three</strong> axes a fixed basis cannot: <span class="red">more search budget \(K\)</span>, <span class="red">a larger model \(|\bm\theta|\)</span>, and <span class="red">a better prompt</span> (higher \(\epsilon\)-good mass). Multi-stage: search effort scales as \(K\sum_t H_t\); estimation scales like \(\sqrt{T(H+1)/S}\).</p></div>
   </div>
   <div class="footer"><span class="ftitle">Key Insights</span></div>
 </section>
@@ -936,7 +849,7 @@ figure.dfig figcaption{font-size:19px!important}
 
 <!-- N1 setup -->
 <section class="slide">
-  <h1 class="kicker">Numerical · 1 / 5</h1>
+  <h1 class="kicker">Numerical · 1 / 6</h1>
   <h2>Setup &amp; Benchmarks</h2>
   <div class="content">
     <div class="grid g2">
@@ -951,39 +864,57 @@ figure.dfig figcaption{font-size:19px!important}
 
 <!-- N2 inventory-control results -->
 <section class="slide">
-  <h1 class="kicker">Numerical · 2 / 5</h1>
+  <h1 class="kicker">Numerical · 2 / 6</h1>
   <h2>Case 1 — Multi-Period Inventory Control</h2>
   <div class="two">
     <div>
-      <p><small>Seasonal demand, \(T=24\), \(c_+\!=\!5,c_-\!=\!1\). Mean cost (lower is better); GenSO is best at every uncertainty level \(\theta\).</small></p>
+      <p><small>Seasonal demand, \(T=24\), \(c_+\!=\!5,c_-\!=\!1\). Mean cost (lower is better); GenSO is best at every uncertainty level \(\gamma\).</small></p>
       <table>
-        <thead><tr><th>Method</th><th>θ=.025</th><th>θ=.05</th><th>θ=.10</th><th>θ=.20</th></tr></thead>
+        <thead><tr><th>Method</th><th>γ=.025</th><th>γ=.05</th><th>γ=.10</th><th>γ=.20</th></tr></thead>
         <tbody>
-          <tr><td>SAA (No Adapt.)</td><td>930</td><td>1837</td><td>3736</td><td>7303</td></tr>
-          <tr><td>SAA (Full LDR)</td><td>661</td><td>1334</td><td>2721</td><td>5303</td></tr>
-          <tr><td>DRO (Mean–Var)</td><td>881</td><td>1758</td><td>3514</td><td>7034</td></tr>
+          <tr><td>SAA (No Adapt.)</td><td>918</td><td>1827</td><td>3615</td><td>7249</td></tr>
+          <tr><td>SAA (Full LDR)</td><td>587</td><td>1172</td><td>2352</td><td>4569</td></tr>
+          <tr><td>DRO (Mean–Var)</td><td>599</td><td>1198</td><td>2396</td><td>4794</td></tr>
           <tr><td>DRO (Wasserstein)</td><td>599</td><td>1198</td><td>2396</td><td>4794</td></tr>
           <tr class="ours"><td>GenSO (Ours)</td><td class="best">534</td><td class="best">1069</td><td class="best">2174</td><td class="best">4389</td></tr>
         </tbody>
       </table>
-      <div class="box"><span class="lbl">Improvement</span><p style="margin-top:4px">vs LDR: <strong>~17–20%↓</strong> &nbsp;·&nbsp; vs Wasserstein DRO: <strong>~8–11%↓</strong> &nbsp;·&nbsp; lowest mean <em>and</em> CVaR throughout.</p></div>
+      <div class="box"><span class="lbl">Improvement</span><p style="margin-top:4px">vs LDR: <strong>~4–9%↓</strong> &nbsp;·&nbsp; vs DRO: <strong>~8–11%↓</strong> &nbsp;·&nbsp; lowest mean <em>and</em> CVaR throughout.</p></div>
     </div>
-    <figure><img src="plots/newsvendor_theta_0025_boxplot.png" alt="inventory-control boxplot"><figcaption>Out-of-sample cost over 1,000 test scenarios (θ=0.025). GenSO: lower median, narrower spread.</figcaption></figure>
+    <figure><img src="plots/newsvendor_theta_0025_boxplot.png" alt="inventory-control boxplot"><figcaption>Out-of-sample cost over 1,000 test scenarios (γ=0.025). GenSO: lower median, narrower spread.</figcaption></figure>
   </div>
   <div class="footer"><span class="ftitle">Case 1 — Inventory Control</span></div>
 </section>
 
+<!-- N3 theory validation via parameter sensitivity -->
+<section class="slide">
+  <h1 class="kicker">Numerical · 3 / 6</h1>
+  <h2>Figure 3 — Sensitivity Validates the Bound</h2>
+  <div class="two">
+    <figure><img src="plots/main_parameter_analysis.png" alt="parameter sensitivity for K M S"><figcaption>Out-of-sample cost under γ=0.025 as search budget, population size, and sample size vary.</figcaption></figure>
+    <div>
+      <div class="box"><span class="lbl">Theory prediction</span><p style="margin-top:4px">Theorem 2 separates <strong>estimation</strong> and <strong>search</strong>:</p><div class="eq small-eq" style="background:#fff">$$\epsilon+C_1R\sigma\sqrt{\frac{N+\log K}{S}}+\frac{C_2}{\eta'}e^{-K\rho_\theta}$$</div></div>
+      <ul>
+        <li><strong>Increasing \(K\)</strong>: lowers the LLM search penalty exponentially, while adding only \(\log K\) to estimation.</li>
+        <li><strong>Increasing \(M\)</strong>: expands representation diversity and improves the chance of finding low-gap bases.</li>
+        <li><strong>Increasing \(S\)</strong>: reduces coefficient-estimation error and stabilizes validation.</li>
+      </ul>
+      <div class="callout"><span class="lbl">Empirical message</span><p style="margin-top:4px">The cost curves move in the directions predicted by the bound: better search and more data both improve deployed performance.</p></div>
+    </div>
+  </div>
+  <div class="footer"><span class="ftitle">Case 1 — Bound Validation</span></div>
+</section>
+
 <!-- N3 inventory-control insights / discovered functions -->
-<section class="slide fit-tight">
-  <h1 class="kicker">Numerical · 3 / 5</h1>
+<section class="slide">
+  <h1 class="kicker">Numerical · 4 / 6</h1>
   <h2>Case 1 — What Did the LLM Discover?</h2>
   <div class="content">
-    <p>The generated basis functions are <span class="red">interpretable operational statistics</span>, not arbitrary nonlinearities. Representative examples from the main text:</p>
+    <p>The generated basis functions are <span class="red">interpretable representations</span>, not arbitrary nonlinearities. Two representative examples from the main text:</p>
     <div class="grid" style="grid-template-columns:1fr 1fr;gap:12px">
       <div class="card"><h3>① Seasonal deviation</h3><div class="eq small-eq" style="background:#fff;font-size:14px">$$\phi^{(1)}=\frac{d_{t-1}-d_t^*}{1000},\quad d_t^*=1000\Big(1+0.5\sin\frac{\pi(t-1)}{12}\Big)$$</div><p>Compares the most recent demand with the nominal seasonal level. Positive values signal stronger-than-expected demand; negative values signal weaker demand.</p></div>
       <div class="card"><h3>② Historical peak-demand indicator</h3><div class="eq small-eq" style="background:#fff;font-size:14px">$$\phi^{(2)}=\min\left\{1,\max\left(0,\frac{\max_{\tau \lt t}d_\tau-1200}{1000}\right)\right\}$$</div><p>Detects whether past demand has exceeded a high-demand threshold. The clipping maps the signal into \([0,1]\), avoiding overreaction to extreme outliers.</p></div>
     </div>
-    <div class="card" style="margin-top:10px"><h3>③ Seasonal demand interaction</h3><div class="eq small-eq" style="background:#fff;font-size:14px">$$\begin{aligned}\phi^{(3)}&=\sin\!\left(\frac{2\pi(t-1)}{12}\right)\frac{d_{t-1}}{1200},\\[1mm]\phi^{(4)}&=\cos\!\left(\frac{2\pi(t-1)}{12}\right)\frac{d_{t-1}}{1200}.\end{aligned}$$</div><p>The sine/cosine pair captures both recent demand magnitude and seasonal phase, without using tilde notation for deterministic basis functions.</p></div>
     <div class="callout" style="margin-top:10px;padding:10px 12px"><span class="lbl">Key insight</span><p style="margin-top:4px;font-size:15px">The LLM discovers lagged demand, thresholds, clipping, scaling, and cyclical phase terms — structures hard to pre-commit to with one polynomial or PWL family.</p></div>
   </div>
   <div class="footer"><span class="ftitle">Case 1 — Discovered Structure</span></div>
@@ -991,7 +922,7 @@ figure.dfig figcaption{font-size:19px!important}
 
 <!-- N4 datacenter setup -->
 <section class="slide">
-  <h1 class="kicker">Numerical · 4 / 5</h1>
+  <h1 class="kicker">Numerical · 5 / 6</h1>
   <h2>Case 2 — Data Center Location + Job Scheduling</h2>
   <div class="two">
     <div>
@@ -1011,32 +942,26 @@ figure.dfig figcaption{font-size:19px!important}
 
 <!-- N5 datacenter results -->
 <section class="slide">
-  <h1 class="kicker">Numerical · 5 / 6</h1>
-  <h2>Case 2 — Results &amp; Out-of-Distribution Robustness</h2>
-  <div class="content">
-    <p>Multi-period \(T=8\). Mean cost; lower is better. GenSO wins on both the in-distribution Alibaba test set and the out-of-distribution Microsoft test set.</p>
-    <table>
-      <thead><tr><th>Method</th><th>Alibaba</th><th>Microsoft (OOD)</th></tr></thead>
-      <tbody>
-        <tr><td>SAA (No Adapt.)</td><td>3657</td><td>4132</td></tr>
-        <tr><td>SAA (LDR)</td><td>2658</td><td>4608</td></tr>
-        <tr><td>DRO (Mean–Var)</td><td>3208</td><td>2867</td></tr>
-        <tr><td>DRO (Wasserstein)</td><td>2304</td><td>2399</td></tr>
-        <tr class="ours"><td>GenSO (Ours)</td><td class="best">2123</td><td class="best">2173</td></tr>
-      </tbody>
-    </table>
-    <div class="box"><span class="lbl">Generalization</span><p style="margin-top:4px">vs LDR on OOD: <strong>~53%↓</strong>. GenSO also has the <strong>smallest std &amp; CVaR</strong> — the learned bases transfer to a different trace distribution.</p></div>
-  </div>
-  <div class="footer"><span class="ftitle">Case 2 — Results</span></div>
-</section>
-
-<section class="slide figure-slide">
   <h1 class="kicker">Numerical · 6 / 6</h1>
-  <h2>Case 2 — Distributional Performance</h2>
-  <div class="content">
+  <h2>Case 2 — Results &amp; Out-of-Distribution Robustness</h2>
+  <div class="two">
+    <div>
+      <p><small>Multi-period \(T=8\). Mean cost; lower is better. GenSO wins on both the in-distribution (Alibaba) and OOD (Microsoft) test sets.</small></p>
+      <table>
+        <thead><tr><th>Method</th><th>Alibaba</th><th>Microsoft (OOD)</th></tr></thead>
+        <tbody>
+          <tr><td>SAA (No Adapt.)</td><td>3657</td><td>4132</td></tr>
+          <tr><td>SAA (LDR)</td><td>2658</td><td>4608</td></tr>
+          <tr><td>DRO (Mean–Var)</td><td>3208</td><td>2867</td></tr>
+          <tr><td>DRO (Wasserstein)</td><td>2304</td><td>2399</td></tr>
+          <tr class="ours"><td>GenSO (Ours)</td><td class="best">2123</td><td class="best">2173</td></tr>
+        </tbody>
+      </table>
+      <div class="box"><span class="lbl">Generalization</span><p style="margin-top:4px">vs LDR on OOD: <strong>~53%↓</strong>. GenSO also has the <strong>smallest std &amp; CVaR</strong> — the learned bases transfer to a different trace distribution.</p></div>
+    </div>
     <figure><img src="plots/multiperiod_two_test_sets_boxplot.png" alt="two test sets boxplot"><figcaption>(a) Alibaba in-distribution &nbsp; (b) Microsoft out-of-distribution.</figcaption></figure>
   </div>
-  <div class="footer"><span class="ftitle">Case 2 — Boxplot</span></div>
+  <div class="footer"><span class="ftitle">Case 2 — Results</span></div>
 </section>
 
 <!-- Insights consolidation -->
@@ -1046,7 +971,7 @@ figure.dfig figcaption{font-size:19px!important}
   <div class="content">
     <div class="grid g2">
       <div class="card"><h3>Consistent wins</h3><p>GenSO beats SAA, LDR, and both DRO variants on <strong>mean cost and CVaR</strong>, across uncertainty levels, horizons, and two domains.</p></div>
-      <div class="card"><h3>Advantage grows with uncertainty</h3><p>The richer representation matters more precisely when adaptivity is most valuable.</p></div>
+      <div class="card"><h3>Bound-aligned sensitivity</h3><p>Figure 3 supports the theory: more search \(K\), broader population \(M\), and larger samples \(S\) improve deployed cost.</p></div>
       <div class="card"><h3>Lower variance, better tails</h3><p>Narrower out-of-sample spread → more reliable, not just lower on average.</p></div>
       <div class="card"><h3>Transfers out-of-distribution</h3><p>Bases learned on Alibaba traces generalize to Azure — evidence they capture genuine operational structure.</p></div>
     </div>
@@ -1074,8 +999,10 @@ figure.dfig figcaption{font-size:19px!important}
 <!-- THANK YOU -->
 <section class="slide center" style="background:radial-gradient(1000px 500px at 50% 0%, #fbeeee 0%, #fff 60%)">
   <div class="titlebar" style="margin-bottom:24px"></div>
-  <h2 style="border:none;font-size:72px;color:var(--pku-red);margin-bottom:24px">Thank you!</h2>
-  <p style="font-size:52px;font-weight:800;color:#111;margin-top:0">Q &amp; A</p>
+  <h2 style="border:none;font-size:44px;color:var(--pku-red)">Thank You</h2>
+  <p style="font-size:22px;max-width:720px;margin-top:8px">Beyond Linear Decision Rules:<br>LLM-Guided Representation Discovery for Data-Driven Optimization</p>
+  <p style="margin-top:24px;font-size:18px"><b style="color:var(--pku-red)">Questions &amp; Discussion welcome</b></p>
+  <p class="aff" style="margin-top:18px">Huan Zhang · Yang Wang · Hanzhang Qin · Yue Zhao &nbsp;|&nbsp; NWPU · NUS · PKU</p>
   <div class="footer"><span class="ftitle">Thank You</span></div>
 </section>
 
@@ -1092,37 +1019,19 @@ figure.dfig figcaption{font-size:19px!important}
 <script>
 (function(){
   var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
-  var requested = parseInt(new URLSearchParams(window.location.search).get('slide') || window.location.hash.replace('#',''), 10);
-  var i = Number.isFinite(requested) ? requested-1 : 0;
+  var i = 0;
   var bar = document.querySelector('#bar i');
   var counter = document.getElementById('counter');
-  function fitSlide(s){
-    var c = s.querySelector('.content');
-    s.classList.remove('sparse','scrollable');
-    if(!c) return;
-    c.scrollTop = 0;
-    // If content is genuinely taller than the viewport, keep it scrollable.
-    // If it uses too little vertical space, spread it like a PPT slide.
-    requestAnimationFrame(function(){
-      var used = c.scrollHeight;
-      var avail = c.clientHeight;
-      if(used > avail + 8){
-        s.classList.add('scrollable');
-      }else if(used < avail * 0.82){
-        s.classList.add('sparse');
-      }
-    });
-  }
   function show(n){
     i = Math.max(0, Math.min(slides.length-1, n));
     slides.forEach(function(s,k){ s.classList.toggle('active', k===i); });
     bar.style.width = ((i)/(slides.length-1)*100)+'%';
     counter.textContent = (i+1)+' / '+slides.length;
     if(window.MathJax && window.MathJax.typesetPromise){
-      window.MathJax.typesetPromise([slides[i]]).then(function(){ fitSlide(slides[i]); }).catch(function(){ fitSlide(slides[i]); });
-    }else{
-      fitSlide(slides[i]);
+      window.MathJax.typesetPromise([slides[i]]).catch(function(){});
     }
+    var c = slides[i].querySelector('.content');
+    if(c) c.scrollTop = 0;
   }
   function next(){ show(i+1); }
   function prev(){ show(i-1); }
@@ -1147,7 +1056,7 @@ figure.dfig figcaption{font-size:19px!important}
     if(Math.abs(dx)>50){ dx<0 ? next() : prev(); }
     x0=null;
   });
-  show(i);
+  show(0);
 })();
 </script>
 </body>
