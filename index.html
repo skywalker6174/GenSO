@@ -934,21 +934,21 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 <section class="slide">
   <h1 class="kicker">Numerical · 3 / 6</h1>
   <h2>Figure 3 — Sensitivity Validates the Bound</h2>
-  <div class="two" style="grid-template-columns:1.18fr .82fr;gap:22px;align-items:stretch">
-    <div style="display:flex;flex-direction:column;gap:12px;min-height:0">
-      <figure style="margin:0;text-align:center;flex:1">
-        <img src="plots/main_parameter_analysis.png" alt="parameter sensitivity for K M S" style="max-height:50vh;width:100%;object-fit:contain">
+  <div class="two" style="grid-template-columns:1.28fr .72fr;gap:22px;align-items:stretch">
+    <div style="display:flex;flex-direction:column;gap:10px;min-height:0">
+      <figure style="margin:0;text-align:center">
+        <img src="plots/main_parameter_analysis.png" alt="parameter sensitivity for K M S" style="max-height:43vh;width:100%;object-fit:contain">
         <figcaption>Out-of-sample cost under γ=0.025 as search budget, population size, and sample size vary.</figcaption>
       </figure>
-      <div class="callout" style="margin-top:0"><span class="lbl">Empirical message</span><p style="margin-top:4px">The cost curves move in the directions predicted by the bound: better search and more data both improve deployed performance.</p></div>
-    </div>
-    <div style="display:flex;flex-direction:column;justify-content:space-between;gap:12px">
-      <div class="box" style="margin:0"><span class="lbl">Theory prediction</span><p style="margin-top:4px">Theorem 2 separates <strong>estimation</strong> and <strong>search</strong>:</p><div class="eq small-eq" style="background:#fff">$$\epsilon+C_1R\sigma\sqrt{\frac{N+\log K}{S}}+\frac{C_2}{\eta'}e^{-K\rho_\theta}$$</div></div>
-      <div class="grid" style="gap:10px">
-        <div class="card"><h3>Increasing \(K\)</h3><p>Lowers the LLM search penalty exponentially, while adding only \(\log K\) to estimation.</p></div>
-        <div class="card"><h3>Increasing \(M\)</h3><p>Expands representation diversity and improves the chance of finding low-gap bases.</p></div>
-        <div class="card"><h3>Increasing \(S\)</h3><p>Reduces coefficient-estimation error and stabilizes validation.</p></div>
+      <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:10px">
+        <div class="card" style="padding:12px 13px"><h3>Increasing \(K\)</h3><p>Lowers the LLM search penalty exponentially, while adding only \(\log K\) to estimation.</p></div>
+        <div class="card" style="padding:12px 13px"><h3>Increasing \(M\)</h3><p>Expands representation diversity and improves the chance of finding low-gap bases.</p></div>
+        <div class="card" style="padding:12px 13px"><h3>Increasing \(S\)</h3><p>Reduces coefficient-estimation error and stabilizes validation.</p></div>
       </div>
+    </div>
+    <div style="display:flex;flex-direction:column;justify-content:center;gap:14px">
+      <div class="box" style="margin:0"><span class="lbl">Theory prediction</span><p style="margin-top:4px">Theorem 2 separates <strong>estimation</strong> and <strong>search</strong>:</p><div class="eq small-eq" style="background:#fff">$$\epsilon+C_1R\sigma\sqrt{\frac{N+\log K}{S}}+\frac{C_2}{\eta'}e^{-K\rho_\theta}$$</div></div>
+      <div class="callout" style="margin-top:0"><span class="lbl">Empirical message</span><p style="margin-top:4px">The cost curves move in the directions predicted by the bound: better search and more data both improve deployed performance.</p></div>
     </div>
   </div>
   <div class="footer"><span class="ftitle">Case 1 — Bound Validation</span></div>
