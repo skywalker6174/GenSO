@@ -197,6 +197,19 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 
 
 /* targeted large-text slides */
+.tradeoff-slide h2{font-size:52px!important;margin-bottom:10px!important}
+.tradeoff-slide .content{display:grid;grid-template-rows:auto auto 1fr auto;gap:8px;overflow:hidden}
+.tradeoff-slide .content>p{font-size:24px!important;line-height:1.22!important}
+.tradeoff-slide .eq{font-size:22px!important;margin:4px 0!important;padding:6px 12px!important}
+.tradeoff-slide .splitrow{gap:30px!important;align-items:start!important;margin:0!important}
+.tradeoff-slide .splitrow .card{padding:12px 15px!important;margin-bottom:8px!important}
+.tradeoff-slide .splitrow .card h3{font-size:25px!important;margin-bottom:6px!important}
+.tradeoff-slide .splitrow .card li{font-size:22px!important;line-height:1.18!important;margin-bottom:4px!important}
+.tradeoff-slide .diagram{max-height:30vh!important}
+.tradeoff-slide figcaption{font-size:18px!important;line-height:1.22!important;margin-top:4px!important}
+.tradeoff-slide .callout{margin-top:0!important;padding:8px 12px!important}
+.tradeoff-slide .callout .lbl{font-size:16px!important}
+
 .llm-opportunity-slide h1.kicker{font-size:23px}
 .llm-opportunity-slide h2{font-size:58px;line-height:1.06;margin-bottom:14px}
 .llm-opportunity-slide .content{gap:12px}
@@ -419,7 +432,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- P2: LDR tradeoff -->
-<section class="slide">
+<section class="slide tradeoff-slide">
   <h1 class="kicker">Problem · 2 / 5</h1>
   <h2>The Tractability–Expressiveness Tradeoff</h2>
   <div class="content">
@@ -602,9 +615,9 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h2>Data-Driven Stochastic &amp; Robust Optimization</h2>
   <div class="content">
     <div class="grid g3">
-      <div class="card"><h3>Stochastic / SAA</h3><p>Model uncertainty via a distribution; SAA replaces it with the empirical one — asymptotic &amp; finite-sample guarantees.</p><small>Birge &amp; Louveaux; Shapiro; Kleywegt et al.</small></div>
-      <div class="card"><h3>Robust / Adjustable RO</h3><p>Guard against all realizations in an uncertainty set; adjustable RO for adaptivity.</p><small>Ben-Tal et al.; Bertsimas &amp; Sim</small></div>
-      <div class="card"><h3>Distributionally Robust</h3><p>Worst case over an ambiguity set (moment, conic, Wasserstein); robust satisficing.</p><small>Delage &amp; Ye; Mohajerin Esfahani &amp; Kuhn; Long et al.</small></div>
+      <div class="card"><h3>Stochastic / SAA</h3><p>Model uncertainty via a distribution; SAA replaces it with the empirical one — asymptotic &amp; finite-sample guarantees.</p><small>Birge and Louveaux 2011; Shapiro and Homem-de-Mello 1998; Kleywegt et al. 2002</small></div>
+      <div class="card"><h3>Robust / Adjustable RO</h3><p>Guard against all realizations in an uncertainty set; adjustable RO for adaptivity.</p><small>Ben-Tal et al. 2004; Bertsimas and Sim 2004</small></div>
+      <div class="card"><h3>Distributionally Robust</h3><p>Worst case over an ambiguity set (moment, conic, Wasserstein); robust satisficing.</p><small>Delage and Ye 2010; Mohajerin Esfahani and Kuhn 2018; Long et al. 2023</small></div>
     </div>
     <div class="box"><span class="lbl">Our relation</span><p style="margin-top:4px">GenSO is <strong>compatible</strong> with all of these. For a fixed generated basis, basis values are <em>lifted uncertain quantities</em>; coefficients can be fit by SAA, robust, or DRO machinery — enriching recourse while keeping tractability and out-of-sample evaluation.</p></div>
   </div>
@@ -617,8 +630,8 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h2>Decision Rules &amp; Operational Data Analytics</h2>
   <div class="content">
     <div class="grid g2">
-      <div class="card"><h3>Decision rules in optimization</h3><ul><li>LDR (Ben-Tal et al. 2004); when affine rules are optimal (Bertsimas et al.; Georghiou et al.)</li><li>Deflected / segregated LDR (Chen et al.); polynomial rules (Bampou &amp; Kuhn); piecewise-linear &amp; primal-dual (Kuhn et al.)</li><li>Lifted uncertainty in adaptive DRO (Bertsimas et al. 2019); multi-deflected CARA (Chen et al. 2025)</li></ul></div>
-      <div class="card"><h3>ODA &amp; prescriptive analytics</h3><ul><li>Operational statistics judged by <em>decision value</em>, not predictive accuracy (Feng et al.)</li><li>Covariate-to-decision prescriptions (Bertsimas &amp; Kallus; Ban &amp; Rudin)</li></ul></div>
+      <div class="card"><h3>Decision rules in optimization</h3><ul><li>LDR (Ben-Tal et al. 2004); when affine rules are optimal (Bertsimas and Goyal 2012; Georghiou et al. 2026)</li><li>Deflected / segregated LDR (Chen et al. 2008); polynomial rules (Bampou and Kuhn 2011); piecewise-linear and primal-dual rules (Kuhn et al. 2011)</li><li>Lifted uncertainty in adaptive DRO (Bertsimas et al. 2019); multi-deflected CARA (Chen et al. 2025)</li></ul></div>
+      <div class="card"><h3>ODA &amp; prescriptive analytics</h3><ul><li>Operational statistics judged by <em>decision value</em>, not predictive accuracy (Feng and Shanthikumar 2023; Feng et al. 2025)</li><li>Covariate-to-decision prescriptions (Bertsimas and Kallus 2020; Ban and Rudin 2019)</li></ul></div>
     </div>
     <div class="box"><span class="lbl">The common limitation</span><p style="margin-top:4px">In all of these, the transformation / lifting / basis is <strong>specified manually by the modeler</strong>. <span class="red">GenSO automates this representation-design step</span>. ODA serves as a conceptual bridge: both judge data summaries by downstream decision value.</p></div>
   </div>
@@ -631,8 +644,8 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   <h2>LLM-Guided Function Search &amp; LLMs in OR</h2>
   <div class="content">
     <div class="grid g2">
-      <div class="card"><h3>LLM + evolutionary search</h3><p><strong>FunSearch</strong> (Romera-Paredes et al., <em>Nature</em> 2024): pair an LLM with an evaluator to discover new mathematical constructions / algorithms. Extended by EoH, ReEvo, AlphaEvolve, …</p><p>Mostly in CS/AI; LLMs generate <em>complete programs</em>.</p></div>
-      <div class="card"><h3>LLMs in OR</h3><ul><li>Auto-formulation: NL → model (OptiMUS, ORLM, …)</li><li>Auto-modeling for robust / DP / SAA</li><li>LLMs as end-to-end combinatorial solvers</li><li>Operational apps: fleets, inventory; OM vision papers</li></ul></div>
+      <div class="card"><h3>LLM + evolutionary search</h3><p><strong>FunSearch</strong> (Romera-Paredes et al. 2024, <em>Nature</em>): pair an LLM with an evaluator to discover new mathematical constructions / algorithms. Extended by EoH (Liu et al. 2025), ReEvo (Ye et al. 2024), AlphaEvolve (Novikov et al. 2025), …</p><p>Mostly in CS/AI; LLMs generate <em>complete programs</em>.</p></div>
+      <div class="card"><h3>LLMs in OR</h3><ul><li>Auto-formulation: NL → model (OptiMUS 2023; ORLM 2025; …)</li><li>Auto-modeling for robust / DP / SAA</li><li>LLMs as end-to-end combinatorial solvers</li><li>Operational apps: fleets, inventory; OM vision papers</li></ul></div>
     </div>
     <div class="box"><span class="lbl">Our positioning</span><p style="margin-top:4px">We <strong>transfer the FunSearch idea to adaptive decision rules</strong> and redesign the search around mathematical optimization: the LLM searches for <em>expressive representations</em>, while coefficients come from an optimization model — not an end-to-end optimizer, not a replacement for modeling.</p></div>
   </div>
