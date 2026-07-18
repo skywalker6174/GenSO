@@ -156,7 +156,10 @@ tr.ours td{color:var(--pku-red)}
 .thanks-slide{gap:34px}
 .thanks-slide::before{display:none}
 .thanks-slide h2{border:none;color:var(--pku-red);font-size:76px;line-height:1;margin:0;padding:0}
-.thanks-slide .thanks-qr{width:min(54vh,560px);height:min(54vh,560px);object-fit:contain;border:none;border-radius:0;background:#fff}
+.thanks-slide .qr-row{display:flex;gap:72px;align-items:flex-start;justify-content:center}
+.thanks-slide .qr-item{display:flex;flex-direction:column;align-items:center;gap:14px}
+.thanks-slide .thanks-qr{width:min(42vh,430px);height:min(42vh,430px);object-fit:contain;border:none;border-radius:0;background:#fff}
+.thanks-slide .qr-label{font-size:34px;font-weight:800;color:var(--ink)}
 
 /* divider slides */
 .divider{background:linear-gradient(120deg,var(--pku-red) 0%, #7a0608 100%)!important;}
@@ -1179,7 +1182,16 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 <!-- THANK YOU -->
 <section class="slide center thanks-slide" style="background:#fff">
   <h2>Thank You</h2>
-  <img class="thanks-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=720x720&amp;margin=24&amp;data=https%3A%2F%2Fskywalker6174.github.io%2FGenSO%2F" alt="QR code for the GenSO presentation website">
+  <div class="qr-row">
+    <div class="qr-item">
+      <img class="thanks-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=720x720&amp;margin=24&amp;data=https%3A%2F%2Fskywalker6174.github.io%2FGenSO%2F" alt="QR code for the GenSO slides">
+      <div class="qr-label">Slides</div>
+    </div>
+    <div class="qr-item">
+      <img class="thanks-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=720x720&amp;margin=24&amp;data=https%3A%2F%2Fpapers.ssrn.com%2Fsol3%2Fpapers.cfm%3Fabstract_id%3D7127438" alt="QR code for the full paper on SSRN">
+      <div class="qr-label">Full Paper</div>
+    </div>
+  </div>
 </section>
 
 </div><!-- /deck -->
