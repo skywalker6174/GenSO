@@ -153,6 +153,11 @@ tr.ours td{color:var(--pku-red)}
 .aff{font-size:19px;color:var(--muted);margin-top:4px}
 .titlebar{height:6px;width:160px;background:var(--pku-red);margin:26px 0;border-radius:3px}
 
+.thanks-slide{gap:34px}
+.thanks-slide::before{display:none}
+.thanks-slide h2{border:none;color:var(--pku-red);font-size:76px;line-height:1;margin:0;padding:0}
+.thanks-slide .thanks-qr{width:min(54vh,560px);height:min(54vh,560px);object-fit:contain;border:none;border-radius:0;background:#fff}
+
 /* divider slides */
 .divider{background:linear-gradient(120deg,var(--pku-red) 0%, #7a0608 100%)!important;}
 .divider::before{display:none}
@@ -1144,13 +1149,9 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- THANK YOU -->
-<section class="slide center" style="background:radial-gradient(1000px 500px at 50% 0%, #fbeeee 0%, #fff 60%)">
-  <div class="titlebar" style="margin-bottom:24px"></div>
-  <h2 style="border:none;font-size:44px;color:var(--pku-red)">Thank You</h2>
-  <p style="font-size:22px;max-width:720px;margin-top:8px">Beyond Linear Decision Rules:<br>LLM-Guided Representation Discovery for Data-Driven Optimization</p>
-  <p style="margin-top:24px;font-size:18px"><b style="color:var(--pku-red)">Questions &amp; Discussion welcome</b></p>
-  <p class="aff" style="margin-top:18px">Huan Zhang · Yang Wang · Hanzhang Qin · Yue Zhao &nbsp;|&nbsp; NWPU · NUS · PKU</p>
-  <div class="footer"><span class="ftitle">Thank You</span></div>
+<section class="slide center thanks-slide" style="background:#fff">
+  <h2>Thank You</h2>
+  <img class="thanks-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=720x720&amp;margin=24&amp;data=https%3A%2F%2Fskywalker6174.github.io%2FGenSO%2F" alt="QR code for the GenSO presentation website">
 </section>
 
 </div><!-- /deck -->
