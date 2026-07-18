@@ -190,11 +190,47 @@ ol{margin-left:24px}
 ol li::marker{color:var(--pku-red);font-weight:700}
 
 
+
+/* fuller content slides */
+.content{display:flex;flex-direction:column;gap:20px}
+.content>.grid{flex:1;align-items:stretch}
+.content>.grid>.card{height:100%;display:flex;flex-direction:column;justify-content:flex-start}
+.content>.grid>.card p,.content>.grid>.card ul{margin-top:4px}
+.content>.box,.content>.callout{margin-top:auto}
+.content>.box p,.content>.callout p{font-size:23px;line-height:1.34}
+.content>.grid.g2{grid-template-columns:1fr 1fr;gap:22px}
+.content>.grid.g3{grid-template-columns:1fr 1fr 1fr;gap:20px}
+.content>table{flex:1;font-size:22px}
+.content>table th,.content>table td{padding:13px 14px}
+.framework-dense .content{justify-content:space-between}
+.framework-dense .eq{font-size:24px;padding:12px 16px}
+.framework-dense .small-eq{font-size:21px}
+.framework-dense .box,.framework-dense .callout{padding:18px 22px}
+.lit-fill .card{padding:24px 24px}
+.lit-fill .card p,.lit-fill .card li{font-size:23px;line-height:1.32}
+.lit-fill .card h3{font-size:27px}
+.lit-fill small{font-size:19px;line-height:1.3;margin-top:auto;display:block}
+.lit-fill .box,.lit-fill .callout{padding:20px 24px}
+.positioning-table table{font-size:24px}
+.positioning-table th,.positioning-table td{padding:16px 16px}
+@media (max-width: 900px){
+  .content{display:flex;gap:14px}
+  .content>.grid{flex:initial}
+  .content>.box,.content>.callout{margin-top:0}
+  .content>.box p,.content>.callout p{font-size:18px}
+  .content>table{font-size:15px;flex:initial}
+  .content>table th,.content>table td{padding:7px 8px}
+  .framework-dense .eq{font-size:16px;padding:8px 10px}
+  .lit-fill .card{padding:14px 15px}
+  .lit-fill .card p,.lit-fill .card li{font-size:18px}
+  .positioning-table table{font-size:15px}
+}
+
 /* slide-specific guardrails */
 .algo-slide figure{margin:0 auto 8px;width:100%}
-.algo-slide figure img{width:100%;max-height:54vh;object-fit:contain}
+.algo-slide figure img{width:100%;max-height:50vh;object-fit:contain}
 .algo-slide .callout{margin-top:6px;padding:9px 14px}
-.algo-slide .callout p{font-size:21px;line-height:1.3}
+.algo-slide .callout p{font-size:20px;line-height:1.25}
 @media (max-width: 900px){
   .algo-slide figure img{max-height:none}
   .algo-slide .callout p{font-size:17px}
@@ -506,7 +542,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- L1 -->
-<section class="slide">
+<section class="slide lit-fill">
   <h1 class="kicker">Literature · 1 / 4</h1>
   <h2>Data-Driven Stochastic &amp; Robust Optimization</h2>
   <div class="content">
@@ -521,7 +557,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- L2 -->
-<section class="slide">
+<section class="slide lit-fill">
   <h1 class="kicker">Literature · 2 / 4</h1>
   <h2>Decision Rules &amp; Operational Data Analytics</h2>
   <div class="content">
@@ -535,7 +571,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- L3 -->
-<section class="slide">
+<section class="slide lit-fill">
   <h1 class="kicker">Literature · 3 / 4</h1>
   <h2>LLM-Guided Function Search &amp; LLMs in OR</h2>
   <div class="content">
@@ -549,7 +585,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- L4 positioning table -->
-<section class="slide">
+<section class="slide lit-fill positioning-table">
   <h1 class="kicker">Literature · 4 / 4</h1>
   <h2>Where GenSO Sits</h2>
   <div class="content">
@@ -579,7 +615,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- F1 recourse formulation -->
-<section class="slide">
+<section class="slide framework-dense">
   <h1 class="kicker">Framework · 1 / 10</h1>
   <h2>Stochastic Linear Optimization with Recourse</h2>
   <div class="content">
@@ -593,7 +629,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- F2 LDR -> GenLDR -->
-<section class="slide">
+<section class="slide framework-dense">
   <h1 class="kicker">Framework · 2 / 10</h1>
   <h2>From LDR to Generative LDR</h2>
   <div class="content">
@@ -608,7 +644,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- F3 hierarchy proposition -->
-<section class="slide">
+<section class="slide framework-dense">
   <h1 class="kicker">Framework · 3 / 10</h1>
   <h2>In-Sample Hierarchy</h2>
   <div class="content">
@@ -625,7 +661,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- F4 closed loop figure -->
-<section class="slide">
+<section class="slide framework-dense">
   <h1 class="kicker">Framework · 4 / 10</h1>
   <h2>LLM-Guided Representation Discovery</h2>
   <div class="content">
@@ -641,7 +677,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- F5 coefficient fitting LP -->
-<section class="slide">
+<section class="slide framework-dense">
   <h1 class="kicker">Framework · 5 / 10</h1>
   <h2>Optimization-Based Validation</h2>
   <div class="content">
@@ -672,7 +708,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- F7 dynamic selection MILP -->
-<section class="slide">
+<section class="slide framework-dense">
   <h1 class="kicker">Framework · 7 / 10</h1>
   <h2>Why a MILP for Parent Selection?</h2>
   <div class="content">
@@ -688,7 +724,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- F8 merits vs polynomial/PWL -->
-<section class="slide">
+<section class="slide framework-dense">
   <h1 class="kicker">Framework · 8 / 10</h1>
   <h2>Why LLM-Generated Representations?</h2>
   <div class="content">
@@ -735,7 +771,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- B1 challenge -->
-<section class="slide">
+<section class="slide framework-dense">
   <h1 class="kicker">Bounds · 1 / 10</h1>
   <h2>The Analytical Challenge</h2>
   <div class="content">
@@ -749,7 +785,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- B2 decomposition -->
-<section class="slide">
+<section class="slide framework-dense">
   <h1 class="kicker">Bounds · 2 / 10</h1>
   <h2>The Core Decomposition</h2>
   <div class="content">
@@ -764,7 +800,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- B3 fixed basis setup -->
-<section class="slide">
+<section class="slide framework-dense">
   <h1 class="kicker">Bounds · 3 / 10</h1>
   <h2>Fixed-Basis Setup: Exploiting Linearity</h2>
   <div class="content">
@@ -777,7 +813,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- B4 assumptions -->
-<section class="slide">
+<section class="slide framework-dense">
   <h1 class="kicker">Bounds · 4 / 10</h1>
   <h2>Assumptions (Fixed Basis)</h2>
   <div class="content">
@@ -793,7 +829,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- B5 proposition uniform conv -->
-<section class="slide">
+<section class="slide framework-dense">
   <h1 class="kicker">Bounds · 5 / 10</h1>
   <h2>Proposition: Uniform Convergence</h2>
   <div class="content">
@@ -812,7 +848,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- B6 theorem 1 -->
-<section class="slide">
+<section class="slide framework-dense">
   <h1 class="kicker">Bounds · 6 / 10</h1>
   <h2>Theorem 1: Finite-Sample Bound</h2>
   <div class="content">
@@ -831,7 +867,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- B7 epsilon-good basis + scaling law -->
-<section class="slide">
+<section class="slide framework-dense">
   <h1 class="kicker">Bounds · 7 / 10</h1>
   <h2>\(\epsilon\)-Good Bases &amp; the LLM as a Prior</h2>
   <div class="content">
@@ -845,7 +881,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- B8 hit probability assumption -->
-<section class="slide">
+<section class="slide framework-dense">
   <h1 class="kicker">Bounds · 8 / 10</h1>
   <h2>Assumption: LLM Prior Mass / Hit Probability</h2>
   <div class="content">
@@ -862,7 +898,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- B9 Theorem 2 combined -->
-<section class="slide">
+<section class="slide framework-dense">
   <h1 class="kicker">Bounds · 9 / 10</h1>
   <h2>Theorem 2: Combined Estimation + Search Bound</h2>
   <div class="content">
@@ -880,7 +916,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- B10 key insights -->
-<section class="slide">
+<section class="slide framework-dense">
   <h1 class="kicker">Bounds · 10 / 10</h1>
   <h2>Key Insight: GenSO vs. a Fixed Basis</h2>
   <div class="content">
