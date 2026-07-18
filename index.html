@@ -226,6 +226,140 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   .positioning-table table{font-size:15px}
 }
 
+
+
+/* stronger fill pass: make non-section slides visibly occupy the page */
+.lit-fill .content,
+.framework-dense .content{
+  min-height:calc(100vh - 168px);
+}
+.lit-fill .content>.grid{
+  min-height:48vh;
+}
+.lit-fill .content>.grid.g2{
+  min-height:50vh;
+}
+.lit-fill .content>.grid>.card{
+  justify-content:center;
+  padding:30px 28px;
+}
+.lit-fill .content>.grid>.card h3{
+  font-size:30px;
+  margin-bottom:14px;
+}
+.lit-fill .content>.grid>.card p,
+.lit-fill .content>.grid>.card li{
+  font-size:25px;
+  line-height:1.28;
+}
+.lit-fill .content>.box,
+.lit-fill .content>.callout{
+  min-height:17vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:24px 30px;
+}
+.lit-fill .content>.box p,
+.lit-fill .content>.callout p{
+  font-size:26px;
+  line-height:1.28;
+}
+.positioning-table .content>table{
+  min-height:50vh;
+  font-size:26px;
+}
+.positioning-table .content>table th,
+.positioning-table .content>table td{
+  padding:19px 18px;
+}
+.positioning-table .content>.callout{
+  min-height:16vh;
+}
+.framework-dense .content{
+  justify-content:space-evenly;
+}
+.framework-dense .content>.grid{
+  min-height:30vh;
+}
+.framework-dense .content>.grid.g2{
+  min-height:32vh;
+}
+.framework-dense .content>.grid>.card{
+  justify-content:center;
+  padding:26px 26px;
+}
+.framework-dense .content>.grid>.card h3{
+  font-size:29px;
+}
+.framework-dense .content>.grid>.card p,
+.framework-dense .content>.grid>.card li{
+  font-size:24px;
+  line-height:1.27;
+}
+.framework-dense .content>.eq{
+  min-height:13vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:27px;
+  padding:16px 18px;
+}
+.framework-dense .content>.eq.small-eq,
+.framework-dense .content>.eq.hl.small-eq{
+  font-size:24px;
+}
+.framework-dense .content>.box,
+.framework-dense .content>.callout{
+  min-height:16vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:24px 28px;
+}
+.framework-dense .content>.box p,
+.framework-dense .content>.callout p{
+  font-size:25px;
+  line-height:1.28;
+}
+.framework-dense .content>p{
+  font-size:26px;
+  line-height:1.32;
+}
+.algo-slide .content{
+  min-height:auto;
+  justify-content:flex-start;
+}
+.algo-slide figure img{
+  max-height:48vh;
+}
+@media (max-width: 900px){
+  .lit-fill .content,
+  .framework-dense .content{min-height:auto}
+  .lit-fill .content>.grid,
+  .lit-fill .content>.grid.g2,
+  .framework-dense .content>.grid,
+  .framework-dense .content>.grid.g2{min-height:auto}
+  .lit-fill .content>.grid>.card,
+  .framework-dense .content>.grid>.card{padding:15px}
+  .lit-fill .content>.grid>.card h3,
+  .framework-dense .content>.grid>.card h3{font-size:20px}
+  .lit-fill .content>.grid>.card p,
+  .lit-fill .content>.grid>.card li,
+  .framework-dense .content>.grid>.card p,
+  .framework-dense .content>.grid>.card li{font-size:18px;line-height:1.32}
+  .lit-fill .content>.box,
+  .lit-fill .content>.callout,
+  .framework-dense .content>.box,
+  .framework-dense .content>.callout{min-height:auto;padding:13px 14px}
+  .lit-fill .content>.box p,
+  .lit-fill .content>.callout p,
+  .framework-dense .content>.box p,
+  .framework-dense .content>.callout p{font-size:18px}
+  .framework-dense .content>.eq{min-height:auto;font-size:16px;padding:8px 10px}
+  .positioning-table .content>table{min-height:auto;font-size:15px}
+}
+
 /* slide-specific guardrails */
 .algo-slide figure{margin:0 auto 8px;width:100%}
 .algo-slide figure img{width:100%;max-height:50vh;object-fit:contain}
