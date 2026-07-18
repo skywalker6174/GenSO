@@ -313,7 +313,12 @@ ol li::marker{color:var(--pku-red);font-weight:700}
   .slide:not(.divider):not(#s-title):not(.center) li{margin-bottom:7px}
   .slide:not(.divider):not(#s-title):not(.center) small{font-size:22px;line-height:1.22}
   .slide:not(.divider):not(#s-title):not(.center) .content{overflow:hidden}
-  .slide:not(.divider):not(#s-title):not(.center) .grid{gap:18px}
+  .slide:not(.divider):not(#s-title):not(.center) .grid{gap:24px}
+  .slide:not(.divider):not(#s-title):not(.center) .g2{column-gap:32px;row-gap:24px}
+  .slide:not(.divider):not(#s-title):not(.center) .g3{column-gap:24px;row-gap:24px}
+  .slide:not(.divider):not(#s-title):not(.center) .two{gap:34px}
+  .slide:not(.divider):not(#s-title):not(.center) .splitrow{gap:32px}
+  .slide:not(.divider):not(#s-title):not(.center) .flex{gap:28px}
   .slide:not(.divider):not(#s-title):not(.center) .card{padding:20px 22px}
   .slide:not(.divider):not(#s-title):not(.center) .card h3{font-size:32px;margin-bottom:8px}
   .slide:not(.divider):not(#s-title):not(.center) .card p,
@@ -1027,13 +1032,13 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 <section class="slide">
   <h1 class="kicker">Numerical · 3 / 6</h1>
   <h2>Figure 3 — Sensitivity Validates the Bound</h2>
-  <div class="two" style="grid-template-columns:1.28fr .72fr;gap:22px;align-items:start">
+  <div class="two" style="grid-template-columns:1.26fr .74fr;gap:34px;align-items:start">
     <div style="display:flex;flex-direction:column;gap:10px;min-height:0">
       <figure style="margin:0;text-align:center">
         <img src="plots/main_parameter_analysis.png" alt="parameter sensitivity for K M S" style="max-height:43vh;width:100%;object-fit:contain">
         <figcaption>Out-of-sample cost under γ=0.025 as search budget, population size, and sample size vary.</figcaption>
       </figure>
-      <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:10px">
+      <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:18px">
         <div class="card" style="padding:12px 13px"><h3>Increasing \(K\)</h3><p>Lowers the LLM search penalty exponentially, while adding only \(\log K\) to estimation.</p></div>
         <div class="card" style="padding:12px 13px"><h3>Increasing \(M\)</h3><p>Expands representation diversity and improves the chance of finding low-gap bases.</p></div>
         <div class="card" style="padding:12px 13px"><h3>Increasing \(S\)</h3><p>Reduces coefficient-estimation error and stabilizes validation.</p></div>
