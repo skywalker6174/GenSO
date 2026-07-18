@@ -192,6 +192,21 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 
 
 /* targeted large-text slides */
+.llm-opportunity-slide h1.kicker{font-size:23px}
+.llm-opportunity-slide h2{font-size:58px;line-height:1.06;margin-bottom:14px}
+.llm-opportunity-slide .content{gap:12px}
+.llm-opportunity-slide .splitrow{gap:22px}
+.llm-opportunity-slide .splitrow .card{padding:18px 20px;margin-bottom:14px}
+.llm-opportunity-slide .splitrow .card h3{font-size:32px;margin-bottom:8px}
+.llm-opportunity-slide .splitrow .card p,
+.llm-opportunity-slide .splitrow .card li{font-size:28px;line-height:1.2}
+.llm-opportunity-slide .splitrow .card li{margin-bottom:7px}
+.llm-opportunity-slide .diagram{max-height:39vh}
+.llm-opportunity-slide figcaption{font-size:20px;line-height:1.25}
+.llm-opportunity-slide .box{padding:18px 22px;margin-top:6px}
+.llm-opportunity-slide .box .lbl{font-size:19px}
+.llm-opportunity-slide .box p{font-size:27px;line-height:1.23}
+.llm-opportunity-slide .content>p{font-size:27px;line-height:1.23}
 .contribution-slide h2{font-size:58px}
 .contribution-slide .box .lbl{font-size:19px}
 .literature-large h1.kicker{font-size:23px}
@@ -460,7 +475,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 </section>
 
 <!-- P4: LLM opportunity -->
-<section class="slide">
+<section class="slide llm-opportunity-slide">
   <h1 class="kicker">Problem · 4 / 5</h1>
   <h2>LLMs: An Opportunity — and a Trap</h2>
   <div class="content">
@@ -985,7 +1000,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
 <section class="slide">
   <h1 class="kicker">Numerical · 3 / 6</h1>
   <h2>Figure 3 — Sensitivity Validates the Bound</h2>
-  <div class="two" style="grid-template-columns:1.28fr .72fr;gap:22px;align-items:stretch">
+  <div class="two" style="grid-template-columns:1.28fr .72fr;gap:22px;align-items:start">
     <div style="display:flex;flex-direction:column;gap:10px;min-height:0">
       <figure style="margin:0;text-align:center">
         <img src="plots/main_parameter_analysis.png" alt="parameter sensitivity for K M S" style="max-height:43vh;width:100%;object-fit:contain">
@@ -997,7 +1012,7 @@ ol li::marker{color:var(--pku-red);font-weight:700}
         <div class="card" style="padding:12px 13px"><h3>Increasing \(S\)</h3><p>Reduces coefficient-estimation error and stabilizes validation.</p></div>
       </div>
     </div>
-    <div style="display:flex;flex-direction:column;justify-content:center;gap:14px">
+    <div style="display:flex;flex-direction:column;justify-content:flex-start;gap:14px">
       <div class="box" style="margin:0"><span class="lbl">Theory prediction</span><p style="margin-top:4px">Theorem 2 separates <strong>estimation</strong> and <strong>search</strong>:</p><div class="eq small-eq" style="background:#fff">$$\epsilon+C_1R\sigma\sqrt{\frac{N+\log K}{S}}+\frac{C_2}{\eta'}e^{-K\rho_\theta}$$</div></div>
       <div class="callout" style="margin-top:0"><span class="lbl">Empirical message</span><p style="margin-top:4px">The cost curves move in the directions predicted by the bound: better search and more data both improve deployed performance.</p></div>
     </div>
